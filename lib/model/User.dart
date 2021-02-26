@@ -1,4 +1,4 @@
-class Uesr {
+class User {
   String Id;
   String Username;
   String Password;
