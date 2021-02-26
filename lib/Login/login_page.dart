@@ -3,10 +3,13 @@ import 'package:localstorage/localstorage.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import '../Homepage/BottomNavigation.dart';
 import 'package:http/http.dart' as http;
-import 'Model/userModel.dart';
 import '../Register/regi_page.dart';
 import 'dart:convert';
 import 'package:hello/api/user_api.dart';
+import 'package:hello/Homepage/BottomNavigation.dart';
+import 'package:provider/provider.dart';
+import 'package:hello/providers/user_provider.dart';
+import 'package:hello/model/User.dart';
 
 LocalStorage storage = LocalStorage('user');
 LocalStorage storage2 = LocalStorage('Product');
@@ -31,7 +34,6 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context, {bool isPassword = true}) {
     userApi api = userApi();
-    var res;
     return Container(
         decoration: BoxDecoration(
             image: DecorationImage(
@@ -95,11 +97,48 @@ class _LoginPageState extends State<LoginPage> {
                           height: 20.0,
                         ),
                         RaisedButton(
-                          onPressed: () {
+                          onPressed: () async {
                             var user = UserController.text;
                             var pass = PassController.text;
-                            res = api.login(user, pass);
-                            //print(res);
+                            var res = await api.login(user, pass);
+                            if (res.statusCode == 200) {
+                              Map<String, dynamic> data = jsonDecode(res.body);
+                              print(data);
+
+                              User statement = User(
+                                  Id: data['ID'],
+                                  Username: data['Username'],
+                                  Password: data['Password'],
+                                  Email: data['Email'],
+                                  PhoneNumber: data['PhoneNumber'],
+                                  Name: data['Name']);
+
+                              var provider = Provider.of<UserProvider>(context,
+                                  listen: false);
+                              provider.addUser(statement);
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return Bottomnavigations();
+                              }));
+                            } else {
+                              Alert(
+                                context: context,
+                                type: AlertType.error,
+                                title: "LoginFalile",
+                                desc: "",
+                                buttons: [
+                                  DialogButton(
+                                    child: Text(
+                                      "Close",
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 20),
+                                    ),
+                                    onPressed: () => Navigator.pop(context),
+                                    width: 120,
+                                  )
+                                ],
+                              ).show();
+                            }
                           },
                           color: Colors.black,
                           child: Text(

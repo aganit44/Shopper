@@ -3,31 +3,24 @@ import 'package:hello/Profile/profile_menu.dart';
 import 'package:hello/Userprofile/top_header.dart';
 import '../Login/login_page.dart';
 
-
-
 class Page1 extends StatefulWidget {
-
   @override
   State<StatefulWidget> createState() {
     return _Page1();
   }
 }
 
-
 class _Page1 extends State<Page1> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xfff4f4f4),
-
       body: ListView(
         children: <Widget>[
-
           topheader(),
           SizedBox(height: 20),
           ProfileMenu(
-          text: "My Account",
+            text: "My Account",
             icon: "assets/icons/User Icon.svg",
             press: () => {},
           ),
@@ -48,16 +41,10 @@ class _Page1 extends State<Page1> {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => LoginPage()),
-
-
               );
             },
-
           ),
-
-
         ],
-
       ),
     );
   }

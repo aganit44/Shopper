@@ -3,6 +3,9 @@ import 'package:localstorage/localstorage.dart';
 import '../Homepage/BottomNavigation.dart';
 import 'package:http/http.dart';
 import 'dart:convert';
+import 'package:provider/provider.dart';
+import 'package:hello/providers/user_provider.dart';
+import 'package:hello/model/User.dart';
 
 class topheader extends StatefulWidget {
   @override
@@ -39,6 +42,8 @@ class TopHeader extends State {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<UserProvider>(context, listen: false);
+    User user = provider.getUser();
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
@@ -84,7 +89,7 @@ class TopHeader extends State {
                         localStorage.setItem('Productlist', snapshot.data);
                         var data2 = localStorage.getItem('Productlist');
                         return Text(
-                          '${data2[0]['Name']}',
+                          '${user.Name}',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 21.0,
