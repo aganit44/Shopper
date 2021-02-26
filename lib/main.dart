@@ -2,10 +2,11 @@ import 'dart:convert';
 import 'getProduct.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:http/http.dart'as http;
+import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'Login/login_page.dart';
 import 'package:localstorage/localstorage.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -24,6 +25,7 @@ class _MyAppState extends State<MyApp> {
     localStorage = LocalStorage('Product');
     super.initState();
   }
+
   Future<dynamic> _ProductData() async {
     String url = "http://25.46.25.35/login/Product.php";
     var response = await get(url);
@@ -47,17 +49,15 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       home: FutureBuilder(
         future: _ProductData(),
-        builder: (BuildContext context,AsyncSnapshot snapshot){
-          if(snapshot.hasData){
-            localStorage.setItem('Productlist',snapshot.data);
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (snapshot.hasData) {
+            localStorage.setItem('Productlist', snapshot.data);
             var data = localStorage.getItem('Productlist');
 
             return LoginPage();
-          }
-          else if (snapshot.hasError){
+          } else if (snapshot.hasError) {
             return CircularProgressIndicator();
-          }
-          else{
+          } else {
             return CircularProgressIndicator();
           }
         },
