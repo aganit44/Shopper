@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'file:///C:/Program%20Files/shopper/lib/Homepage/main_menu_viewmodel.dart';
+import 'package:hello/Homepage/main_menu_viewmodel.dart';
 import 'package:localstorage/localstorage.dart';
 
 class MainMenu extends StatefulWidget {
-
-
   @override
   State<StatefulWidget> createState() {
     return _MainMenu();
@@ -12,9 +10,8 @@ class MainMenu extends StatefulWidget {
 }
 
 final List<MainMenuModel> _menus = MainMenuViewModel().getMainMenu();
+
 class _MainMenu extends State<MainMenu> {
-
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,7 +24,7 @@ class _MainMenu extends State<MainMenu> {
           crossAxisCount: 2,
           childAspectRatio: 1.25,
         ),
-        itemBuilder: (context,index){
+        itemBuilder: (context, index) {
           final MainMenuModel menu = _menus[index];
           return Column(
             children: [
@@ -37,27 +34,21 @@ class _MainMenu extends State<MainMenu> {
                 child: FlatButton(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(14),
-                      side: BorderSide(
-                          color: Colors.black
-                      )
-                  ),
+                      side: BorderSide(color: Colors.black)),
                   padding: EdgeInsets.all(8),
                   color: Colors.white,
-
-                  onPressed: (){
-
-                    Navigator.push(context,
-                      MaterialPageRoute(builder:(context) => menu.function),
-
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => menu.function),
                     );
 
-
-
                     //todo
-                  }, child: Image.asset(
-                  menu.image,
-                  //color: menu.color,
-                ),
+                  },
+                  child: Image.asset(
+                    menu.image,
+                    //color: menu.color,
+                  ),
                 ),
               ),
               SizedBox(height: 4),
