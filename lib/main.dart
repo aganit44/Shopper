@@ -1,8 +1,5 @@
 import 'dart:convert';
-import 'getProduct.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'Login/login_page.dart';
 import 'package:localstorage/localstorage.dart';
