@@ -1,5 +1,5 @@
+import 'package:Shopper/model/User.dart';
 import 'package:flutter/foundation.dart';
-import 'package:hello/model/User.dart';
 
 class UserProvider with ChangeNotifier {
   User user;

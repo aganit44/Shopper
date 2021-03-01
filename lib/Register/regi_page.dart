@@ -1,10 +1,6 @@
-import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:Shopper/api/user_api.dart';
 import 'package:flutter/material.dart';
-import 'package:hello/Register/btn_widget.dart';
-import 'package:hello/Register/herder_container.dart';
-import 'package:http/http.dart' as http;
-import 'package:hello/Register/color.dart';
-import 'package:hello/Login/login_page.dart';
+
 
 TextEditingController UserController = TextEditingController();
 TextEditingController PassController = TextEditingController();
@@ -20,6 +16,7 @@ class RegPage extends StatefulWidget {
 class _RegPageState extends State<RegPage> {
   @override
   Widget build(BuildContext context, {bool isPassword = true}) {
+    userApi api = userApi();
     return Container(
         decoration: BoxDecoration(
             image: DecorationImage(
@@ -34,8 +31,7 @@ class _RegPageState extends State<RegPage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    Image.network(
-                        'https://scontent.xx.fbcdn.net/v/t1.15752-0/p206x206/151655500_466774074691188_845261356064583738_n.png?_nc_cat=101&ccb=3&_nc_sid=50854b&_nc_ohc=n2IaNaEaJpwAX_r5pYy&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&_nc_tp=30&oh=22b80a8461ddf553798e45f32a1e7c6f&oe=605D14DF'),
+                    Image.asset('assets/images/logo.png'),
                     SizedBox(
                       height: 10.0,
                     ),
@@ -89,14 +85,17 @@ class _RegPageState extends State<RegPage> {
                       height: 50.0,
                     ),
                     RaisedButton(
-                      onPressed: () => {
-                        Register(
-                            UserController.text,
-                            PassController.text,
-                            EmailController.text,
-                            PhoneNumberController.text,
-                            NameController.text,
-                            context),
+                      onPressed: () async {
+                        var res = await api.register(
+                          UserController.text,
+                          PassController.text,
+                          EmailController.text,
+                          PhoneNumberController.text,
+                          NameController.text,
+                        );
+                        if (res.statusCode == 200) {
+                          Navigator.pop(context);
+                        }
                       },
                       color: Colors.black,
                       child: Text(
@@ -137,9 +136,13 @@ class _RegPageState extends State<RegPage> {
   }
 }
 
-Future<Function> Register(String username, String password, String Email,
+/*Future<Function> Register(String username, String password, String Email,
     String PhoneNumber, String Name, BuildContext context) async {
-  if (username == '' || password == ''|| Email == '' ||PhoneNumber ==''||Name =='') {
+  if (username == '' ||
+      password == '' ||
+      Email == '' ||
+      PhoneNumber == '' ||
+      Name == '') {
     Alert(
       context: context,
       type: AlertType.error,
@@ -156,7 +159,7 @@ Future<Function> Register(String username, String password, String Email,
         )
       ],
     ).show();
-  }else{
+  } else {
     var url =
         'http://25.46.25.35/login/Register.php?Username=$username&Password=$password&Email=$Email&PhoneNumber=$PhoneNumber&Name=$Name';
     // Await the http get response, then decode the json-formatted response.
@@ -178,15 +181,12 @@ Future<Function> Register(String username, String password, String Email,
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
                 onPressed: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => (LoginPage())),
-                ))
+                      context,
+                      MaterialPageRoute(builder: (context) => (LoginPage())),
+                    ))
           ],
         ).show();
       }
     }
   }
-
-
-
-}
+}*/

@@ -6,7 +6,7 @@ import '../Notifications/Notifications.dart';
 
 class Bottomnavigations extends StatefulWidget {
   int selectedIndex = 0;
-  Bottomnavigations();
+  Bottomnavigations({this.selectedIndex});
 
   @override
   _BottomnavigationsState createState() => _BottomnavigationsState();

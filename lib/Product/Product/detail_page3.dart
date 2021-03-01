@@ -1,6 +1,6 @@
+import 'package:Shopper/Product/widgets/app_clipper.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
-import 'package:hello/Product/widgets/app_clipper.dart';
 import 'package:localstorage/localstorage.dart';
 import 'dart:convert';
 import 'package:http/http.dart';
@@ -37,9 +37,9 @@ class _DetailPageState extends State<DetailPage3> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.green,
+      backgroundColor: Colors.black,
       appBar: AppBar(
-        backgroundColor: Colors.green,
+        backgroundColor: Colors.black,
         elevation: 0,
         title: Text("OnitsukaTiger"),
         leading: IconButton(
@@ -51,7 +51,7 @@ class _DetailPageState extends State<DetailPage3> {
         actions: [
           Icon(
             Icons.shopping_basket,
-            color: Colors.black,
+            color: Colors.white,
           ),
           SizedBox(
             width: 10,
@@ -246,7 +246,7 @@ class _DetailPageState extends State<DetailPage3> {
               horizontal: 50,
             ),
             decoration: BoxDecoration(
-              color: Colors.black38,
+              color: Colors.black,
               borderRadius: BorderRadius.all(
                 Radius.circular(50),
               ),

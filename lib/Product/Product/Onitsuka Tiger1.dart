@@ -1,14 +1,14 @@
+import 'package:Shopper/Product/models/shoe_model.dart';
 import 'package:flutter/material.dart';
 import 'package:localstorage/localstorage.dart';
-import 'package:hello/Product/Product/detail_page.dart';
-import 'package:hello/Product/Product/detail_page2.dart';
-import 'package:hello/Product/Product/detail_page3.dart';
+
 import 'banner3.dart';
 import 'package:http/http.dart';
 import 'dart:convert';
-import 'package:hello/Product/models/shoe_model.dart';
-import 'package:hello/Homepage/home_page.dart';
-import 'package:hello/Homepage/BottomNavigation.dart';
+
+import 'detail_page.dart';
+import 'detail_page2.dart';
+import 'detail_page3.dart';
 
 class OnitsukaTiger2 extends StatefulWidget {
   @override
@@ -46,26 +46,8 @@ class _OnitsukaTigerState extends State<OnitsukaTiger2> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: FutureBuilder(
-          future: _ProductData(),
-          builder: (BuildContext context, AsyncSnapshot snapshot) {
-            if (snapshot.hasData) {
-              localStorage.setItem('Productlist', snapshot.data);
-              var data = localStorage.getItem('Productlist');
-              CircularProgressIndicator();
-              return Text('OnitsukaTiger');
-            } else if (snapshot.hasError) {
-              return CircularProgressIndicator();
-            } else {
-              return CircularProgressIndicator();
-            }
-          },
-        ),
+        title: Text('OnitsukaTiger'),
         actions: [
-          Icon(
-            Icons.search,
-            color: Colors.black,
-          ),
           SizedBox(
             width: 10,
           ),

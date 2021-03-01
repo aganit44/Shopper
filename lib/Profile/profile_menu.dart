@@ -8,7 +8,7 @@ class ProfileMenu extends StatelessWidget {
     Key key,
     @required this.text,
     @required this.icon,
-    this.press,
+    this.press, Map Function() onpress, Null Function() onPressed,
   }) : super(key: key);
 
   final String text, icon;

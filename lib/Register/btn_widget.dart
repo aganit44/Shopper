@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hello/Register/color.dart';
+
+import 'color.dart';
 class ButtonWidget extends StatelessWidget {
   var btnText ="";
   var onClick;

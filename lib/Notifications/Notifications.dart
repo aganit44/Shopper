@@ -1,5 +1,7 @@
+import 'package:Shopper/Homepage/BottomNavigation.dart';
+import 'package:Shopper/Homepage/DrawerNavigation.dart';
+import 'package:Shopper/Profile/profile_menu.dart';
 import 'package:flutter/material.dart';
-import 'package:hello/Profile/profile_menu2.dart';
 
 class Notifications extends StatefulWidget {
   @override
@@ -12,12 +14,20 @@ class _ProductState extends State<Notifications> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: Text('การแจ้งเตือน'),
-        actions: [
-          SizedBox(
-            width: 10,
-          ),
-        ],
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => Bottomnavigations(
+                        selectedIndex: 0,
+                      )),
+            );
+          },
+        ),
+        title: Text("Notifications"),
+        centerTitle: true,
       ),
       body: ListView(
         children: <Widget>[

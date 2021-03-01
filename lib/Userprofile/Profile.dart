@@ -1,7 +1,9 @@
+import 'package:Shopper/Homepage/BottomNavigation.dart';
+import 'package:Shopper/Profile/profile_menu.dart';
+import 'package:Shopper/Userprofile/top_header.dart';
 import 'package:flutter/material.dart';
-import 'package:hello/Profile/profile_menu.dart';
-import 'package:hello/Userprofile/top_header.dart';
 import '../Login/login_page.dart';
+import 'editprofile.dart';
 
 class Page1 extends StatefulWidget {
   @override
@@ -14,15 +16,38 @@ class _Page1 extends State<Page1> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xfff4f4f4),
+      backgroundColor: Colors.black,
       body: ListView(
         children: <Widget>[
+            AppBar(
+        backgroundColor: Colors.black,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => Bottomnavigations(
+                        selectedIndex: 0,
+                      )),
+            );
+          },
+        ),
+        title: Text("Profile"),
+        centerTitle: true,
+      ),
           topheader(),
           SizedBox(height: 20),
           ProfileMenu(
             text: "My Account",
             icon: "assets/icons/User Icon.svg",
-            press: () => {},
+            press: () => {
+                Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MyHomePage()),
+              )
+              
+            },
           ),
           ProfileMenu(
             text: "Notifications",

@@ -5,6 +5,7 @@ class User {
   String Email;
   String PhoneNumber;
   String Name;
+  String Image;
 
   User(
       {this.Id,
@@ -12,5 +13,6 @@ class User {
       this.Password,
       this.Email,
       this.PhoneNumber,
-      this.Name});
+      this.Name,
+      this.Image});
 }

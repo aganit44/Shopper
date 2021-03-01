@@ -1,11 +1,11 @@
+import 'package:Shopper/api/user_api.dart';
+import 'package:Shopper/model/User.dart';
+import 'package:Shopper/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:localstorage/localstorage.dart';
-import '../Homepage/BottomNavigation.dart';
 import 'package:http/http.dart';
 import 'dart:convert';
 import 'package:provider/provider.dart';
-import 'package:hello/providers/user_provider.dart';
-import 'package:hello/model/User.dart';
 
 class topheader extends StatefulWidget {
   @override
@@ -44,6 +44,7 @@ class TopHeader extends State {
   Widget build(BuildContext context) {
     var provider = Provider.of<UserProvider>(context, listen: false);
     User user = provider.getUser();
+
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
@@ -55,20 +56,6 @@ class TopHeader extends State {
       child: Stack(
         children: <Widget>[
           Row(),
-          SafeArea(
-            child: IconButton(
-              icon: Icon(
-                Icons.keyboard_arrow_left,
-                color: Colors.deepOrange,
-              ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Bottomnavigations()),
-                );
-              },
-            ),
-          ),
           Align(
             alignment: Alignment(0, -0.5),
             child: SafeArea(
@@ -77,8 +64,8 @@ class TopHeader extends State {
                 children: <Widget>[
                   CircleAvatar(
                     maxRadius: 50.0,
-                    backgroundImage:
-                        NetworkImage('http://25.46.25.35/images/3.jfif'),
+                    backgroundImage: NetworkImage(
+                        "http://25.46.25.35:5000/image?path=" + user.Image),
                   ),
                   SizedBox(height: 5.0),
 

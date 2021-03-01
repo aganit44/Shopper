@@ -2,77 +2,89 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class BannerSlider2 extends StatelessWidget {
+var bannerItems = ["Adidas", "Converse", "Nlke", "Nlke"];
+var bannerImage = [
+  'assets/images/Promo1.jpg',
+  'assets/images/Promo2.jpg',
+  'assets/images/Promo3.jpg',
+  'assets/images/Promo3.jpg',
+];
+
+class BannerWidgetArea extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      overflow: Overflow.visible,
-      alignment: Alignment.bottomCenter,
-      children: [
+    var screenWidth = MediaQuery.of(context).size.width;
 
-        BannerSection2(),
+    PageController controller =
+        PageController(viewportFraction: 0.8, initialPage: 1);
 
-      ],
-    );
-  }
-}
+    List<Widget> banners = new List<Widget>();
 
-class BannerSection2 extends StatefulWidget {
-  @override
-  _BannerSectionState createState() => _BannerSectionState();
-}
-
-class _BannerSectionState extends State<BannerSection2> {
-  final List<String> _imgList = [
-    'assets/images/sss.jpg',
-    'assets/images/ssss.jpg',
-    'assets/images/sssss.jpg',
-  ];
-
-
-
-
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        buildBanner(),
-
-      ],
-    );
-  }
-
-  Container buildBanner() {
-    return Container(
-
-      width: double.infinity,
-      child: CarouselSlider(
-        options: CarouselOptions(
-            aspectRatio: 1.573,
-            viewportFraction: 1.0,
-            autoPlay: true,
-            onPageChanged: (index, reason) {
-              setState(() {
-
-              });
-            }),
-        items: _imgList
-            .map(
-              (item) => Image.asset(
-            item,
-            fit: BoxFit.cover,
-            width: double.infinity,
+    for (int x = 0; x < bannerItems.length; x++) {
+      var bannerView = Padding(
+        padding: EdgeInsets.all(10.0),
+        child: Container(
+          child: Stack(
+            fit: StackFit.expand,
+            children: <Widget>[
+              Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.black54,
+                          offset: Offset(2.0, 2.0),
+                          blurRadius: 5.0,
+                          spreadRadius: 1.0)
+                    ]),
+              ),
+              ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                child: Image.asset(
+                  bannerImage[x],
+                  fit: BoxFit.cover,
+                ),
+              ),
+              Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                    gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [Colors.transparent, Colors.black])),
+              ),
+              Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      bannerItems[x],
+                      style: TextStyle(fontSize: 25.0, color: Colors.white),
+                    ),
+                    Text(
+                      "More than 40% Off",
+                      style: TextStyle(fontSize: 12.0, color: Colors.white),
+                    )
+                  ],
+                ),
+              )
+            ],
           ),
-        )
-            .toList(),
+        ),
+      );
+      banners.add(bannerView);
+    }
+
+    return Container(
+      width: screenWidth,
+      height: screenWidth * 9 / 16,
+      child: PageView(
+        controller: controller,
+        scrollDirection: Axis.horizontal,
+        children: banners,
       ),
     );
   }
-
-
 }
-
-
-
-

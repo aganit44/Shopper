@@ -1,15 +1,14 @@
+import 'package:Shopper/api/user_api.dart';
+import 'package:Shopper/model/User.dart';
+import 'package:Shopper/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import '../Homepage/BottomNavigation.dart';
-import 'package:http/http.dart' as http;
 import '../Register/regi_page.dart';
 import 'dart:convert';
-import 'package:hello/api/user_api.dart';
-import 'package:hello/Homepage/BottomNavigation.dart';
+
 import 'package:provider/provider.dart';
-import 'package:hello/providers/user_provider.dart';
-import 'package:hello/model/User.dart';
 
 LocalStorage storage = LocalStorage('user');
 LocalStorage storage2 = LocalStorage('Product');
@@ -50,8 +49,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        Image.network(
-                            'https://scontent.xx.fbcdn.net/v/t1.15752-0/p206x206/151655500_466774074691188_845261356064583738_n.png?_nc_cat=101&ccb=3&_nc_sid=50854b&_nc_ohc=n2IaNaEaJpwAX_r5pYy&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&_nc_tp=30&oh=22b80a8461ddf553798e45f32a1e7c6f&oe=605D14DF'),
+                        Image.asset('assets/images/logo.png'),
                         SizedBox(
                           height: 10.0,
                         ),
@@ -101,6 +99,7 @@ class _LoginPageState extends State<LoginPage> {
                             var user = UserController.text;
                             var pass = PassController.text;
                             var res = await api.login(user, pass);
+
                             if (res.statusCode == 200) {
                               Map<String, dynamic> data = jsonDecode(res.body);
                               print(data);
@@ -111,14 +110,17 @@ class _LoginPageState extends State<LoginPage> {
                                   Password: data['Password'],
                                   Email: data['Email'],
                                   PhoneNumber: data['PhoneNumber'],
-                                  Name: data['Name']);
+                                  Name: data['Name'],
+                                  Image: data['Image']);
 
                               var provider = Provider.of<UserProvider>(context,
                                   listen: false);
                               provider.addUser(statement);
                               Navigator.push(context,
                                   MaterialPageRoute(builder: (context) {
-                                return Bottomnavigations();
+                                return Bottomnavigations(
+                                  selectedIndex: 0,
+                                );
                               }));
                             } else {
                               Alert(
