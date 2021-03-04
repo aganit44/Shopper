@@ -6,6 +6,8 @@ class User {
   String PhoneNumber;
   String Name;
   String Image;
+  String Coin;
+  String Airpay;
 
   User(
       {this.Id,
@@ -14,5 +16,7 @@ class User {
       this.Email,
       this.PhoneNumber,
       this.Name,
-      this.Image});
+      this.Image,
+      this.Coin,
+      this.Airpay});
 }

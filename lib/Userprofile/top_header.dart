@@ -25,7 +25,7 @@ class TopHeader extends State {
   }
 
   Future<dynamic> _ProductData() async {
-    String url = "http://25.46.25.35/images/Profile.json";
+    String url = "http://192.168.43.200/images/Profile.json";
     var response = await get(url);
     if (response.statusCode == 200) {
       if (response.body.isNotEmpty) {
@@ -48,7 +48,7 @@ class TopHeader extends State {
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: NetworkImage('http://25.46.25.35/images/01.jpg'),
+          image: NetworkImage('http://192.168.43.200/images/01.jpg'),
           fit: BoxFit.cover,
         ),
       ),
@@ -65,7 +65,7 @@ class TopHeader extends State {
                   CircleAvatar(
                     maxRadius: 50.0,
                     backgroundImage: NetworkImage(
-                        "http://25.46.25.35:5000/image?path=" + user.Image),
+                        "http://192.168.43.200:5000/image?path=" + user.Image),
                   ),
                   SizedBox(height: 5.0),
 

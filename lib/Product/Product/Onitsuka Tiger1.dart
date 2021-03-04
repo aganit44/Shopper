@@ -1,384 +1,159 @@
-import 'package:Shopper/Product/models/shoe_model.dart';
-import 'package:flutter/material.dart';
-import 'package:localstorage/localstorage.dart';
-
-import 'banner3.dart';
-import 'package:http/http.dart';
 import 'dart:convert';
+
+import 'package:Shopper/Product/Product/banner3.dart';
+import 'package:flutter/material.dart';
+
+import '../../Addproduct.dart';
+
+import 'package:http/http.dart' as http;
 
 import 'detail_page.dart';
 import 'detail_page2.dart';
-import 'detail_page3.dart';
 
 class OnitsukaTiger2 extends StatefulWidget {
+  String brand;
+  OnitsukaTiger2({this.brand});
+
   @override
-  _OnitsukaTigerState createState() => _OnitsukaTigerState();
+  _OnitsukaTiger2State createState() => _OnitsukaTiger2State();
 }
 
-class _OnitsukaTigerState extends State<OnitsukaTiger2> {
-  List<ShoeModel> shoeList = ShoeModel.list;
-  LocalStorage localStorage;
+class _OnitsukaTiger2State extends State<OnitsukaTiger2> {
+  String brand = "";
+  Future getproduct() async {
+    try {
+      var response = await http
+          .get('http://25.46.25.35:5000/product/select?brand=' + brand);
 
-  @override
-  void initState() {
-    localStorage = LocalStorage('Product');
-    super.initState();
+      return json.decode(response.body);
+    } catch (error) {
+      throw error;
+    }
   }
 
-  Future<dynamic> _ProductData() async {
-    String url = "http://25.46.25.35/login/Product.php";
-    var response = await get(url);
-    if (response.statusCode == 200) {
-      if (response.body.isNotEmpty) {
-        var data = jsonDecode(response.body);
-
-        return data;
-      } else {
-        return null;
-      }
-    } else {
-      return null;
-    }
+  void initState() {
+    brand = widget.brand;
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-        title: Text('OnitsukaTiger'),
-        actions: [
-          SizedBox(
-            width: 10,
-          ),
-        ],
-      ),
-      body: ListView(
-        children: <Widget>[
-          BannerSection3(),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[],
-            ),
-          ),
-          SizedBox(height: 30),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text(
-                  "JUST FOR YOU",
-                  style: TextStyle(
-                    color: Colors.black54,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Text(
-                  "VIEW ALL",
-                  style: TextStyle(
-                    fontSize: 12,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(height: 24),
-          Container(
-            margin: EdgeInsets.only(left: 16, right: 16, bottom: 10),
-            padding: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.all(
-                Radius.circular(25),
-              ),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black12,
-                  spreadRadius: 10,
-                  blurRadius: 10,
-                ),
-              ],
-            ),
-            child: Row(
-              children: <Widget>[
-                FutureBuilder(
-                  future: _ProductData(),
-                  builder: (BuildContext context, AsyncSnapshot snapshot) {
-                    if (snapshot.hasData) {
-                      localStorage.setItem('Productlist', snapshot.data);
-                      var data = localStorage.getItem('Productlist');
-                      return Image.network(
-                        '${data[0]['Images']}',
-                        width: 100,
-                        height: 100,
-                      );
-                    } else if (snapshot.hasError) {
-                      return CircularProgressIndicator();
-                    } else {
-                      return CircularProgressIndicator();
-                    }
-                  },
-                ),
-                SizedBox(width: 16),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Container(
-                        width: MediaQuery.of(context).size.width * .4,
-                        child: FutureBuilder(
-                          future: _ProductData(),
-                          builder:
-                              (BuildContext context, AsyncSnapshot snapshot) {
-                            if (snapshot.hasData) {
-                              localStorage.setItem(
-                                  'Productlist', snapshot.data);
-                              var data = localStorage.getItem('Productlist');
-                              CircularProgressIndicator();
-                              return Text('${data[0]['Name']}');
-                            } else if (snapshot.hasError) {
-                              return CircularProgressIndicator();
-                            } else {
-                              return CircularProgressIndicator();
-                            }
-                          },
+        appBar: AppBar(
+          title: Text(brand),
+          backgroundColor: Colors.black,
+        ),
+        body: Container(
+          child: FutureBuilder(
+            builder: (context, snapshot) {
+              if (ConnectionState.active != null && !snapshot.hasData) {
+                return Center(child: CircularProgressIndicator());
+              }
+
+              if (ConnectionState.done != null && snapshot.hasError) {
+                return Center(child: Text(snapshot.error));
+              }
+
+              return ListView.separated(
+                padding: EdgeInsets.all(10),
+                itemCount: snapshot.data.length,
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => DetailPage(),
                         ),
-                      ),
-                      FutureBuilder(
-                        future: _ProductData(),
-                        builder:
-                            (BuildContext context, AsyncSnapshot snapshot) {
-                          if (snapshot.hasData) {
-                            localStorage.setItem('Productlist', snapshot.data);
-                            var data = localStorage.getItem('Productlist');
-                            CircularProgressIndicator();
-                            return Text('OnitsukaTiger');
-                          } else if (snapshot.hasError) {
-                            return CircularProgressIndicator();
-                          } else {
-                            return CircularProgressIndicator();
-                          }
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                ),
-                IconButton(
-                  icon: Image.network(
-                      "https://cdn0.iconfinder.com/data/icons/simpline-mix/64/simpline_41-512.png"),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => DetailPage()),
-                    );
-                  },
-                ),
-              ],
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.only(left: 16, right: 16, bottom: 10),
-            padding: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.all(
-                Radius.circular(25),
-              ),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black12,
-                  spreadRadius: 10,
-                  blurRadius: 10,
-                ),
-              ],
-            ),
-            child: Row(
-              children: <Widget>[
-                FutureBuilder(
-                  future: _ProductData(),
-                  builder: (BuildContext context, AsyncSnapshot snapshot) {
-                    if (snapshot.hasData) {
-                      localStorage.setItem('Productlist', snapshot.data);
-                      var data = localStorage.getItem('Productlist');
-                      CircularProgressIndicator();
-                      return Image.network(
-                        '${data[1]['Images']}',
-                        width: 100,
-                        height: 100,
                       );
-                    } else if (snapshot.hasError) {
-                      return CircularProgressIndicator();
-                    } else {
-                      return CircularProgressIndicator();
-                    }
-                  },
-                ),
-                SizedBox(width: 16),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Container(
-                        width: MediaQuery.of(context).size.width * .4,
-                        child: FutureBuilder(
-                          future: _ProductData(),
-                          builder:
-                              (BuildContext context, AsyncSnapshot snapshot) {
-                            if (snapshot.hasData) {
-                              localStorage.setItem(
-                                  'Productlist', snapshot.data);
-                              var data = localStorage.getItem('Productlist');
-                              CircularProgressIndicator();
-                              return Text('${data[1]['Name']}');
-                            } else if (snapshot.hasError) {
-                              return CircularProgressIndicator();
-                            } else {
-                              return CircularProgressIndicator();
-                            }
-                          },
+                    },
+                    child: Container(
+                      margin: EdgeInsets.only(left: 16, right: 16, bottom: 10),
+                      padding:
+                          EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(25),
                         ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black12,
+                            spreadRadius: 10,
+                            blurRadius: 10,
+                          ),
+                        ],
                       ),
-                      FutureBuilder(
-                        future: _ProductData(),
-                        builder:
-                            (BuildContext context, AsyncSnapshot snapshot) {
-                          if (snapshot.hasData) {
-                            localStorage.setItem('Productlist', snapshot.data);
-                            var data = localStorage.getItem('Productlist');
-                            CircularProgressIndicator();
-                            return Text('OnitsukaTiger');
-                          } else if (snapshot.hasError) {
-                            return CircularProgressIndicator();
-                          } else {
-                            return CircularProgressIndicator();
-                          }
-                        },
+                      child: Row(
+                        children: <Widget>[
+                          Image.network(
+                            'http://25.46.25.35:5000/product/image?path=' +
+                                snapshot.data[index]["Images"],
+                            width: 100,
+                            height: 100,
+                          ),
+                          SizedBox(width: 16),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Container(
+                                  width: MediaQuery.of(context).size.width * .4,
+                                  child: Text(
+                                    "${snapshot.data[index]["Name"]}",
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                // Text(
+                                //   "${data.brand}",
+                                //   style: TextStyle(
+                                //     color: Colors.black26,
+                                //     height: 1.5,
+                                //   ),
+                                // ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 12),
+                            child: Text(
+                              "\$${snapshot.data[index]["Price"]}",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                ),
-                IconButton(
-                  icon: Image.network(
-                      "https://cdn0.iconfinder.com/data/icons/simpline-mix/64/simpline_41-512.png"),
-                  color: Colors.indigo,
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => DetailPage2()),
-                    );
-                  },
-                ),
-              ],
-            ),
+                    ),
+                  );
+                },
+                separatorBuilder: (BuildContext context, int index) {
+                  return Divider(
+                    indent: 10,
+                    endIndent: 10,
+                  );
+                },
+              );
+            },
+            future: getproduct(),
           ),
-          Container(
-            margin: EdgeInsets.only(left: 16, right: 16, bottom: 10),
-            padding: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.all(
-                Radius.circular(25),
-              ),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black12,
-                  spreadRadius: 10,
-                  blurRadius: 10,
-                ),
-              ],
-            ),
-            child: Row(
-              children: <Widget>[
-                FutureBuilder(
-                  future: _ProductData(),
-                  builder: (BuildContext context, AsyncSnapshot snapshot) {
-                    if (snapshot.hasData) {
-                      localStorage.setItem('Productlist', snapshot.data);
-                      var data = localStorage.getItem('Productlist');
-                      CircularProgressIndicator();
-                      return Image.network(
-                        '${data[2]['Images']}',
-                        width: 100,
-                        height: 100,
-                      );
-                    } else if (snapshot.hasError) {
-                      return CircularProgressIndicator();
-                    } else {
-                      return CircularProgressIndicator();
-                    }
-                  },
-                ),
-                SizedBox(width: 16),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Container(
-                        width: MediaQuery.of(context).size.width * .4,
-                        child: FutureBuilder(
-                          future: _ProductData(),
-                          builder:
-                              (BuildContext context, AsyncSnapshot snapshot) {
-                            if (snapshot.hasData) {
-                              localStorage.setItem(
-                                  'Productlist', snapshot.data);
-                              var data = localStorage.getItem('Productlist');
-                              CircularProgressIndicator();
-                              return Text('${data[2]['Name']}');
-                            } else if (snapshot.hasError) {
-                              return CircularProgressIndicator();
-                            } else {
-                              return CircularProgressIndicator();
-                            }
-                          },
-                        ),
-                      ),
-                      FutureBuilder(
-                        future: _ProductData(),
-                        builder:
-                            (BuildContext context, AsyncSnapshot snapshot) {
-                          if (snapshot.hasData) {
-                            localStorage.setItem('Productlist', snapshot.data);
-                            var data = localStorage.getItem('Productlist');
-                            CircularProgressIndicator();
-                            return Text('OnitsukaTiger');
-                          } else if (snapshot.hasError) {
-                            return CircularProgressIndicator();
-                          } else {
-                            return CircularProgressIndicator();
-                          }
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                ),
-                IconButton(
-                  icon: Image.network(
-                      "https://cdn0.iconfinder.com/data/icons/simpline-mix/64/simpline_41-512.png"),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => DetailPage3()),
-                    );
-                  },
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Addproduct()),
+            );
+          },
+          backgroundColor: Colors.black,
+          foregroundColor: Colors.white,
+          mini: true,
+          child: Icon(Icons.add),
+        ));
   }
 }

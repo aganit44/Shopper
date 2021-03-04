@@ -96,50 +96,74 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         RaisedButton(
                           onPressed: () async {
-                            var user = UserController.text;
-                            var pass = PassController.text;
-                            var res = await api.login(user, pass);
+                            if (formKey.currentState.validate()) {
+                              var user = UserController.text;
+                              var pass = PassController.text;
+                              var res = await api.login(user, pass);
 
-                            if (res.statusCode == 200) {
-                              Map<String, dynamic> data = jsonDecode(res.body);
-                              print(data);
+                              if (res.statusCode == 200) {
+                                Map<String, dynamic> data =
+                                    jsonDecode(res.body);
+                                print(data);
 
-                              User statement = User(
+                                User statement = User(
                                   Id: data['ID'],
                                   Username: data['Username'],
                                   Password: data['Password'],
                                   Email: data['Email'],
                                   PhoneNumber: data['PhoneNumber'],
                                   Name: data['Name'],
-                                  Image: data['Image']);
-
-                              var provider = Provider.of<UserProvider>(context,
-                                  listen: false);
-                              provider.addUser(statement);
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) {
-                                return Bottomnavigations(
-                                  selectedIndex: 0,
+                                  Image: data['Image'],
+                                  Coin: data['Coin'],
+                                  Airpay: data['Airpay'],
                                 );
-                              }));
-                            } else {
-                              Alert(
-                                context: context,
-                                type: AlertType.error,
-                                title: "LoginFalile",
-                                desc: "",
-                                buttons: [
-                                  DialogButton(
-                                    child: Text(
-                                      "Close",
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 20),
-                                    ),
-                                    onPressed: () => Navigator.pop(context),
-                                    width: 120,
-                                  )
-                                ],
-                              ).show();
+
+                                var provider = Provider.of<UserProvider>(
+                                    context,
+                                    listen: false);
+                                provider.addUser(statement);
+                                Alert(
+                                  context: context,
+                                  type: AlertType.success,
+                                  title: "เข้าสู่ระบบสำเร็จ",
+                                  desc: "",
+                                  buttons: [
+                                    DialogButton(
+                                      child: Text(
+                                        "OK",
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 20),
+                                      ),
+                                      onPressed: () =>   Navigator.push(context,
+                                          MaterialPageRoute(builder: (context) {
+                                            return Bottomnavigations(
+                                              selectedIndex: 0,
+                                            );
+
+                                          }))
+                                    )
+                                  ],
+                                ).show();
+
+                              } else {
+                                Alert(
+                                  context: context,
+                                  type: AlertType.error,
+                                  title: "LoginFalile",
+                                  desc: "",
+                                  buttons: [
+                                    DialogButton(
+                                      child: Text(
+                                        "Close",
+                                        style: TextStyle(
+                                            color: Colors.white, fontSize: 20),
+                                      ),
+                                      onPressed: () => Navigator.pop(context),
+                                      width: 120,
+                                    )
+                                  ],
+                                ).show();
+                              }
                             }
                           },
                           color: Colors.black,

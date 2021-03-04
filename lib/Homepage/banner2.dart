@@ -2,12 +2,12 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-var bannerItems = ["Adidas", "Converse", "Nlke", "Nlke"];
+var bannerItems = ["Adidas", "Converse", "Nlke", "รวม"];
 var bannerImage = [
   'assets/images/Promo1.jpg',
   'assets/images/Promo2.jpg',
   'assets/images/Promo3.jpg',
-  'assets/images/Promo3.jpg',
+  'assets/images/Pomo4.jpg',
 ];
 
 class BannerWidgetArea extends StatelessWidget {

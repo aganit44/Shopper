@@ -21,20 +21,20 @@ class _MainMenu extends State<MainMenu> {
         scrollDirection: Axis.horizontal,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          childAspectRatio: 1.25,
+          childAspectRatio: 0.8,
         ),
         itemBuilder: (context, index) {
           final MainMenuModel menu = _menus[index];
           return Column(
             children: [
               Container(
-                width: 55,
-                height: 55,
+                width: 100,
+                height: 75,
                 child: FlatButton(
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(14),
-                      side: BorderSide(color: Colors.black)),
-                  padding: EdgeInsets.all(8),
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                  padding: EdgeInsets.all(5),
                   color: Colors.white,
                   onPressed: () {
                     Navigator.push(

@@ -1,7 +1,6 @@
 import 'package:Shopper/api/user_api.dart';
 import 'package:flutter/material.dart';
 
-
 TextEditingController UserController = TextEditingController();
 TextEditingController PassController = TextEditingController();
 TextEditingController EmailController = TextEditingController();
@@ -135,58 +134,3 @@ class _RegPageState extends State<RegPage> {
     );
   }
 }
-
-/*Future<Function> Register(String username, String password, String Email,
-    String PhoneNumber, String Name, BuildContext context) async {
-  if (username == '' ||
-      password == '' ||
-      Email == '' ||
-      PhoneNumber == '' ||
-      Name == '') {
-    Alert(
-      context: context,
-      type: AlertType.error,
-      title: "กรุณากรอกให้ครบ",
-      desc: "",
-      buttons: [
-        DialogButton(
-          child: Text(
-            "Close",
-            style: TextStyle(color: Colors.white, fontSize: 20),
-          ),
-          onPressed: () => Navigator.pop(context),
-          width: 120,
-        )
-      ],
-    ).show();
-  } else {
-    var url =
-        'http://25.46.25.35/login/Register.php?Username=$username&Password=$password&Email=$Email&PhoneNumber=$PhoneNumber&Name=$Name';
-    // Await the http get response, then decode the json-formatted response.
-    var response = await http.get(url);
-
-    if (response.statusCode == 200) {
-      var string = response.body;
-      print(string);
-      if (string != '') {
-        Alert(
-          context: context,
-          type: AlertType.warning,
-          title: "สมัครสำเร็จ",
-          desc: "",
-          buttons: [
-            DialogButton(
-                child: Text(
-                  "OK",
-                  style: TextStyle(color: Colors.white, fontSize: 20),
-                ),
-                onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => (LoginPage())),
-                    ))
-          ],
-        ).show();
-      }
-    }
-  }
-}*/

@@ -19,40 +19,39 @@ class _Page1 extends State<Page1> {
       backgroundColor: Colors.black,
       body: ListView(
         children: <Widget>[
-            AppBar(
-        backgroundColor: Colors.black,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => Bottomnavigations(
-                        selectedIndex: 0,
-                      )),
-            );
-          },
-        ),
-        title: Text("Profile"),
-        centerTitle: true,
-      ),
+          AppBar(
+            backgroundColor: Colors.black,
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back, color: Colors.white),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => Bottomnavigations(
+                            selectedIndex: 0,
+                          )),
+                );
+              },
+            ),
+            title: Text("Profile"),
+            centerTitle: true,
+          ),
           topheader(),
           SizedBox(height: 20),
           ProfileMenu(
             text: "My Account",
             icon: "assets/icons/User Icon.svg",
             press: () => {
-                Navigator.push(
+              Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => MyHomePage()),
               )
-              
             },
           ),
           ProfileMenu(
             text: "Notifications",
             icon: "assets/icons/Bell.svg",
-            press: () {},
+            press: () => {},
           ),
           ProfileMenu(
             text: "Settings",

@@ -1,8 +1,16 @@
+import 'package:Shopper/model/User.dart';
+import 'package:Shopper/providers/user_provider.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class BannerSlider extends StatelessWidget {
+class BannerSlider extends StatefulWidget {
+  @override
+  _BannerSliderState createState() => _BannerSliderState();
+}
+
+class _BannerSliderState extends State<BannerSlider> {
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -97,10 +105,16 @@ class _BannerSectionState extends State<BannerSection> {
       );
 }
 
-class CashInfo extends StatelessWidget {
-  CashInfo();
+class CashInfo extends StatefulWidget {
+  @override
+  _CashInfoState createState() => _CashInfoState();
+}
+
+class _CashInfoState extends State<CashInfo> {
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<UserProvider>(context, listen: false);
+    User user = provider.getUser();
     final verticalDivider = VerticalDivider(
       indent: 5,
       endIndent: 5,
@@ -111,37 +125,30 @@ class CashInfo extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: 0),
       padding: EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: Colors.white,
-            borderRadius: BorderRadius.circular(4),
-      boxShadow: [
-        BoxShadow(
-          color: Colors.grey.withOpacity(0.5),
-          spreadRadius: 0.2,
-          blurRadius: 7,
-          offset: Offset(0,1),
-        )
-      ]
-      ),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(4),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 0.2,
+              blurRadius: 7,
+              offset: Offset(0, 1),
+            )
+          ]),
       child: IntrinsicHeight(
         child: Row(
           children: [
             SizedBox(width: 3),
-            //Image.network(
-             // "https://cdn.icon-icons.com/icons2/1898/PNG/512/scan_121131.png",
-              //height: 45,
-              //color: Colors.black54,
-           // ),
             verticalDivider,
             _buildInfo(
               image: "assets/logo/Airpay.png",
-              title: "5000.00",
+              title: '${user.Airpay} Coin',
               subTitle: "by Dev from Home รับโค๊ดส่งฟรี 100 ต่อเดือน",
             ),
             verticalDivider,
             _buildInfo(
-              image:
-                  "assets/logo/coin.jpg",
-              title: "3,000 coin",
+              image: "assets/logo/coin.jpg",
+              title: '${user.Coin} Coin',
               subTitle: "นำ coin มาแลกหัวใจ ",
             ),
           ],
@@ -150,7 +157,8 @@ class CashInfo extends StatelessWidget {
     );
   }
 
-  _buildInfo({String image, String title, String subTitle, bool isCoin = false}) {
+  _buildInfo(
+      {String image, String title, String subTitle, bool isCoin = false}) {
     final height = 22.0;
     return Expanded(
       flex: 3,
@@ -178,7 +186,9 @@ class CashInfo extends StatelessWidget {
               ],
             ),
           ),
-          Text(subTitle, style: TextStyle(
+          Text(
+            subTitle,
+            style: TextStyle(
               fontSize: 11,
               color: Colors.grey[700],
             ),

@@ -11,6 +11,8 @@ import 'package:image_picker/image_picker.dart';
 import 'Profile.dart';
 
 class MyHomePage extends StatefulWidget {
+  final formKey = GlobalKey<FormState>();
+
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -27,7 +29,7 @@ class _MyHomePageState extends State<MyHomePage> {
     User user = provider.getUser();
     return Container(
       child: Scaffold(
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.white,
         appBar: AppBar(
           centerTitle: true,
           backgroundColor: Colors.black,
@@ -40,7 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: CircleAvatar(
                 radius: 60.0,
                 backgroundImage: _image == null
-                    ? AssetImage("กรุณาใส่รูป")
+                    ? AssetImage("assets/images/AAA.png")
                     : FileImage(File(_image.path)),
               ),
             ),
@@ -49,7 +51,6 @@ class _MyHomePageState extends State<MyHomePage> {
               decoration: InputDecoration(
                   prefixIcon: Icon(Icons.account_box),
                   labelText: 'กรุณาใส่ชื่อที่ต้องการเปลื่ยน',
-                  filled: true,
                   fillColor: Colors.white,
                   border: InputBorder.none),
             ),
@@ -83,11 +84,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     }));
                   }
                 }
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //       builder: (context) => ()),
-                // );
               },
               color: Colors.deepOrange,
               child: Text(
@@ -101,6 +97,8 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
         floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          backgroundColor: Colors.black,
           child: InkWell(
             onTap: () {
               showModalBottomSheet(
@@ -110,7 +108,7 @@ class _MyHomePageState extends State<MyHomePage> {
             },
             child: Icon(
               Icons.camera_alt,
-              color: Colors.black,
+              color: Colors.white,
               size: 50.0,
             ),
           ),
