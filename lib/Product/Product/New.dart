@@ -23,7 +23,7 @@ class _OnitsukaTiger2State extends State<OnitsukaTiger2> {
   Future getproduct() async {
     try {
       var response = await http
-          .get('http://25.46.25.35:5000/product/select?brand=' + brand);
+          .get('http://192.168.43.200:5000/product/select?brand=' + brand);
 
       return json.decode(response.body);
     } catch (error) {
@@ -71,28 +71,54 @@ class _OnitsukaTiger2State extends State<OnitsukaTiger2> {
                       );
                     },
                     child: Container(
-                      margin: EdgeInsets.only(left: 1, right: 8, bottom: 10),
-                      padding: EdgeInsets.symmetric(vertical: 1, horizontal: 5),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(10),
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black12,
-                            spreadRadius: 10,
-                            blurRadius: 10,
+                        margin: EdgeInsets.only(left: 1, right: 8, bottom: 10),
+                        padding:
+                            EdgeInsets.symmetric(vertical: 1, horizontal: 5),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(10),
                           ),
-                        ],
-                      ),
-                      child: Image.network(
-                        'http://25.46.25.35:5000/product/image?path=' +
-                            snapshot.data[index]["Images"],
-                        width: 160,
-                        height: 150,
-                      ),
-                    ),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black12,
+                              spreadRadius: 10,
+                              blurRadius: 10,
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          children: <Widget>[
+                            Image.network(
+                              'http://192.168.43.200:5000/product/image?path=' +
+                                  snapshot.data[index]["Images"],
+                              width: 160,
+                              height: 110,
+                            ),
+                            Text("${snapshot.data[index]["Name"]}",
+                                maxLines: 2,
+                                overflow: TextOverflow.fade,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                )),
+                            Row(
+                              children: <Widget>[
+                                Icon(
+                                  Icons.monetization_on,
+                                  color: Colors.yellow,
+                                  size: 30.0,
+                                ),
+                                Text(
+                                    "        ${snapshot.data[index]["Price"]}  ฿",
+                                    maxLines: 2,
+                                    overflow: TextOverflow.fade,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    )),
+                              ],
+                            )
+                          ],
+                        )),
                   );
                 },
               );

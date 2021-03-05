@@ -14,7 +14,7 @@ class productApi {
     var length = await imageFile.length();
 
     // string to uri
-    var uri = Uri.parse("http://25.46.25.35:5000/product/uploadProduct");
+    var uri = Uri.parse("http://192.168.43.200:5000/product/uploadProduct");
 
     // create multipart request
     var request = new http.MultipartRequest("POST", uri);
@@ -37,7 +37,7 @@ class productApi {
   }
 
   Future<dynamic> getproduct(String brand) async {
-    var url = 'http://25.46.25.35:5000/product/select?brand=' + brand;
+    var url = 'http://192.168.43.200:5000/product/select?brand=' + brand;
     var res = await http.get(url);
     return res;
   }

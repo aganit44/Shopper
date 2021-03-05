@@ -5,6 +5,7 @@
 // import 'package:hello/Product/NewProduct/Reebok/Reebok.dart';
 // import 'package:hello/Product/NewProduct/Adidas/Adidas.dart';
 // import 'package:hello/Product/NewProduct/Vans/Vans.dart';
+import 'package:Shopper/Product/Product/New.dart';
 import 'package:Shopper/Product/Product/Onitsuka%20Tiger1.dart';
 import 'package:flutter/cupertino.dart';
 

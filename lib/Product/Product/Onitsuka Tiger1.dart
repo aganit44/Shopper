@@ -10,20 +10,20 @@ import 'package:http/http.dart' as http;
 import 'detail_page.dart';
 import 'detail_page2.dart';
 
-class OnitsukaTiger2 extends StatefulWidget {
+class OnitsukaTiger1 extends StatefulWidget {
   String brand;
-  OnitsukaTiger2({this.brand});
+  OnitsukaTiger1({this.brand});
 
   @override
   _OnitsukaTiger2State createState() => _OnitsukaTiger2State();
 }
 
-class _OnitsukaTiger2State extends State<OnitsukaTiger2> {
+class _OnitsukaTiger2State extends State<OnitsukaTiger1> {
   String brand = "";
   Future getproduct() async {
     try {
       var response = await http
-          .get('http://25.46.25.35:5000/product/select?brand=' + brand);
+          .get('http://192.168.43.200:5000/product/select?brand=' + brand);
 
       return json.decode(response.body);
     } catch (error) {
@@ -62,7 +62,8 @@ class _OnitsukaTiger2State extends State<OnitsukaTiger2> {
                     onTap: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (_) => DetailPage(),
+                          builder: (_) =>
+                              DetailPage(id: snapshot.data[index]["ID"]),
                         ),
                       );
                     },
@@ -86,7 +87,7 @@ class _OnitsukaTiger2State extends State<OnitsukaTiger2> {
                       child: Row(
                         children: <Widget>[
                           Image.network(
-                            'http://25.46.25.35:5000/product/image?path=' +
+                            'http://192.168.43.200:5000/product/image?path=' +
                                 snapshot.data[index]["Images"],
                             width: 100,
                             height: 100,
