@@ -1,5 +1,7 @@
+import 'package:Shopper/Login/login_page.dart';
 import 'package:Shopper/api/user_api.dart';
 import 'package:flutter/material.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 TextEditingController UserController = TextEditingController();
 TextEditingController PassController = TextEditingController();
@@ -93,7 +95,24 @@ class _RegPageState extends State<RegPage> {
                           NameController.text,
                         );
                         if (res.statusCode == 200) {
-                          Navigator.pop(context);
+                          Alert(
+                            context: context,
+                            type: AlertType.success,
+                            title: "สมัครสำเร็จ",
+                            desc: "",
+                            buttons: [
+                              DialogButton(
+                                  child: Text(
+                                    "OK",
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 20),
+                                  ),
+                                  onPressed: () => Navigator.push(context,
+                                          MaterialPageRoute(builder: (context) {
+                                        return LoginPage();
+                                      })))
+                            ],
+                          ).show();
                         }
                       },
                       color: Colors.black,

@@ -1,11 +1,10 @@
 import 'dart:io';
-import 'package:Shopper/Product/Product/Onitsuka%20Tiger1.dart';
 import 'package:Shopper/api/product_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'Homepage/BottomNavigation.dart';
 
 class Addproduct extends StatefulWidget {
@@ -45,45 +44,6 @@ class _Addproduct extends State<Addproduct> {
                   : Image.file(File(_image.path)),
             ),
           ),
-          TextFormField(
-            controller: NameproductController,
-            decoration: new InputDecoration(labelText: "กรุณาป้อนชื่อProduct"),
-            autofocus: false,
-            validator: (String str) {
-              //ชื่อรายการเป็นค่าว่าง
-              if (str.isEmpty) {
-                return "กรุณาป้อนชื่อProduct";
-              }
-              return null;
-            },
-          ),
-          //
-          TextFormField(
-            controller: InformationController,
-            decoration:
-                new InputDecoration(labelText: "กรุณาป้อนข้อมูลProduct"),
-            autofocus: false,
-            validator: (String str) {
-              if (str.isEmpty) {
-                return "กรุณาป้อนข้อมูลProduct";
-              }
-
-              return null;
-            },
-          ),
-          TextFormField(
-            controller: PriceController,
-            decoration: new InputDecoration(labelText: "กรุณาป้อนราคาProduct"),
-            autofocus: false,
-            validator: (String str) {
-              if (str.isEmpty) {
-                return "กรุณาป้อนราคาProduct";
-              }
-
-              return null;
-            },
-          ),
-
           DropdownButton<String>(
             value: dropdownValue,
             onChanged: (String newValue) {
@@ -100,6 +60,47 @@ class _Addproduct extends State<Addproduct> {
               );
             }).toList(),
           ),
+
+          TextFormField(
+            controller: NameproductController,
+            decoration: new InputDecoration(labelText: "กรุณาป้อนชื่อProduct"),
+            autofocus: true,
+            validator: (String str) {
+              //ชื่อรายการเป็นค่าว่าง
+              if (str.isEmpty) {
+                return "กรุณาป้อนชื่อProduct";
+              }
+              return null;
+            },
+          ),
+          //
+          TextFormField(
+            controller: InformationController,
+            decoration:
+                new InputDecoration(labelText: "กรุณาป้อนข้อมูลProduct"),
+            autofocus: true,
+            cursorColor: Colors.redAccent,
+            validator: (String str) {
+              if (str.isEmpty) {
+                return "กรุณาป้อนข้อมูลProduct";
+              }
+
+              return null;
+            },
+          ),
+          TextFormField(
+            controller: PriceController,
+            decoration: new InputDecoration(labelText: "กรุณาป้อนราคาProduct"),
+            autofocus: true,
+            validator: (String str) {
+              if (str.isEmpty) {
+                return "กรุณาป้อนราคาProduct";
+              }
+
+              return null;
+            },
+          ),
+
           RaisedButton(
             onPressed: () async {
               var res = await api.uploadproduct(
@@ -115,12 +116,26 @@ class _Addproduct extends State<Addproduct> {
                 //Map<String, dynamic> data = jsonDecode(res.body);
                 print("yes");
 
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return Bottomnavigations(
-                    selectedIndex: 0,
-                  );
-                }));
-              } else {}
+                Alert(
+                  context: context,
+                  type: AlertType.success,
+                  title: "เพิ่มสินค้าสำเร็จ",
+                  desc: "",
+                  buttons: [
+                    DialogButton(
+                        child: Text(
+                          "OK",
+                          style: TextStyle(color: Colors.white, fontSize: 20),
+                        ),
+                        onPressed: () => Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return Bottomnavigations(
+                                selectedIndex: 0,
+                              );
+                            })))
+                  ],
+                ).show();
+              }
             },
             color: Colors.deepOrange,
             child: Text(

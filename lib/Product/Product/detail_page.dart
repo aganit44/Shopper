@@ -86,38 +86,16 @@ class _DetailPageState extends State<DetailPage> {
                                           BorderRadius.all(Radius.circular(20)),
                                       gradient: LinearGradient(
                                         colors: [
-                                          Color(0xFFE0DAE2),
+                                          Color(0xFF6F6A6A),
                                           Color(0xFF000000)
                                         ],
                                       )),
                                 ),
                                 Positioned(
-                                  top: -30,
-                                  right: -10,
-                                  child: Text(
-                                    'air',
-                                    style: TextStyle(
-                                      fontSize: 140,
-                                      color: Colors.black.withOpacity(.15),
-                                    ),
-                                  ),
-                                ),
-                                Positioned(
-                                  bottom: -30,
-                                  left: -10,
-                                  child: Text(
-                                    'spa',
-                                    style: TextStyle(
-                                      fontSize: 140,
-                                      color: Colors.black.withOpacity(.15),
-                                    ),
-                                  ),
-                                ),
-                                Positioned(
                                   left: 15,
                                   bottom: 15,
                                   child: Text(
-                                    "Nike ispa air",
+                                    "?",
                                     style: TextStyle(
                                         fontSize: 30, color: Colors.white),
                                   ),
@@ -131,8 +109,7 @@ class _DetailPageState extends State<DetailPage> {
                                     width: 230,
                                     decoration: BoxDecoration(
                                         image: DecorationImage(
-                                            image: AssetImage(
-                                                'asset/images/shoe1.png'),
+                                            image: AssetImage('?'),
                                             fit: BoxFit.contain)),
                                   ),
                                 )
@@ -151,7 +128,7 @@ class _DetailPageState extends State<DetailPage> {
                     children: <Widget>[
                       Container(
                         child: Text(
-                          'Nike ispa air Max 720',
+                          '?',
                           style: TextStyle(fontSize: 30),
                         ),
                       ),
@@ -163,8 +140,8 @@ class _DetailPageState extends State<DetailPage> {
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 20),
                     child: Text(
-                      '\$187',
-                      style: TextStyle(color: Colors.blue, fontSize: 30),
+                      '\$   ?',
+                      style: TextStyle(color: Colors.red, fontSize: 30),
                     ),
                   ),
                   SizedBox(
@@ -173,7 +150,7 @@ class _DetailPageState extends State<DetailPage> {
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 20),
                     child: Text(
-                      "Utilising the largest innovations and NIke's spa project which touts a pholosophy of improvise, scavaga, protect and adapr Nike ISPA Air Max 720 delivers smooth cushioning. Utilising the largest innovations and NIke's spa project which touts a pholosophy of improvise, scavaga, protect and adapr Nike ISPA Air Max 720 delivers smooth cushioning. Utilising the largest innovations and NIke's spa project which touts a pholosophy of improvise, scavaga, protect and adapr Nike ISPA Air Max 720 delivers smooth cushioning",
+                      " ?",
                       style: TextStyle(color: Colors.black54, fontSize: 15),
                       textAlign: TextAlign.justify,
                     ),
@@ -184,49 +161,13 @@ class _DetailPageState extends State<DetailPage> {
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 20),
                     child: Text(
-                      'Colors',
+                      'Size',
                       style: TextStyle(fontSize: 30),
                     ),
                   ),
                   SizedBox(
                     height: 10,
                   ),
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    child: Row(
-                      children: <Widget>[
-                        Container(
-                          height: 50,
-                          width: 50,
-                          margin: EdgeInsets.only(right: 10),
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Colors.black,
-                              border: Border.all(color: Colors.white, width: 4),
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Colors.black,
-                                    spreadRadius: 0.5,
-                                    blurRadius: 5)
-                              ]),
-                        ),
-                        Container(
-                          height: 50,
-                          width: 50,
-                          margin: EdgeInsets.only(right: 10),
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle, color: Colors.blueAccent),
-                        ),
-                        Container(
-                          height: 50,
-                          width: 50,
-                          margin: EdgeInsets.only(right: 10),
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle, color: Colors.orange),
-                        )
-                      ],
-                    ),
-                  )
                 ],
               ),
             ),

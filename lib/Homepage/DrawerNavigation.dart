@@ -18,31 +18,19 @@ class _DrawerNavitionState extends State<DrawerNavition> {
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
-          DrawerHeader(
+          UserAccountsDrawerHeader(
             decoration: BoxDecoration(
               color: Colors.black,
             ),
-            child: Column(
-              children: [
-                Column(
-                  children: [
-                    Text(
-                      '${user.Name}',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                      ),
-                    ),
-                  ],
-                ),
-                Align(
-                    alignment: Alignment.centerLeft,
-                    child: CircleAvatar(
-                      backgroundImage: NetworkImage("http://25.46.25.35:5000/image?path="+user.Image),
-                      radius: 40.0,
-                    )),
-              ],
-            ),
+            accountName: Text("${user.Name}"),
+            accountEmail: Text("${user.Email}"),
+            currentAccountPicture: Align(
+                alignment: Alignment.centerLeft,
+                child: CircleAvatar(
+                  backgroundImage: NetworkImage(
+                      "http://25.46.25.35:5000/image?path=" + user.Image),
+                  radius: 40.0,
+                )),
           ),
           ListTile(
             leading: Icon(Icons.shopping_cart),
@@ -82,19 +70,3 @@ class _DrawerNavitionState extends State<DrawerNavition> {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

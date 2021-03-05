@@ -29,38 +29,42 @@ class _ProductState extends State<Notifications> {
         title: Text("Notifications"),
         centerTitle: true,
       ),
-      body: ListView(
-        children: <Widget>[
-          SizedBox(height: 5),
-          ProfileMenu(
-            text: "โปรโมชั่น",
-            icon: "assets/icons/Shop Icon.svg",
-            press: () => {},
-          ),
-          ProfileMenu(
-            text: "กิจกรรม",
-            icon: "assets/icons/Gift Icon.svg",
-            press: () {},
-          ),
-          ProfileMenu(
-            text: "รายการอัปเดตจากShopper",
-            icon: "assets/icons/Mail.svg",
-            press: () {},
-          ),
-          ProfileMenu(
-            text: "อัพเดตคำสั่งซื้อ",
-            icon: "assets/icons/Parcel.svg",
-            press: () {},
-          ),
-          SizedBox(height: 5),
-          Container(
-            height: 600,
-            decoration: BoxDecoration(
-              color: Colors.grey[200],
+      body: Container(
+        child: ListView(
+          children: <Widget>[
+            SizedBox(height: 5),
+            ProfileMenu(
+              text: "โปรโมชั่น",
+              icon: "assets/icons/Shop Icon.svg",
+              press: () => {},
             ),
-            child: Center(child: Text("", style: TextStyle(fontSize: 20))),
-          )
-        ],
+            ProfileMenu(
+              text: "กิจกรรม",
+              icon: "assets/icons/Gift Icon.svg",
+              press: () {},
+            ),
+            ProfileMenu(
+              text: "รายการอัปเดตจากShopper",
+              icon: "assets/icons/Mail.svg",
+              press: () {},
+            ),
+            ProfileMenu(
+              text: "อัพเดตคำสั่งซื้อ",
+              icon: "assets/icons/Parcel.svg",
+              press: () {},
+            ),
+            SizedBox(height: 5),
+            Container(
+              height: 600,
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+              ),
+              child: Center(
+                  child: Text("TTTTTTTTTTTTTTTTTS",
+                      style: TextStyle(fontSize: 20))),
+            )
+          ],
+        ),
       ),
     );
   }

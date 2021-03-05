@@ -7,14 +7,14 @@ import 'package:path/path.dart';
 
 class userApi {
   Future<dynamic> login(String userName, String password) async {
-    var url = 'http://192.168.43.200:5000/login/' + userName + '/' + password;
+    var url = 'http:/25.46.25.35:5000/login/' + userName + '/' + password;
     var res = await http.get(url);
     return res;
   }
 
   Future<dynamic> register(String userName, String password, String email,
       String phoneNumber, String name) async {
-    var url = 'http://192.168.43.200:5000/Resgister/' +
+    var url = 'http://25.46.25.35:5000/Resgister/' +
         userName +
         '/' +
         password +
@@ -36,7 +36,7 @@ class userApi {
     var length = await imageFile.length();
 
     // string to uri
-    var uri = Uri.parse("http://192.168.43.200:5000/upload");
+    var uri = Uri.parse("http://25.46.25.35:5000/upload");
 
     // create multipart request
     var request = new http.MultipartRequest("POST", uri);
