@@ -129,22 +129,21 @@ class _LoginPageState extends State<LoginPage> {
                                   desc: "",
                                   buttons: [
                                     DialogButton(
-                                      child: Text(
-                                        "OK",
-                                        style: TextStyle(
-                                            color: Colors.white, fontSize: 20),
-                                      ),
-                                      onPressed: () =>   Navigator.push(context,
-                                          MaterialPageRoute(builder: (context) {
-                                            return Bottomnavigations(
-                                              selectedIndex: 0,
-                                            );
-
-                                          }))
-                                    )
+                                        child: Text(
+                                          "OK",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20),
+                                        ),
+                                        onPressed: () => Navigator.push(context,
+                                                MaterialPageRoute(
+                                                    builder: (context) {
+                                              return Bottomnavigations(
+                                                selectedIndex: 0,
+                                              );
+                                            })))
                                   ],
                                 ).show();
-
                               } else {
                                 Alert(
                                   context: context,

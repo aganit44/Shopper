@@ -3,6 +3,7 @@ import 'package:Shopper/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'BottomNavigation.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 
 class DrawerNavition extends StatefulWidget {
   @override

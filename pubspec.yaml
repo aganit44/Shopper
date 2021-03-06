@@ -31,7 +31,10 @@ dependencies:
   flutter_secure_storage: ^3.3.5
   logger: ^0.9.4
   flutter_rating_bar: ^3.2.0+1
-
+  flutter_cart: ^0.0.5+1
+  passwordfield: ^0.0.82
+  flutter_icons: ^1.1.0
+  flutter_svg: ^0.20.0-nullsafety.3
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.3
@@ -47,7 +50,6 @@ dev_dependencies:
   #  cupertino_icons: ^0.1.3
   animate_do: ^1.7.5
   #  carousel_slider: ^2.3.1
-  flutter_svg: ^0.18.0
   auto_animated: ^2.1.0
   flutter_animator: ^2.1.0
   google_fonts: ^1.0.0
@@ -62,8 +64,10 @@ dev_dependencies:
   scoped_model: ^1.1.0
   animated_floatactionbuttons: ^0.1.0
   flutter_local_notifications: ^4.0.1+1
-
-
+  badges: ^1.1.6
+  fancy_bottom_navigation: ^0.3.2
+  bottom_bar_with_sheet: ^0.5.5+2
+  
 # The following section is specific to Flutter.
 flutter:
   # The following line ensures that the Material Icons font is

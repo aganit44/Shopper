@@ -1,12 +1,4 @@
-// import 'package:hello/Product/Product/Onitsuka Tiger1.dart';
-// import 'package:hello/Product/NewProduct/Nike/Nike.dart';
-// import 'package:hello/Product/NewProduct/Puma/Puma.dart';
-// import 'package:hello/Product/NewProduct/converse/converse.dart';
-// import 'package:hello/Product/NewProduct/Reebok/Reebok.dart';
-// import 'package:hello/Product/NewProduct/Adidas/Adidas.dart';
-// import 'package:hello/Product/NewProduct/Vans/Vans.dart';
-import 'package:Shopper/Product/Product/New.dart';
-import 'package:Shopper/Product/Product/Onitsuka%20Tiger1.dart';
+import 'package:Shopper/Product/Product/All_product.dart';
 import 'package:flutter/cupertino.dart';
 
 class MainMenuModel {

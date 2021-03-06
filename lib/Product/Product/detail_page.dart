@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+
+import 'endDrawer.dart';
 
 class DetailPage extends StatefulWidget {
   int id;
@@ -12,11 +15,13 @@ class DetailPage extends StatefulWidget {
 
 class _DetailPageState extends State<DetailPage> {
   int id = 0;
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   Future getproduct() async {
     try {
       var response = await http.get(
-          'http://25.46.25.35:5000/product/selectproduct?ID=' + id.toString());
+          'http://192.168.43.200:5000/product/selectproduct?ID=' +
+              id.toString());
 
       return json.decode(response.body);
     } catch (error) {
@@ -33,23 +38,27 @@ class _DetailPageState extends State<DetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      endDrawer: Drawer2(),
       appBar: AppBar(
         backgroundColor: Colors.black,
-        elevation: 0,
-        title: Text("ข้อมูลสินค้า"),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.of(context).pop();
+        leading: Builder(
+          builder: (BuildContext context) {
+            return IconButton(
+              icon: const Icon(Icons.arrow_back_ios),
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+              tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+            );
           },
         ),
         actions: [
-          Icon(
-            Icons.shopping_basket,
-            color: Colors.white,
-          ),
-          SizedBox(
-            width: 10,
+          Builder(
+            builder: (context) => IconButton(
+              icon: Icon(SimpleLineIcons.basket),
+              onPressed: () => Scaffold.of(context).openEndDrawer(),
+              tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+            ),
           ),
         ],
       ),
@@ -119,7 +128,7 @@ class _DetailPageState extends State<DetailPage> {
                                             decoration: BoxDecoration(
                                                 image: DecorationImage(
                                                     image: NetworkImage(
-                                                      'http://25.46.25.35:5000/product/image?path=' +
+                                                      'http://192.168.43.200:5000/product/image?path=' +
                                                           snapshot
                                                               .data["Images"],
                                                     ),
@@ -210,14 +219,12 @@ class _DetailPageState extends State<DetailPage> {
                                 height: 50,
                                 width: 10,
                                 child: IconButton(
-                                  icon: Icon(
-                                    Icons.shopping_cart,
-                                    color: Colors.black,
-                                  ),
+                                  icon: Icon(SimpleLineIcons.basket),
+                                  color: Colors.black,
                                 ),
                               ),
                               Text(
-                                'Add to cart',
+                                '    Add to cart',
                                 style: TextStyle(fontSize: 20),
                               )
                             ],
@@ -247,7 +254,7 @@ class _DetailPageState extends State<DetailPage> {
                                 ),
                               ),
                               Text(
-                                'Buy Now',
+                                '   Buy Now',
                                 style: TextStyle(
                                     fontSize: 20, color: Colors.white),
                               )
