@@ -20,8 +20,7 @@ class _DetailPageState extends State<DetailPage> {
   Future getproduct() async {
     try {
       var response = await http.get(
-          'http://192.168.43.200:5000/product/selectproduct?ID=' +
-              id.toString());
+          'http://25.46.25.35:5000/product/selectproduct?ID=' + id.toString());
 
       return json.decode(response.body);
     } catch (error) {
@@ -46,7 +45,9 @@ class _DetailPageState extends State<DetailPage> {
             return IconButton(
               icon: const Icon(Icons.arrow_back_ios),
               onPressed: () {
-                Scaffold.of(context).openDrawer();
+                Navigator.pop(
+                  context,
+                );
               },
               tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
             );
