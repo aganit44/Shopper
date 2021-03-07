@@ -1,22 +1,33 @@
 import 'dart:convert';
+import 'package:Shopper/model/User.dart';
+import 'package:Shopper/providers/user_provider.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:flutter/material.dart';
 
 class Drawer2 extends StatefulWidget {
-  String brand;
+  int iduser;
+  Drawer2({this.iduser});
 
   @override
   _DrawerState createState() => _DrawerState();
 }
 
 class _DrawerState extends State<Drawer2> {
-  String brand = "";
+  int iduser = 0;
+
+  @override
+  void initState() {
+    iduser = widget.iduser;
+    super.initState();
+  }
+
   Future getproduct() async {
     try {
-      var response = await http
-          .get('http://192.168.43.200:5000/product/select?brand=' + brand);
+      var response = await http.get(
+          'http://25.46.25.35:5000/basket/selectbasket?ID=' +
+              iduser.toString());
 
       return json.decode(response.body);
     } catch (error) {
@@ -30,7 +41,7 @@ class _DrawerState extends State<Drawer2> {
       child: Column(
         children: <Widget>[
           Container(
-            height: 150,
+            height: 50,
             child: DrawerHeader(
                 padding: EdgeInsets.zero,
                 child: ListTile(

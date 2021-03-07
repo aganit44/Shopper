@@ -1,11 +1,16 @@
 import 'dart:convert';
 
 import 'package:Shopper/Product/Product/Addproduct.dart';
+import 'package:Shopper/model/User.dart';
+import 'package:Shopper/providers/user_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
+import 'package:provider/provider.dart';
 
 import 'package:http/http.dart' as http;
 
 import 'detail_page.dart';
+import 'endDrawer.dart';
 
 class OnitsukaTiger2 extends StatefulWidget {
   String brand;
@@ -35,10 +40,34 @@ class _OnitsukaTiger2State extends State<OnitsukaTiger2> {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<UserProvider>(context, listen: false);
+    User user = provider.getUser();
     return Scaffold(
+        endDrawer: Drawer2(iduser: user.Id),
         appBar: AppBar(
-          title: Text(brand),
           backgroundColor: Colors.black,
+          leading: Builder(
+            builder: (BuildContext context) {
+              return IconButton(
+                icon: const Icon(Icons.arrow_back_ios),
+                onPressed: () {
+                  Navigator.pop(
+                    context,
+                  );
+                },
+                tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+              );
+            },
+          ),
+          actions: [
+            Builder(
+              builder: (context) => IconButton(
+                icon: Icon(SimpleLineIcons.basket),
+                onPressed: () => Scaffold.of(context).openEndDrawer(),
+                tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+              ),
+            ),
+          ],
         ),
         body: Container(
           child: FutureBuilder(

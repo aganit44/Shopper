@@ -7,7 +7,7 @@ import 'package:path/path.dart';
 
 class userApi {
   Future<dynamic> login(String userName, String password) async {
-    var url = 'http://192.168.43.200:5000/login/' + userName + '/' + password;
+    var url = 'http://25.46.25.35:5000/login/' + userName + '/' + password;
     var res = await http.get(url);
     return res;
   }

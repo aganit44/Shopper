@@ -1,8 +1,13 @@
+import 'package:Shopper/Homepage/BottomNavigation.dart';
+import 'package:Shopper/api/product_api.dart';
+import 'package:Shopper/model/User.dart';
+import 'package:Shopper/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-
+import 'package:provider/provider.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 import 'endDrawer.dart';
 
 class DetailPage extends StatefulWidget {
@@ -14,6 +19,7 @@ class DetailPage extends StatefulWidget {
 }
 
 class _DetailPageState extends State<DetailPage> {
+  productApi api = productApi();
   int id = 0;
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
@@ -36,8 +42,10 @@ class _DetailPageState extends State<DetailPage> {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<UserProvider>(context, listen: false);
+    User user = provider.getUser();
     return Scaffold(
-      endDrawer: Drawer2(),
+      endDrawer: Drawer2(iduser: user.Id),
       appBar: AppBar(
         backgroundColor: Colors.black,
         leading: Builder(
@@ -206,41 +214,94 @@ class _DetailPageState extends State<DetailPage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
-                        Container(
-                          height: 70,
-                          width: MediaQuery.of(context).size.width * 0.4,
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(7)),
-                              color: Colors.grey.withOpacity(.5)),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: <Widget>[
-                              Container(
-                                height: 50,
-                                width: 10,
-                                child: IconButton(
-                                  icon: Icon(SimpleLineIcons.basket),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            // ignore: deprecated_member_use
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Container(
+                                width: 150.0,
+                                height: 70.0,
+                                decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(1)),
+                                    gradient: LinearGradient(colors: [
+                                      Color(0xFFFFFFFF),
+                                      Color(0xFF000000)
+                                    ])),
+                                // ignore: deprecated_member_use
+                                child: RaisedButton(
                                   color: Colors.black,
+                                  splashColor: Colors.white,
+                                  onPressed: () async {
+                                    var res =
+                                        await api.Userproduct(user.Id, id);
+
+                                    print(res.statusCode);
+
+                                    if (res.statusCode == 200) {
+                                      //Map<String, dynamic> data = jsonDecode(res.body);
+                                      print("yes");
+
+                                      Alert(
+                                        context: context,
+                                        type: AlertType.success,
+                                        title: "เพิ่มสินค้าสำเร็จ",
+                                        desc: "",
+                                        buttons: [
+                                          DialogButton(
+                                              child: Text(
+                                                "OK",
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 20),
+                                              ),
+                                              onPressed: () =>
+                                                  Navigator.pop(context))
+                                        ],
+                                      ).show();
+                                    } else {
+                                      Alert(
+                                        context: context,
+                                        type: AlertType.error,
+                                        title: "คุณเพิ่มสินค้าชิ้นนี้ไปแล้ว",
+                                        desc: "",
+                                        buttons: [
+                                          DialogButton(
+                                              child: Text(
+                                                "OK",
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 20),
+                                              ),
+                                              onPressed: () =>
+                                                  Navigator.push(context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) {
+                                                    return Bottomnavigations(
+                                                      selectedIndex: 0,
+                                                    );
+                                                  })))
+                                        ],
+                                      ).show();
+                                    }
+                                  },
+                                  child: new Text(
+                                    "Add To Cart",
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 10.0,
+                                        fontWeight: FontWeight.bold),
+                                  ),
                                 ),
                               ),
-                              Text(
-                                '    Add to cart',
-                                style: TextStyle(fontSize: 20),
-                              )
-                            ],
-                          ),
+                            )
+                          ],
                         ),
                         Container(
                           height: 70,
                           width: MediaQuery.of(context).size.width * 0.4,
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(7)),
-                              gradient: LinearGradient(colors: [
-                                Color(0xFF1B161D),
-                                Color(0xFF000000)
-                              ])),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: <Widget>[

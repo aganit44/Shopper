@@ -100,6 +100,7 @@ class _Addproduct extends State<Addproduct> {
             },
           ),
 
+          // ignore: deprecated_member_use
           RaisedButton(
             onPressed: () async {
               var res = await api.uploadproduct(

@@ -94,6 +94,7 @@ class _LoginPageState extends State<LoginPage> {
                         SizedBox(
                           height: 20.0,
                         ),
+                        // ignore: deprecated_member_use
                         RaisedButton(
                           onPressed: () async {
                             if (formKey.currentState.validate()) {

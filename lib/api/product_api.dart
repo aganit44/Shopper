@@ -41,4 +41,26 @@ class productApi {
     var res = await http.get(url);
     return res;
   }
+
+  Future<dynamic> Userproduct(int userID, int proID) async {
+    // open a bytestream
+
+    // string to uri
+    var uri = Uri.parse('http://192.168.43.200:5000/basket/addproduct');
+
+    // create multipart request
+    var request = new http.MultipartRequest("POST", uri);
+
+    request.fields['UserID'] = userID.toString();
+    request.fields['ProID'] = proID.toString();
+
+    var response = await request.send();
+
+    return response;
+  }
+
+  // Future<dynamic> Userproduct(String UserID, String ProID) async {
+  //   var url = 'http://192.168.43.200:5000/basket/addproduct=' +;
+  //   var res = await http.get(url);
+  //   return res;
 }
