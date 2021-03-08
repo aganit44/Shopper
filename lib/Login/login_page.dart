@@ -103,6 +103,7 @@ class _LoginPageState extends State<LoginPage> {
                               var res = await api.login(user, pass);
 
                               if (res.statusCode == 200) {
+
                                 Map<String, dynamic> data =
                                     jsonDecode(res.body);
                                 print(data);
@@ -117,6 +118,8 @@ class _LoginPageState extends State<LoginPage> {
                                   Image: data['Image'],
                                   Coin: data['Coin'],
                                   Airpay: data['Airpay'],
+                                  Admin: data['Admin'],
+                                  
                                 );
 
                                 var provider = Provider.of<UserProvider>(
@@ -145,7 +148,13 @@ class _LoginPageState extends State<LoginPage> {
                                             })))
                                   ],
                                 ).show();
-                              } else {
+
+                                
+                              } 
+                              
+                            
+                              
+                              else {
                                 Alert(
                                   context: context,
                                   type: AlertType.error,

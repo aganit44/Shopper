@@ -1,13 +1,11 @@
 import 'dart:convert';
-import 'package:Shopper/model/User.dart';
-import 'package:Shopper/providers/user_provider.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+
+import 'package:Shopper/api/product_api.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:footer/footer_view.dart';
 import 'package:http/http.dart' as http;
-import 'package:footer/footer.dart';
 
 import 'package:flutter/material.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class Drawer2 extends StatefulWidget {
   int iduser;
@@ -19,6 +17,9 @@ class Drawer2 extends StatefulWidget {
 
 class _DrawerState extends State<Drawer2> {
   int iduser = 0;
+  productApi api = productApi();
+
+  int proID;
 
   @override
   void initState() {
@@ -169,7 +170,44 @@ class _DrawerState extends State<Drawer2> {
                                               iconSize: 30,
                                               color: Colors.red,
                                               splashColor: Colors.purple,
-                                              onPressed: () {},
+                                              onPressed: () async {
+                                                var res =
+                                                    await api.deleteproduct(
+                                                        snapshot.data[index]
+                                                            ["ID"]);
+                                                print(res);
+                                                if (proID != null) {
+                                                  //Map<String, dynamic> data = jsonDecode(res.body);
+
+                                                  Alert(
+                                                    context: context,
+                                                    type: AlertType.error,
+                                                    title: "ลบสินค้าสำเร็จ",
+                                                    desc: "",
+                                                    buttons: [
+                                                      DialogButton(
+                                                          child: Text(
+                                                            "OK",
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .white,
+                                                                fontSize: 20),
+                                                          ),
+                                                          onPressed: () =>
+                                                              Navigator.pop(
+                                                                  context,
+                                                                  MaterialPageRoute(
+                                                                      builder:
+                                                                          (context) {
+                                                                //      return Bottomnavigations(
+                                                                //      selectedIndex:
+                                                                //        0,
+                                                                //       );
+                                                              })))
+                                                    ],
+                                                  ).show();
+                                                }
+                                              },
                                             ),
                                           ),
                                           Padding(
@@ -177,7 +215,7 @@ class _DrawerState extends State<Drawer2> {
                                                 horizontal: 1),
                                             child: IconButton(
                                               icon: Icon(
-                                                Icons.attach_money_sharp,
+                                                Icons.monetization_on,
                                               ),
                                               iconSize: 30,
                                               color: Colors.yellowAccent[700],

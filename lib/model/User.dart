@@ -8,6 +8,7 @@ class User {
   String Image;
   String Coin;
   String Airpay;
+  int Admin;
 
   User(
       {this.Id,
@@ -18,5 +19,6 @@ class User {
       this.Name,
       this.Image,
       this.Coin,
-      this.Airpay});
+      this.Airpay,
+      this.Admin});
 }

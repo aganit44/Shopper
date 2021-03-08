@@ -157,17 +157,20 @@ class _OnitsukaTiger2State extends State<OnitsukaTiger2> {
             future: getproduct(),
           ),
         ),
-        floatingActionButton: FloatingActionButton.extended(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => Addproduct()),
-            );
-          },
-          backgroundColor: Colors.black,
-          foregroundColor: Colors.white,
-          label: Text('Addprodurt'),
-          icon: Icon(Icons.add),
+        floatingActionButton: Visibility(
+          visible: user.Admin < 1 ? false : true,
+          child: FloatingActionButton.extended(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Addproduct()),
+              );
+            },
+            backgroundColor: Colors.black,
+            foregroundColor: Colors.white,
+            label: Text('Addprodurt'),
+            icon: Icon(Icons.add),
+          ),
         ));
   }
 }
