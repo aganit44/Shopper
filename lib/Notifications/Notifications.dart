@@ -13,9 +13,9 @@ class _ProductState extends State<Notifications> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.white,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
+          icon: Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
             Navigator.push(
               context,
@@ -59,9 +59,7 @@ class _ProductState extends State<Notifications> {
               decoration: BoxDecoration(
                 color: Colors.grey[200],
               ),
-              child: Center(
-                  child: Text("TTTTTTTTTTTTTTTTTS",
-                      style: TextStyle(fontSize: 20))),
+              child: Center(child: Text("", style: TextStyle(fontSize: 20))),
             )
           ],
         ),

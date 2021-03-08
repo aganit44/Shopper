@@ -3,7 +3,7 @@ import 'package:localstorage/localstorage.dart';
 import '../Userprofile/Profile.dart';
 import 'home_page.dart';
 import '../Notifications/Notifications.dart';
-import 'package:bottom_bar_with_sheet/bottom_bar_with_sheet.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
 class Bottomnavigations extends StatefulWidget {
   int selectedIndex = 0;
@@ -45,33 +45,14 @@ class _BottomnavigationsState extends State<Bottomnavigations> {
   Widget build(BuildContext context) {
     return new Scaffold(
       body: _childern[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: (Colors.black),
-        currentIndex: _currentIndex,
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.white.withOpacity(.60),
-        selectedFontSize: 14,
-        unselectedFontSize: 14,
-        onTap: onTappedBar,
-        items: [
-          BottomNavigationBarItem(
-            // ignore: deprecated_member_use
-            title: Text('shop'),
-            icon: Icon(Icons.shopping_cart),
-          ),
-          BottomNavigationBarItem(
-            // ignore: deprecated_member_use
-            title: Text('Notifications'),
-            icon: Icon(Icons.notifications),
-          ),
-          BottomNavigationBarItem(
-            // ignore: deprecated_member_use
-            title: Text('profile'),
-            icon: Icon(Icons.person_rounded),
-          ),
-        ],
-      ),
+      bottomNavigationBar: CurvedNavigationBar(
+          backgroundColor: Colors.black,
+          items: <Widget>[
+            Icon(Icons.shopping_cart_sharp, size: 25),
+            Icon(Icons.notification_important_sharp, size: 25),
+            Icon(Icons.accessibility_rounded, size: 25),
+          ],
+          onTap: onTappedBar),
     );
   }
 }

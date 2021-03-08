@@ -1,8 +1,11 @@
 import 'dart:convert';
 import 'package:Shopper/model/User.dart';
 import 'package:Shopper/providers/user_provider.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:footer/footer_view.dart';
 import 'package:http/http.dart' as http;
+import 'package:footer/footer.dart';
 
 import 'package:flutter/material.dart';
 
@@ -26,7 +29,7 @@ class _DrawerState extends State<Drawer2> {
   Future getproduct() async {
     try {
       var response = await http.get(
-          'http://25.46.25.35:5000/basket/selectbasket?ID=' +
+          'http://192.168.43.200:5000/basket/selectbasket?ID=' +
               iduser.toString());
 
       return json.decode(response.body);
@@ -41,7 +44,7 @@ class _DrawerState extends State<Drawer2> {
       child: Column(
         children: <Widget>[
           Container(
-            height: 50,
+            height: 120,
             child: DrawerHeader(
                 padding: EdgeInsets.zero,
                 child: ListTile(
@@ -70,7 +73,7 @@ class _DrawerState extends State<Drawer2> {
             child: FutureBuilder(
               builder: (context, snapshot) {
                 if (ConnectionState.active != null && !snapshot.hasData) {
-                  return Center(child: CircularProgressIndicator());
+                  return Center(child: Text("ไม่มีสินค้าในตะกร้า"));
                 }
 
                 if (ConnectionState.done != null && snapshot.hasError) {
@@ -91,10 +94,9 @@ class _DrawerState extends State<Drawer2> {
                         // );
                       },
                       child: Container(
-                        margin:
-                            EdgeInsets.only(left: 16, right: 16, bottom: 10),
+                        margin: EdgeInsets.only(left: 1, right: 1, bottom: 10),
                         padding:
-                            EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+                            EdgeInsets.symmetric(vertical: 1, horizontal: 25),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.all(
@@ -108,51 +110,105 @@ class _DrawerState extends State<Drawer2> {
                             ),
                           ],
                         ),
-                        child: Row(
-                          children: <Widget>[
-                            Image.network(
-                              'http://192.168.43.200:5000/product/image?path=' +
-                                  snapshot.data[index]["Images"],
-                              width: 100,
-                              height: 100,
-                            ),
-                            SizedBox(width: 16),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Container(
-                                    width:
-                                        MediaQuery.of(context).size.width * .4,
-                                    child: Text(
-                                      "${snapshot.data[index]["Name"]}",
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
+                        child: Column(
+                          children: [
+                            Row(
+                              children: <Widget>[
+                                Image.network(
+                                  'http://192.168.43.200:5000/product/image?path=' +
+                                      snapshot.data[index]["Images"],
+                                  width: 100,
+                                  height: 100,
+                                ),
+                                SizedBox(width: 16),
+                                Expanded(
+                                  child: Column(
+                                    children: [
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          Container(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                .4,
+                                          ),
+                                        ],
                                       ),
+                                      SizedBox(
+                                        height: 35,
+                                      ),
+                                      Column(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 1),
+                                            child: Text(
+                                              "     \$${snapshot.data[index]["Price"]}",
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 20,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 5,
+                                      ),
+                                      Row(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 1),
+                                            child: IconButton(
+                                              icon: Icon(
+                                                Icons.delete_forever_outlined,
+                                              ),
+                                              iconSize: 30,
+                                              color: Colors.red,
+                                              splashColor: Colors.purple,
+                                              onPressed: () {},
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 1),
+                                            child: IconButton(
+                                              icon: Icon(
+                                                Icons.attach_money_sharp,
+                                              ),
+                                              iconSize: 30,
+                                              color: Colors.yellowAccent[700],
+                                              splashColor: Colors.purple,
+                                              onPressed: () {},
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                Container(
+                                  width: MediaQuery.of(context).size.width * .6,
+                                  child: Text(
+                                    "   ${snapshot.data[index]["Name"]}",
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  // Text(
-                                  //   "${data.brand}",
-                                  //   style: TextStyle(
-                                  //     color: Colors.black26,
-                                  //     height: 1.5,
-                                  //   ),
-                                  // ),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 12),
-                              child: Text(
-                                "\$${snapshot.data[index]["Price"]}",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
                                 ),
-                              ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                ),
+                              ],
                             ),
                           ],
                         ),
@@ -170,6 +226,7 @@ class _DrawerState extends State<Drawer2> {
               future: getproduct(),
             ),
           ),
+
           // const Expanded(child: CartContent())
         ],
       ),

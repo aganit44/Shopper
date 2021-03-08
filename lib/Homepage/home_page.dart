@@ -20,11 +20,18 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.white,
+        iconTheme: IconThemeData(color: Colors.black),
         // leading: IconButton(
         //   icon: Icon(Icons.arrow_back, color: Colors.white),
         // ),
-        title: Text("Shopper"),
+        title: Text(
+          "Shopper",
+          style: TextStyle(
+            color: Colors.black,
+            decorationStyle: TextDecorationStyle.wavy,
+          ),
+        ),
         centerTitle: true,
       ),
       drawer: DrawerNavition(),

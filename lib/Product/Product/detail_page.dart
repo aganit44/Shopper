@@ -1,5 +1,6 @@
 import 'package:Shopper/Homepage/BottomNavigation.dart';
 import 'package:Shopper/api/product_api.dart';
+import 'package:Shopper/api/user_api.dart';
 import 'package:Shopper/model/User.dart';
 import 'package:Shopper/providers/user_provider.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,7 @@ import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'endDrawer.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class DetailPage extends StatefulWidget {
   int id;
@@ -20,13 +22,15 @@ class DetailPage extends StatefulWidget {
 
 class _DetailPageState extends State<DetailPage> {
   productApi api = productApi();
+  userApi api1 = userApi();
   int id = 0;
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   Future getproduct() async {
     try {
       var response = await http.get(
-          'http://25.46.25.35:5000/product/selectproduct?ID=' + id.toString());
+          'http://192.168.43.200:5000/product/selectproduct?ID=' +
+              id.toString());
 
       return json.decode(response.body);
     } catch (error) {
@@ -47,6 +51,7 @@ class _DetailPageState extends State<DetailPage> {
     return Scaffold(
       endDrawer: Drawer2(iduser: user.Id),
       appBar: AppBar(
+        title: Text("ลายละเอียดสินค้า"),
         backgroundColor: Colors.black,
         leading: Builder(
           builder: (BuildContext context) {
@@ -117,6 +122,9 @@ class _DetailPageState extends State<DetailPage> {
                                               ],
                                             )),
                                       ),
+                                      SizedBox(
+                                        width: 100,
+                                      ),
                                       Positioned(
                                         left: 15,
                                         bottom: 15,
@@ -133,7 +141,7 @@ class _DetailPageState extends State<DetailPage> {
                                         right: 0,
                                         child: Container(
                                             height: 230,
-                                            width: 230,
+                                            width: 100,
                                             decoration: BoxDecoration(
                                                 image: DecorationImage(
                                                     image: NetworkImage(
@@ -166,6 +174,21 @@ class _DetailPageState extends State<DetailPage> {
                         ),
                         SizedBox(
                           height: 10,
+                        ),
+                        RatingBar.builder(
+                          initialRating: 3,
+                          minRating: 1,
+                          direction: Axis.horizontal,
+                          allowHalfRating: true,
+                          itemCount: 5,
+                          itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                          itemBuilder: (context, _) => Icon(
+                            Icons.star,
+                            color: Colors.amber,
+                          ),
+                          onRatingUpdate: (rating) {
+                            print(rating);
+                          },
                         ),
                         Container(
                           padding: EdgeInsets.symmetric(horizontal: 20),
@@ -223,105 +246,182 @@ class _DetailPageState extends State<DetailPage> {
                               child: Container(
                                 width: 150.0,
                                 height: 70.0,
-                                decoration: BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(1)),
-                                    gradient: LinearGradient(colors: [
-                                      Color(0xFFFFFFFF),
-                                      Color(0xFF000000)
-                                    ])),
+
                                 // ignore: deprecated_member_use
                                 child: RaisedButton(
-                                  color: Colors.black,
-                                  splashColor: Colors.white,
-                                  onPressed: () async {
-                                    var res =
-                                        await api.Userproduct(user.Id, id);
+                                    color: Colors.black,
+                                    splashColor: Colors.white,
+                                    onPressed: () async {
+                                      var res =
+                                          await api.Userproduct(user.Id, id);
 
-                                    print(res.statusCode);
+                                      print(res.statusCode);
 
-                                    if (res.statusCode == 200) {
-                                      //Map<String, dynamic> data = jsonDecode(res.body);
-                                      print("yes");
+                                      if (res.statusCode == 200) {
+                                        //Map<String, dynamic> data = jsonDecode(res.body);
+                                        print("yes");
 
-                                      Alert(
-                                        context: context,
-                                        type: AlertType.success,
-                                        title: "เพิ่มสินค้าสำเร็จ",
-                                        desc: "",
-                                        buttons: [
-                                          DialogButton(
-                                              child: Text(
-                                                "OK",
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 20),
-                                              ),
-                                              onPressed: () =>
-                                                  Navigator.pop(context))
-                                        ],
-                                      ).show();
-                                    } else {
-                                      Alert(
-                                        context: context,
-                                        type: AlertType.error,
-                                        title: "คุณเพิ่มสินค้าชิ้นนี้ไปแล้ว",
-                                        desc: "",
-                                        buttons: [
-                                          DialogButton(
-                                              child: Text(
-                                                "OK",
-                                                style: TextStyle(
-                                                    color: Colors.white,
-                                                    fontSize: 20),
-                                              ),
-                                              onPressed: () =>
-                                                  Navigator.push(context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) {
-                                                    return Bottomnavigations(
-                                                      selectedIndex: 0,
-                                                    );
-                                                  })))
-                                        ],
-                                      ).show();
-                                    }
-                                  },
-                                  child: new Text(
-                                    "Add To Cart",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 10.0,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
+                                        Alert(
+                                          context: context,
+                                          type: AlertType.success,
+                                          title: "เพิ่มสินค้าสำเร็จ",
+                                          desc: "",
+                                          buttons: [
+                                            DialogButton(
+                                                child: Text(
+                                                  "OK",
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 20),
+                                                ),
+                                                onPressed: () =>
+                                                    Navigator.pop(context))
+                                          ],
+                                        ).show();
+                                      } else {
+                                        Alert(
+                                          context: context,
+                                          type: AlertType.error,
+                                          title: "คุณเพิ่มสินค้าชิ้นนี้ไปแล้ว",
+                                          desc: "",
+                                          buttons: [
+                                            DialogButton(
+                                                child: Text(
+                                                  "OK",
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 20),
+                                                ),
+                                                onPressed: () =>
+                                                    Navigator.push(context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) {
+                                                      return Bottomnavigations(
+                                                        selectedIndex: 0,
+                                                      );
+                                                    })))
+                                          ],
+                                        ).show();
+                                      }
+                                    },
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: <Widget>[
+                                        Container(
+                                          height: 50,
+                                          width: 10,
+                                          child: IconButton(
+                                            icon: Icon(
+                                              Icons.shopping_basket,
+                                              color: Colors.white,
+                                            ),
+                                            onPressed: () {},
+                                          ),
+                                        ),
+                                        Text(
+                                          "       Add To Cart",
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 15.0,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ],
+                                    ),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10))),
                               ),
                             )
                           ],
                         ),
                         Container(
-                          height: 70,
-                          width: MediaQuery.of(context).size.width * 0.4,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: <Widget>[
-                              Container(
-                                height: 50,
-                                width: 10,
-                                child: IconButton(
-                                  icon: Icon(
-                                    Icons.shopping_basket,
-                                    color: Colors.white,
+                          width: 150.0,
+                          height: 70.0,
+
+                          // ignore: deprecated_member_use
+                          child: RaisedButton(
+                              color: Colors.deepOrange,
+                              splashColor: Colors.white,
+                              onPressed: () async {
+                                var res = await api1.coin(user.Coin);
+
+                                print(res.statusCode);
+
+                                if (res.statusCode == 200) {
+                                  //Map<String, dynamic> data = jsonDecode(res.body);
+                                  print("yes");
+
+                                  Alert(
+                                    context: context,
+                                    type: AlertType.success,
+                                    title: "สั่งซื้อสินค้าสำเร็จ",
+                                    desc: "",
+                                    buttons: [
+                                      DialogButton(
+                                          child: Text(
+                                            "OK",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 20),
+                                          ),
+                                          onPressed: () =>
+                                              Navigator.pop(context))
+                                    ],
+                                  ).show();
+                                } else {
+                                  Alert(
+                                    context: context,
+                                    type: AlertType.error,
+                                    title: "คุณเพิ่มสินค้าชิ้นนี้ไปแล้ว",
+                                    desc: "",
+                                    buttons: [
+                                      DialogButton(
+                                          child: Text(
+                                            "OK",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 20),
+                                          ),
+                                          onPressed: () => Navigator.push(
+                                                  context, MaterialPageRoute(
+                                                      builder: (context) {
+                                                return Bottomnavigations(
+                                                  selectedIndex: 0,
+                                                );
+                                              })))
+                                    ],
+                                  ).show();
+                                }
+                              },
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: <Widget>[
+                                  Container(
+                                    height: 50,
+                                    width: 10,
+                                    child: IconButton(
+                                      icon: Icon(
+                                        Icons.shopping_cart_sharp,
+                                        color: Colors.white,
+                                      ),
+                                      onPressed: () {},
+                                    ),
                                   ),
-                                ),
+                                  Text(
+                                    "      Buy Now",
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 15.0,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
                               ),
-                              Text(
-                                '   Buy Now',
-                                style: TextStyle(
-                                    fontSize: 20, color: Colors.white),
-                              )
-                            ],
-                          ),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10))),
                         ),
                       ],
                     ),

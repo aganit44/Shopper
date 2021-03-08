@@ -47,12 +47,12 @@ class TopHeader extends State {
 
     return Container(
       decoration: BoxDecoration(
-        image: DecorationImage(
-          image: NetworkImage('http://192.168.43.200/images/01.jpg'),
-          fit: BoxFit.cover,
-        ),
-      ),
-      height: MediaQuery.of(context).size.height * 0.3,
+          // image: DecorationImage(
+          //   image: NetworkImage('http://192.168.43.200/images/01.jpg'),
+          //   fit: BoxFit.cover,
+          // ),
+          ),
+      height: MediaQuery.of(context).size.height * 0.25,
       child: Stack(
         children: <Widget>[
           Row(),
@@ -78,7 +78,7 @@ class TopHeader extends State {
                         return Text(
                           '${user.Name}',
                           style: TextStyle(
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 21.0,
                             fontWeight: FontWeight.bold,
                           ),

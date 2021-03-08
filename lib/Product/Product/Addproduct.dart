@@ -51,8 +51,14 @@ class _Addproduct extends State<Addproduct> {
                 print(dropdownValue);
               });
             },
-            items: <String>['Nike', 'Converse', 'Puma', 'Adidas', 'Vans']
-                .map<DropdownMenuItem<String>>((String value) {
+            items: <String>[
+              'Nike',
+              'Converse',
+              'Puma',
+              'Adidas',
+              'Vans',
+              'Newbalance'
+            ].map<DropdownMenuItem<String>>((String value) {
               return DropdownMenuItem<String>(
                 value: value,
                 child: Text(value),

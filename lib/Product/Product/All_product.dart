@@ -38,13 +38,13 @@ class _OnitsukaTiger2State extends State<OnitsukaTiger2> {
     super.initState();
   }
 
-  @override
   Widget build(BuildContext context) {
     var provider = Provider.of<UserProvider>(context, listen: false);
     User user = provider.getUser();
     return Scaffold(
         endDrawer: Drawer2(iduser: user.Id),
         appBar: AppBar(
+          title: Text(brand),
           backgroundColor: Colors.black,
           leading: Builder(
             builder: (BuildContext context) {
@@ -73,7 +73,12 @@ class _OnitsukaTiger2State extends State<OnitsukaTiger2> {
           child: FutureBuilder(
             builder: (context, snapshot) {
               if (ConnectionState.active != null && !snapshot.hasData) {
-                return Center(child: CircularProgressIndicator());
+                return Center(
+                    child: CircularProgressIndicator(
+                  semanticsLabel: 'Linear progress indicator',
+                  backgroundColor: Colors.white,
+                  valueColor: new AlwaysStoppedAnimation<Color>(Colors.black),
+                ));
               }
 
               if (ConnectionState.done != null && snapshot.hasError) {
@@ -152,7 +157,7 @@ class _OnitsukaTiger2State extends State<OnitsukaTiger2> {
             future: getproduct(),
           ),
         ),
-        floatingActionButton: FloatingActionButton(
+        floatingActionButton: FloatingActionButton.extended(
           onPressed: () {
             Navigator.push(
               context,
@@ -161,8 +166,8 @@ class _OnitsukaTiger2State extends State<OnitsukaTiger2> {
           },
           backgroundColor: Colors.black,
           foregroundColor: Colors.white,
-          mini: true,
-          child: Icon(Icons.add),
+          label: Text('Addprodurt'),
+          icon: Icon(Icons.add),
         ));
   }
 }

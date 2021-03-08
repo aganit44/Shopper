@@ -16,13 +16,13 @@ class _Page1 extends State<Page1> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.white,
       body: ListView(
         children: <Widget>[
           AppBar(
-            backgroundColor: Colors.black,
+            backgroundColor: Colors.white,
             leading: IconButton(
-              icon: Icon(Icons.arrow_back, color: Colors.white),
+              icon: Icon(Icons.arrow_back, color: Colors.black),
               onPressed: () {
                 Navigator.push(
                   context,
@@ -33,11 +33,16 @@ class _Page1 extends State<Page1> {
                 );
               },
             ),
-            title: Text("Profile"),
+            title: Text(
+              "Profile",
+              style: TextStyle(
+                color: Colors.black,
+                decorationStyle: TextDecorationStyle.wavy,
+              ),
+            ),
             centerTitle: true,
           ),
           topheader(),
-          SizedBox(height: 20),
           ProfileMenu(
             text: "My Account",
             icon: "assets/icons/User Icon.svg",

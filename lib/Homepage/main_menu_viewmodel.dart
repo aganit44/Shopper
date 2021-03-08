@@ -46,9 +46,9 @@ class MainMenuViewModel {
           function: OnitsukaTiger2(brand: "Vans") //color: Colors.red,
           ),
       MainMenuModel(
-          image: "assets/logo/kedslogo.jpg",
-          title: "Keds",
-          function: OnitsukaTiger2(brand: "Keds") //color: Colors.red,
+          image: "assets/logo/Newbalance.png",
+          title: "Newbalance",
+          function: OnitsukaTiger2(brand: "Newbalance") //color: Colors.red,
           ),
     ];
   }

@@ -7,7 +7,7 @@ import 'package:path/path.dart';
 
 class userApi {
   Future<dynamic> login(String userName, String password) async {
-    var url = 'http://25.46.25.35:5000/login/' + userName + '/' + password;
+    var url = 'http://192.168.43.200:5000/login/' + userName + '/' + password;
     var res = await http.get(url);
     return res;
   }
@@ -67,5 +67,28 @@ class userApi {
     print(url);
     var res = await http.get(url);
     return res;
+  }
+
+  Future<dynamic> coin(String coin) async {
+    // open a bytestream
+
+    var uri = Uri.parse("http://25.46.25.35:5000/CoinandAirpay");
+
+    // create multipart request
+    var request = new http.MultipartRequest("POST", uri);
+
+    // add file to multipart
+    request.fields['Coin'] = coin;
+
+    // send
+    var response = await request.send();
+    print(response.statusCode);
+
+    // listen for response
+    response.stream.transform(utf8.decoder).listen((value) {
+      print(value);
+    });
+
+    return response;
   }
 }

@@ -16,6 +16,7 @@ class _DrawerNavitionState extends State<DrawerNavition> {
     var provider = Provider.of<UserProvider>(context, listen: false);
     User user = provider.getUser();
     return Drawer(
+      
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
