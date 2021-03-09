@@ -60,8 +60,8 @@ class productApi {
   }
 
   Future<dynamic> deleteproduct(int proID) async {
-    var url =
-        'http://25.46.25.35:5000/basket/deletebasket?ProID=' + proID.toString();
+    var url = 'http://192.168.43.200:5000/basket/deletebasket?ProID=' +
+        proID.toString();
     var res = await http.get(url);
     return res;
   }

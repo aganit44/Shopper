@@ -19,8 +19,6 @@ class _DrawerState extends State<Drawer2> {
   int iduser = 0;
   productApi api = productApi();
 
-  int proID;
-
   @override
   void initState() {
     iduser = widget.iduser;
@@ -171,41 +169,17 @@ class _DrawerState extends State<Drawer2> {
                                               color: Colors.red,
                                               splashColor: Colors.purple,
                                               onPressed: () async {
+                                                setState(() {});
                                                 var res =
                                                     await api.deleteproduct(
                                                         snapshot.data[index]
                                                             ["ID"]);
                                                 print(res);
-                                                if (proID != null) {
+                                                if (snapshot.data[index]
+                                                        ["ID"] !=
+                                                    null) {
                                                   //Map<String, dynamic> data = jsonDecode(res.body);
 
-                                                  Alert(
-                                                    context: context,
-                                                    type: AlertType.error,
-                                                    title: "ลบสินค้าสำเร็จ",
-                                                    desc: "",
-                                                    buttons: [
-                                                      DialogButton(
-                                                          child: Text(
-                                                            "OK",
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .white,
-                                                                fontSize: 20),
-                                                          ),
-                                                          onPressed: () =>
-                                                              Navigator.pop(
-                                                                  context,
-                                                                  MaterialPageRoute(
-                                                                      builder:
-                                                                          (context) {
-                                                                //      return Bottomnavigations(
-                                                                //      selectedIndex:
-                                                                //        0,
-                                                                //       );
-                                                              })))
-                                                    ],
-                                                  ).show();
                                                 }
                                               },
                                             ),
