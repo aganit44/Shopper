@@ -66,6 +66,13 @@ class productApi {
     return res;
   }
 
+  Future<dynamic> deleteproductAdmin(int proID) async {
+    var url = 'http://192.168.43.200:5000/basket//deleteProduct?ID=' +
+        proID.toString();
+    var res = await http.get(url);
+    return res;
+  }
+
   // Future<dynamic> Userproduct(String UserID, String ProID) async {
   //   var url = 'http://192.168.43.200:5000/basket/addproduct=' +;
   //   var res = await http.get(url);

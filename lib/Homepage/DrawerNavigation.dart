@@ -39,7 +39,7 @@ class _DrawerNavitionState extends State<DrawerNavition> {
             children: [
               CircleAvatar(
                 backgroundImage: NetworkImage(
-                    "http://25.46.25.35:5000/image?path=" + user.Image),
+                    "http://192.168.43.200:5000/image?path=" + user.Image),
                 radius: 40.0,
               ),
               Row(

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:Shopper/Product/Product/Addproduct.dart';
+import 'package:Shopper/api/product_api.dart';
 import 'package:Shopper/model/User.dart';
 import 'package:Shopper/providers/user_provider.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +22,8 @@ class OnitsukaTiger2 extends StatefulWidget {
 }
 
 class _OnitsukaTiger2State extends State<OnitsukaTiger2> {
+  productApi api = productApi();
+
   String brand = "";
   Future getproduct() async {
     try {
@@ -123,8 +126,8 @@ class _OnitsukaTiger2State extends State<OnitsukaTiger2> {
                             Image.network(
                               'http://192.168.43.200:5000/product/image?path=' +
                                   snapshot.data[index]["Images"],
-                              width: 160,
-                              height: 110,
+                              width: 150,
+                              height: 100,
                             ),
                             Text("${snapshot.data[index]["Name"]}",
                                 maxLines: 2,
@@ -138,6 +141,32 @@ class _OnitsukaTiger2State extends State<OnitsukaTiger2> {
                                   Icons.monetization_on,
                                   color: Colors.yellow,
                                   size: 25.0,
+                                ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(horizontal: 1),
+                                  child: Visibility(
+                                    visible: user.Admin < 1 ? false : true,
+                                    child: IconButton(
+                                      icon: Icon(
+                                        Icons.close_rounded,
+                                      ),
+                                      iconSize: 30,
+                                      color: Colors.red,
+                                      splashColor: Colors.purple,
+                                      onPressed: () async {
+                                        setState(() {});
+                                        var res = await api.deleteproductAdmin(
+                                            snapshot.data[index]["ID"]);
+                                        print(res);
+                                        if (snapshot.data[index]["ID"] !=
+                                            null) {
+                                          //Map<String, dynamic> data = jsonDecode(res.body);
+
+                                        }
+                                      },
+                                    ),
+                                  ),
                                 ),
                                 Text(
                                     "        ${snapshot.data[index]["Price"]}  ฿",

@@ -25,12 +25,10 @@ class _HomePageState extends State<HomePage> {
         // leading: IconButton(
         //   icon: Icon(Icons.arrow_back, color: Colors.white),
         // ),
-        title: Text(
-          "Shopper",
-          style: TextStyle(
-            color: Colors.black,
-            decorationStyle: TextDecorationStyle.wavy,
-          ),
+        title: Image.asset(
+          'assets/images/logo.png',
+          width: 110,
+          height: 200,
         ),
         centerTitle: true,
       ),

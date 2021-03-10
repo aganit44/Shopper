@@ -43,113 +43,130 @@ class _Addproduct extends State<Addproduct> {
                   : Image.file(File(_image.path)),
             ),
           ),
-          DropdownButton<String>(
-            value: dropdownValue,
-            onChanged: (String newValue) {
-              setState(() {
-                dropdownValue = newValue;
-                print(dropdownValue);
-              });
-            },
-            items: <String>[
-              'Nike',
-              'Converse',
-              'Puma',
-              'Adidas',
-              'Vans',
-              'Newbalance'
-            ].map<DropdownMenuItem<String>>((String value) {
-              return DropdownMenuItem<String>(
-                value: value,
-                child: Text(value),
-              );
-            }).toList(),
+          Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: DropdownButton<String>(
+              value: dropdownValue,
+              onChanged: (String newValue) {
+                setState(() {
+                  dropdownValue = newValue;
+                  print(dropdownValue);
+                });
+              },
+              items: <String>[
+                'Nike',
+                'Converse',
+                'Puma',
+                'Adidas',
+                'Vans',
+                'Newbalance'
+              ].map<DropdownMenuItem<String>>((String value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(value),
+                );
+              }).toList(),
+            ),
           ),
 
-          TextFormField(
-            controller: NameproductController,
-            decoration: new InputDecoration(labelText: "กรุณาป้อนชื่อProduct"),
-            autofocus: true,
-            validator: (String str) {
-              //ชื่อรายการเป็นค่าว่าง
-              if (str.isEmpty) {
-                return "กรุณาป้อนชื่อProduct";
-              }
-              return null;
-            },
+          Padding(
+            padding: EdgeInsets.all(15.0),
+            child: TextFormField(
+              controller: NameproductController,
+              decoration:
+                  new InputDecoration(labelText: "กรุณาป้อนชื่อProduct"),
+              autofocus: true,
+              validator: (String str) {
+                //ชื่อรายการเป็นค่าว่าง
+                if (str.isEmpty) {
+                  return "กรุณาป้อนชื่อProduct";
+                }
+                return null;
+              },
+            ),
           ),
           //
-          TextFormField(
-            controller: InformationController,
-            decoration:
-                new InputDecoration(labelText: "กรุณาป้อนข้อมูลProduct"),
-            autofocus: true,
-            cursorColor: Colors.redAccent,
-            validator: (String str) {
-              if (str.isEmpty) {
-                return "กรุณาป้อนข้อมูลProduct";
-              }
+          Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: TextFormField(
+              controller: InformationController,
+              decoration:
+                  new InputDecoration(labelText: "กรุณาป้อนข้อมูลProduct"),
+              autofocus: true,
+              cursorColor: Colors.redAccent,
+              validator: (String str) {
+                if (str.isEmpty) {
+                  return "กรุณาป้อนข้อมูลProduct";
+                }
 
-              return null;
-            },
+                return null;
+              },
+            ),
           ),
-          TextFormField(
-            controller: PriceController,
-            decoration: new InputDecoration(labelText: "กรุณาป้อนราคาProduct"),
-            autofocus: true,
-            validator: (String str) {
-              if (str.isEmpty) {
-                return "กรุณาป้อนราคาProduct";
-              }
+          Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: TextFormField(
+              controller: PriceController,
+              decoration:
+                  new InputDecoration(labelText: "กรุณาป้อนราคาProduct"),
+              autofocus: true,
+              validator: (String str) {
+                if (str.isEmpty) {
+                  return "กรุณาป้อนราคาProduct";
+                }
 
-              return null;
-            },
+                return null;
+              },
+            ),
           ),
 
           // ignore: deprecated_member_use
-          RaisedButton(
-            onPressed: () async {
-              var res = await api.uploadproduct(
-                _image,
-                NameproductController.text,
-                InformationController.text,
-                PriceController.text,
-                dropdownValue.toString(),
-              );
-              print(res.statusCode);
+          Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: RaisedButton(
+              onPressed: () async {
+                var res = await api.uploadproduct(
+                  _image,
+                  NameproductController.text,
+                  InformationController.text,
+                  PriceController.text,
+                  dropdownValue.toString(),
+                );
+                print(res.statusCode);
 
-              if (res.statusCode == 200) {
-                //Map<String, dynamic> data = jsonDecode(res.body);
-                print("yes");
+                if (res.statusCode == 200) {
+                  //Map<String, dynamic> data = jsonDecode(res.body);
+                  print("yes");
 
-                Alert(
-                  context: context,
-                  type: AlertType.success,
-                  title: "เพิ่มสินค้าสำเร็จ",
-                  desc: "",
-                  buttons: [
-                    DialogButton(
-                        child: Text(
-                          "OK",
-                          style: TextStyle(color: Colors.white, fontSize: 20),
-                        ),
-                        onPressed: () => Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              return Bottomnavigations(
-                                selectedIndex: 0,
-                              );
-                            })))
-                  ],
-                ).show();
-              }
-            },
-            color: Colors.deepOrange,
-            child: Text(
-              'ยืนยัน',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold),
+                  Alert(
+                    context: context,
+                    type: AlertType.success,
+                    title: "เพิ่มสินค้าสำเร็จ",
+                    desc: "",
+                    buttons: [
+                      DialogButton(
+                          child: Text(
+                            "OK",
+                            style: TextStyle(color: Colors.white, fontSize: 20),
+                          ),
+                          onPressed: () => Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return Bottomnavigations(
+                                  selectedIndex: 0,
+                                );
+                              })))
+                    ],
+                  ).show();
+                }
+              },
+              color: Colors.deepOrange,
+              child: Text(
+                'ยืนยัน',
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold),
+              ),
             ),
           ),
         ],
@@ -167,7 +184,7 @@ class _Addproduct extends State<Addproduct> {
           child: Icon(
             Icons.camera_alt,
             color: Colors.white,
-            size: 50.0,
+            size: 25.0,
           ),
         ),
       ),

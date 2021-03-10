@@ -103,7 +103,6 @@ class _LoginPageState extends State<LoginPage> {
                               var res = await api.login(user, pass);
 
                               if (res.statusCode == 200) {
-
                                 Map<String, dynamic> data =
                                     jsonDecode(res.body);
                                 print(data);
@@ -119,7 +118,6 @@ class _LoginPageState extends State<LoginPage> {
                                   Coin: data['Coin'],
                                   Airpay: data['Airpay'],
                                   Admin: data['Admin'],
-                                  
                                 );
 
                                 var provider = Provider.of<UserProvider>(
@@ -148,13 +146,7 @@ class _LoginPageState extends State<LoginPage> {
                                             })))
                                   ],
                                 ).show();
-
-                                
-                              } 
-                              
-                            
-                              
-                              else {
+                              } else {
                                 Alert(
                                   context: context,
                                   type: AlertType.error,
@@ -192,26 +184,9 @@ class _LoginPageState extends State<LoginPage> {
                                   builder: (context) => RegPage()),
                             );
                           },
-                          color: Colors.deepOrange,
+                          color: Colors.red,
                           child: Text(
                             '                 New Register                   ',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        RaisedButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => RegPage()),
-                            );
-                          },
-                          color: Colors.indigo,
-                          child: Text(
-                            '              Login to facebook                   ',
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 20.0,

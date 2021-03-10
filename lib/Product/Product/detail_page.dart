@@ -345,6 +345,7 @@ class _DetailPageState extends State<DetailPage> {
                               color: Colors.deepOrange,
                               splashColor: Colors.white,
                               onPressed: () async {
+                                
                                 var res = await api1.coin(user.Coin);
 
                                 print(res.statusCode);
@@ -371,28 +372,28 @@ class _DetailPageState extends State<DetailPage> {
                                     ],
                                   ).show();
                                 } else {
-                                  Alert(
-                                    context: context,
-                                    type: AlertType.error,
-                                    title: "คุณเพิ่มสินค้าชิ้นนี้ไปแล้ว",
-                                    desc: "",
-                                    buttons: [
-                                      DialogButton(
-                                          child: Text(
-                                            "OK",
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 20),
-                                          ),
-                                          onPressed: () => Navigator.push(
-                                                  context, MaterialPageRoute(
-                                                      builder: (context) {
-                                                return Bottomnavigations(
-                                                  selectedIndex: 0,
-                                                );
-                                              })))
-                                    ],
-                                  ).show();
+                                  // Alert(
+                                  //   context: context,
+                                  //   type: AlertType.error,
+                                  //   title: "คุณเพิ่มสินค้าชิ้นนี้ไปแล้ว",
+                                  //   desc: "",
+                                  //   buttons: [
+                                  //     DialogButton(
+                                  //         child: Text(
+                                  //           "OK",
+                                  //           style: TextStyle(
+                                  //               color: Colors.white,
+                                  //               fontSize: 20),
+                                  //         ),
+                                  //         onPressed: () => Navigator.push(
+                                  //                 context, MaterialPageRoute(
+                                  //                     builder: (context) {
+                                  //               return Bottomnavigations(
+                                  //                 selectedIndex: 0,
+                                  //               );
+                                  //             })))
+                                  //   ],
+                                  // ).show();
                                 }
                               },
                               child: Row(
