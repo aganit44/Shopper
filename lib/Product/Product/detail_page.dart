@@ -23,6 +23,7 @@ class DetailPage extends StatefulWidget {
 class _DetailPageState extends State<DetailPage> {
   productApi api = productApi();
   userApi api1 = userApi();
+
   int id = 0;
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
@@ -193,7 +194,7 @@ class _DetailPageState extends State<DetailPage> {
                         Container(
                           padding: EdgeInsets.symmetric(horizontal: 20),
                           child: Text(
-                            snapshot.data["Price"] + "฿",
+                            snapshot.data["Price"] + "   Coin",
                             style: TextStyle(color: Colors.red, fontSize: 30),
                           ),
                         ),
@@ -350,6 +351,12 @@ class _DetailPageState extends State<DetailPage> {
 
                                 var prices = user.Coin - price;
                                 var prices2 = user.Coin = prices;
+
+                                var stork = await snapshot.data["Stock"];
+                                var storks = int.parse(stork);
+                                var storkss = storks - 1;
+
+                                print(storkss);
                                 if (user.Coin <= 0) {
                                   Alert(
                                     context: context,
@@ -373,8 +380,34 @@ class _DetailPageState extends State<DetailPage> {
                                               })))
                                     ],
                                   ).show();
+                                }
+                                if (storks < 1) {
+                                  Alert(
+                                    context: context,
+                                    type: AlertType.error,
+                                    title: "สินค้าหมด",
+                                    desc: "",
+                                    buttons: [
+                                      DialogButton(
+                                          child: Text(
+                                            "OK",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 20),
+                                          ),
+                                          onPressed: () => Navigator.push(
+                                                  context, MaterialPageRoute(
+                                                      builder: (context) {
+                                                return Bottomnavigations(
+                                                  selectedIndex: 0,
+                                                );
+                                              })))
+                                    ],
+                                  ).show();
                                 } else {
+                                  api.updatestock(storkss, id.toString());
                                   api1.coin(prices2, user.Id.toString());
+
                                   Alert(
                                     context: context,
                                     type: AlertType.success,

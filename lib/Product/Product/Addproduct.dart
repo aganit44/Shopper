@@ -27,7 +27,7 @@ class _Addproduct extends State<Addproduct> {
     TextEditingController InformationController = TextEditingController();
     TextEditingController PriceController = TextEditingController();
     TextEditingController BrandController = TextEditingController();
-
+    TextEditingController stockController = TextEditingController();
     return Scaffold(
       appBar: AppBar(
         title: Text("Addproduct"),
@@ -120,19 +120,34 @@ class _Addproduct extends State<Addproduct> {
             ),
           ),
 
+          Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: TextFormField(
+              controller: stockController,
+              decoration: new InputDecoration(labelText: "กรุณาป้อนจำนวนstock"),
+              autofocus: true,
+              validator: (String str) {
+                if (str.isEmpty) {
+                  return "กรุณาป้อนจำนวนstock";
+                }
+
+                return null;
+              },
+            ),
+          ),
           // ignore: deprecated_member_use
           Padding(
             padding: const EdgeInsets.all(15.0),
             child: RaisedButton(
               onPressed: () async {
                 var res = await api.uploadproduct(
-                  _image,
-                  NameproductController.text,
-                  InformationController.text,
-                  PriceController.text,
-                  dropdownValue.toString(),
-                  
-                );
+                    _image,
+                    NameproductController.text,
+                    InformationController.text,
+                    PriceController.text,
+                    dropdownValue.toString(),
+                    stockController.text);
+
                 print(res.statusCode);
 
                 if (res.statusCode == 200) {

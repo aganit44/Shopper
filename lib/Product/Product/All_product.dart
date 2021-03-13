@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:Shopper/Product/Product/Addproduct.dart';
+import 'package:Shopper/Product/Product/Editproduct.dart';
 import 'package:Shopper/api/product_api.dart';
 import 'package:Shopper/model/User.dart';
 import 'package:Shopper/providers/user_provider.dart';
@@ -12,7 +13,6 @@ import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:rflutter_alert/rflutter_alert.dart';
 
-import 'Editproduct_all.dart';
 import 'detail_page.dart';
 import 'endDrawer.dart';
 
@@ -140,14 +140,9 @@ class _OnitsukaTiger2State extends State<OnitsukaTiger2> {
                                 )),
                             Row(
                               children: <Widget>[
-                                Icon(
-                                  Icons.monetization_on,
-                                  color: Colors.yellow,
-                                  size: 25.0,
-                                ),
                                 Padding(
                                   padding:
-                                      const EdgeInsets.symmetric(horizontal: 1),
+                                      const EdgeInsets.symmetric(horizontal: 0),
                                   child: Visibility(
                                     visible: user.Admin < 1 ? false : true,
                                     child: IconButton(
@@ -188,13 +183,37 @@ class _OnitsukaTiger2State extends State<OnitsukaTiger2> {
                                         }),
                                   ),
                                 ),
-                                Text(
-                                    "        ${snapshot.data[index]["Price"]}  ฿",
-                                    maxLines: 2,
-                                    overflow: TextOverflow.fade,
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                    )),
+                                Row(
+                                  children: <Widget>[
+                                    user.Admin < 1
+                                        ? Icon(
+                                            Icons.monetization_on,
+                                            color: Colors.yellowAccent,
+                                          )
+                                        : IconButton(
+                                            icon: Icon(
+                                              Icons.edit,
+                                            ),
+                                            iconSize: 30,
+                                            color: Colors.red,
+                                            splashColor: Colors.purple,
+                                            onPressed: () => {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        Editproduct()),
+                                              ),
+                                            },
+                                          ),
+                                    Text("${snapshot.data[index]["Price"]}  ฿",
+                                        maxLines: 2,
+                                        overflow: TextOverflow.fade,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                        )),
+                                  ],
+                                ),
                               ],
                             )
                           ],
@@ -244,19 +263,6 @@ class floatingActionButton2 extends StatelessWidget {
         shape: CircleBorder(),
         children: [
           SpeedDialChild(
-            child: Icon(Icons.edit),
-            backgroundColor: Colors.white,
-            label: 'Editproduct',
-            labelStyle: TextStyle(fontSize: 18.0),
-            onTap: () => {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Editproduct_all()),
-              ),
-            },
-            onLongPress: () => print('FIRST CHILD LONG PRESS'),
-          ),
-          SpeedDialChild(
             child: Icon(Icons.add_business_rounded),
             backgroundColor: Colors.white,
             label: 'Addproduct',
@@ -267,7 +273,6 @@ class floatingActionButton2 extends StatelessWidget {
                 MaterialPageRoute(builder: (context) => Addproduct()),
               ),
             },
-            onLongPress: () => print('SECOND CHILD LONG PRESS'),
           ),
         ],
       ),

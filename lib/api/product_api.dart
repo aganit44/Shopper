@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'dart:async';
 import 'package:async/async.dart';
@@ -7,7 +8,7 @@ import 'package:path/path.dart';
 // ignore: camel_case_types
 class productApi {
   Future<dynamic> uploadproduct(File imageFile, String name, String information,
-      String price, String brand) async {
+      String price, String brand, String stock) async {
     // open a bytestream
     var stream =
         // ignore: deprecated_member_use
@@ -31,6 +32,7 @@ class productApi {
     request.fields['information'] = information;
     request.fields['price'] = price;
     request.fields['Brand'] = brand;
+    request.fields['Stock'] = stock;
 
     // send
     var response = await request.send();
@@ -76,8 +78,21 @@ class productApi {
     return res;
   }
 
-  // Future<dynamic> Userproduct(String UserID, String ProID) async {
-  //   var url = 'http://192.168.43.200:5000/basket/addproduct=' +;
-  //   var res = await http.get(url);
-  //   return res;
+  Future<dynamic> updatestock(int stock, String id) async {
+    var uri = Uri.parse("http://25.46.25.35:5000/product/Stock");
+
+    var request = new http.MultipartRequest("POST", uri);
+
+    request.fields['ID'] = id;
+    request.fields['Stock'] = stock.toString();
+
+    var response = await request.send();
+    print(response.statusCode);
+
+    response.stream.transform(utf8.decoder).listen((value) {
+      print(value);
+    });
+
+    return response;
+  }
 }

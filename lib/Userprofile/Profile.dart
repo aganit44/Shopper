@@ -1,5 +1,5 @@
 import 'package:Shopper/Homepage/BottomNavigation.dart';
-import 'package:Shopper/Profile/profile_menu.dart';
+import 'package:Shopper/ProfileMenu/profile_menu.dart';
 import 'package:Shopper/Userprofile/top_header.dart';
 import 'package:flutter/material.dart';
 import '../Login/login_page.dart';

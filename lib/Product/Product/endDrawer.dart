@@ -241,7 +241,7 @@ class _DrawerState extends State<Drawer2> {
                                                 } else {
                                                   api1.coin(prices2,
                                                       user.Id.toString());
-                                                  setState(() {});
+
                                                   var res =
                                                       await api.deleteproduct(
                                                           snapshot.data[index]

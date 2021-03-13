@@ -2,18 +2,12 @@ import 'package:Shopper/api/user_api.dart';
 import 'package:Shopper/model/User.dart';
 import 'package:Shopper/providers/user_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:localstorage/localstorage.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import '../Homepage/BottomNavigation.dart';
 import '../Register/regi_page.dart';
 import 'dart:convert';
 
 import 'package:provider/provider.dart';
-
-LocalStorage storage = LocalStorage('user');
-LocalStorage storage2 = LocalStorage('Product');
-
-//UserLogin userLogin = UserLogin();
 
 TextEditingController UserController = TextEditingController();
 TextEditingController PassController = TextEditingController();
@@ -25,10 +19,6 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final formKey = GlobalKey<FormState>();
-  // Future<dynamic> Login() async {
-  //   await userLogin.getUser(UserController.text, PassController.text, context);
-  //   await storage.setItem('data', userLogin.user);
-  // }
 
   @override
   Widget build(BuildContext context, {bool isPassword = true}) {
@@ -201,79 +191,3 @@ class _LoginPageState extends State<LoginPage> {
         ));
   }
 }
-
-// class UserLogin {
-//   List<dynamic> user;
-
-//   Future<List<User>> getUser(
-//       String username, String password, BuildContext context) async {
-//     /* if (username == '' || password == '') {
-//       Alert(
-//         context: context,
-//         type: AlertType.error,
-//         title: "กรุณากรอกUsernameและPassword",
-//         desc: "",
-//         buttons: [
-//           DialogButton(
-//             child: Text(
-//               "Close",
-//               style: TextStyle(color: Colors.white, fontSize: 20),
-//             ),
-//             onPressed: () => Navigator.pop(context),
-//             width: 120,
-//           )
-//         ],
-//       ).show();
-//       print("Falile");
-//     }*/
-//     // var url = 'http://25.46.25.35/login/login.php?username=' +
-//     //     username +
-//     //     '&password=' +
-//     //     password;
-
-//     var url = 'http://25.46.25.35:5000/login/' + username + '/' + password;
-
-//     // Await the http get response, then decode the json-formatted response.
-//     var response = await http.get(url);
-//     if (response.statusCode == 200) {
-//       var data = jsonDecode(response.body);
-//       print(data);
-//       Alert(
-//         type: AlertType.warning,
-//         context: context,
-//         title: "เข้าสู่ระบบสำเร็จ",
-//         desc: "",
-//         buttons: [
-//           DialogButton(
-//               child: Text(
-//                 "OK",
-//                 style: TextStyle(color: Colors.white, fontSize: 20),
-//               ),
-//               onPressed: () => Navigator.push(
-//                     context,
-//                     MaterialPageRoute(
-//                         builder: (context) => (Bottomnavigations())),
-//                   ))
-//         ],
-//       ).show();
-//       //}
-//     } else if (response.statusCode == 400) {
-//       Alert(
-//         context: context,
-//         type: AlertType.error,
-//         title: "LoginFalile",
-//         desc: "",
-//         buttons: [
-//           DialogButton(
-//             child: Text(
-//               "Close",
-//               style: TextStyle(color: Colors.white, fontSize: 20),
-//             ),
-//             onPressed: () => Navigator.pop(context),
-//             width: 120,
-//           )
-//         ],
-//       ).show();
-//     }
-//   }
-// }
