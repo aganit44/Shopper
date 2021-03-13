@@ -17,6 +17,7 @@ class _Addproduct extends State<Addproduct> {
   String dropdownValue = 'Nike';
   final picker = ImagePicker();
   File _image;
+  int PriceController;
   productApi api = productApi();
 
   @override

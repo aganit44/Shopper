@@ -95,4 +95,49 @@ class productApi {
 
     return response;
   }
+
+  Future<dynamic> Editproduct(File imageFile, String name, String information,
+      String price, String brand, String stock, String ID) async {
+    var uri = Uri.parse("http://192.168.43.200:5000/product/EditProduct");
+    var request = new http.MultipartRequest("POST", uri);
+    // open a bytestream
+    if (imageFile == null) {
+      request.fields['Name'] = name;
+      request.fields['information'] = information;
+      request.fields['price'] = price;
+      request.fields['Brand'] = brand;
+      request.fields['Stock'] = stock;
+      request.fields['ID'] = ID;
+      var response = await request.send();
+      return response;
+    } else {
+      var stream =
+          // ignore: deprecated_member_use
+          new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
+      // get file length
+      var length = await imageFile.length();
+
+      // string to uri
+
+      // create multipart request
+
+      // multipart that takes file
+      var multipartFile = new http.MultipartFile('myFile', stream, length,
+          filename: basename(imageFile.path));
+
+      // add file to multipart
+      request.files.add(multipartFile);
+      request.fields['Name'] = name;
+      request.fields['information'] = information;
+      request.fields['price'] = price;
+      request.fields['Brand'] = brand;
+      request.fields['Stock'] = stock;
+      request.fields['ID'] = ID;
+
+      // send
+      var response = await request.send();
+
+      return response;
+    }
+  }
 }

@@ -202,7 +202,10 @@ class _OnitsukaTiger2State extends State<OnitsukaTiger2> {
                                                 context,
                                                 MaterialPageRoute(
                                                     builder: (context) =>
-                                                        Editproduct()),
+                                                        Editproduct(
+                                                          index: index,
+                                                          data: snapshot.data,
+                                                        )),
                                               ),
                                             },
                                           ),

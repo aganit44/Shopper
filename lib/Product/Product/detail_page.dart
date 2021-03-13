@@ -14,7 +14,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class DetailPage extends StatefulWidget {
   int id;
-  DetailPage({this.id});
+  DetailPage({@required this.id});
 
   @override
   _DetailPageState createState() => _DetailPageState();
@@ -25,7 +25,6 @@ class _DetailPageState extends State<DetailPage> {
   userApi api1 = userApi();
 
   int id = 0;
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   Future getproduct() async {
     try {
@@ -87,7 +86,7 @@ class _DetailPageState extends State<DetailPage> {
             if (ConnectionState.done != null && snapshot.hasError) {
               return Center(child: Text(snapshot.error));
             }
-            child:
+
             return Column(
               children: <Widget>[
                 Expanded(
@@ -160,20 +159,6 @@ class _DetailPageState extends State<DetailPage> {
                           ),
                         ),
                         SizedBox(
-                          height: 30,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: <Widget>[
-                            Container(
-                                // child: Text(
-                                //   snapshot.data["information"],
-                                //   style: TextStyle(fontSize: 25),
-                                // ),
-                                ),
-                          ],
-                        ),
-                        SizedBox(
                           height: 10,
                         ),
                         RatingBar.builder(
@@ -191,15 +176,35 @@ class _DetailPageState extends State<DetailPage> {
                             print(rating);
                           },
                         ),
+                        SizedBox(
+                          height: 10,
+                        ),
                         Container(
                           padding: EdgeInsets.symmetric(horizontal: 20),
                           child: Text(
-                            snapshot.data["Price"] + "   Coin",
+                            snapshot.data["Price"].toString() + "   Coin",
                             style: TextStyle(color: Colors.red, fontSize: 30),
                           ),
                         ),
                         SizedBox(
                           height: 10,
+                        ),
+                        Container(
+                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          child: Text(
+                            "สิ้นค้าคงเหลือ",
+                            style: TextStyle(color: Colors.black, fontSize: 19),
+                          ),
+                        ),
+                        Container(
+                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          child: Text(
+                            snapshot.data["Stock"],
+                            style: TextStyle(color: Colors.black, fontSize: 19),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 15,
                         ),
                         Container(
                           padding: EdgeInsets.symmetric(horizontal: 20),
@@ -345,19 +350,14 @@ class _DetailPageState extends State<DetailPage> {
                           child: RaisedButton(
                               color: Colors.deepOrange,
                               splashColor: Colors.white,
-                              onPressed: () async {
-                                var res1 = await snapshot.data["Price"];
-                                var price = int.parse(res1);
+                              onPressed: () {
+                                var res1 = snapshot.data["Price"];
 
-                                var prices = user.Coin - price;
-                                var prices2 = user.Coin = prices;
-
-                                var stork = await snapshot.data["Stock"];
+                                var stork = snapshot.data["Stock"];
                                 var storks = int.parse(stork);
-                                var storkss = storks - 1;
 
-                                print(storkss);
-                                if (user.Coin <= 0) {
+                                print(res1);
+                                if (user.Coin < res1) {
                                   Alert(
                                     context: context,
                                     type: AlertType.error,
@@ -380,8 +380,7 @@ class _DetailPageState extends State<DetailPage> {
                                               })))
                                     ],
                                   ).show();
-                                }
-                                if (storks < 1) {
+                                } else if (storks < 0) {
                                   Alert(
                                     context: context,
                                     type: AlertType.error,
@@ -405,29 +404,36 @@ class _DetailPageState extends State<DetailPage> {
                                     ],
                                   ).show();
                                 } else {
+                                  var prices = user.Coin - res1;
+                                  user.Coin = prices;
+                                  var storkss = storks - 1;
                                   api.updatestock(storkss, id.toString());
-                                  api1.coin(prices2, user.Id.toString());
+                                  api1.coin(prices, user.Id.toString());
 
                                   Alert(
                                     context: context,
                                     type: AlertType.success,
-                                    title: "คุณซื้อสินค้าชิ้นนี้ไปแล้ว",
+                                    title: "ซื้อสินค้าสำเร็จ",
                                     desc: "",
                                     buttons: [
                                       DialogButton(
-                                          child: Text(
-                                            "OK",
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 20),
+                                        child: Text(
+                                          "OK",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 20),
+                                        ),
+                                        onPressed: () => Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) {
+                                              return Bottomnavigations(
+                                                selectedIndex: 0,
+                                              );
+                                            },
                                           ),
-                                          onPressed: () => Navigator.push(
-                                                  context, MaterialPageRoute(
-                                                      builder: (context) {
-                                                return Bottomnavigations(
-                                                  selectedIndex: 0,
-                                                );
-                                              })))
+                                        ),
+                                      ),
                                     ],
                                   ).show();
                                 }

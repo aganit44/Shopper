@@ -7,30 +7,48 @@ import 'package:image_picker/image_picker.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class Editproduct extends StatefulWidget {
+  Editproduct({Key key, @required this.data, @required this.index})
+      : super(key: key);
+  final List data;
+  final int index;
   @override
-  State<StatefulWidget> createState() {
-    return _Editproduct();
-  }
+  _EditproductState createState() => _EditproductState();
 }
 
-class _Editproduct extends State<Editproduct> {
-  String dropdownValue = 'Nike';
-  final picker = ImagePicker();
+class _EditproductState extends State<Editproduct> {
+  String dropdownValue;
   File _image;
   productApi api = productApi();
+  final picker = ImagePicker();
+
+  TextEditingController NameproductController;
+  TextEditingController InformationController;
+  TextEditingController PriceController;
+  TextEditingController BrandController;
+  TextEditingController stockController;
+
+  @override
+  void initState() {
+    super.initState();
+    NameproductController =
+        TextEditingController(text: widget.data[widget.index]['Name']);
+    InformationController =
+        TextEditingController(text: widget.data[widget.index]['information']);
+    PriceController = TextEditingController(
+        text: widget.data[widget.index]['Price'].toString());
+    BrandController =
+        TextEditingController(text: widget.data[widget.index]['Brand']);
+    stockController =
+        TextEditingController(text: widget.data[widget.index]['Stock']);
+
+    dropdownValue = widget.data[widget.index]['Brand'];
+  }
 
   @override
   Widget build(BuildContext context) {
-    // var provider = Provider.of<ProductProvider>(context, listen: false);
-    // Product product = provider.getProduct();
-    TextEditingController NameproductController = TextEditingController();
-    TextEditingController InformationController = TextEditingController();
-    TextEditingController PriceController = TextEditingController();
-    TextEditingController BrandController = TextEditingController();
-
     return Scaffold(
       appBar: AppBar(
-        title: Text("Editproduct"),
+        title: Text("Addproduct"),
         backgroundColor: Colors.black,
       ),
       body: ListView(
@@ -39,7 +57,12 @@ class _Editproduct extends State<Editproduct> {
             padding: const EdgeInsets.symmetric(horizontal: 75, vertical: 1),
             child: Container(
               child: _image == null
-                  ? Image.asset("assets/images/air-max-90.jpg")
+                  ? Image.network(
+                      'http://192.168.43.200:5000/product/image?path=' +
+                          widget.data[widget.index]["Images"],
+                      width: 150,
+                      height: 100,
+                    )
                   : Image.file(File(_image.path)),
             ),
           ),
@@ -120,45 +143,62 @@ class _Editproduct extends State<Editproduct> {
             ),
           ),
 
+          Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: TextFormField(
+              controller: stockController,
+              decoration: new InputDecoration(labelText: "กรุณาป้อนจำนวนstock"),
+              autofocus: true,
+              validator: (String str) {
+                if (str.isEmpty) {
+                  return "กรุณาป้อนจำนวนstock";
+                }
+
+                return null;
+              },
+            ),
+          ),
           // ignore: deprecated_member_use
           Padding(
             padding: const EdgeInsets.all(15.0),
             child: RaisedButton(
-              // onPressed: () async {
-              //   var res = await api.uploadproduct(
-              //     _image,
-              //     NameproductController.text,
-              //     InformationController.text,
-              //     PriceController.text,
-              //     dropdownValue.toString(),
-              //   );
-              //   print(res.statusCode);
+              onPressed: () async {
+                var res = await api.Editproduct(
+                    _image,
+                    NameproductController.text,
+                    InformationController.text,
+                    PriceController.text,
+                    dropdownValue.toString(),
+                    stockController.text,
+                    widget.data[widget.index]['ID'].toString());
 
-              //   if (res.statusCode == 200) {
-              //     //Map<String, dynamic> data = jsonDecode(res.body);
-              //     print("yes");
+                print(res.statusCode);
 
-              //     Alert(
-              //       context: context,
-              //       type: AlertType.success,
-              //       title: "เพิ่มสินค้าสำเร็จ",
-              //       desc: "",
-              //       buttons: [
-              //         DialogButton(
-              //             child: Text(
-              //               "OK",
-              //               style: TextStyle(color: Colors.white, fontSize: 20),
-              //             ),
-              //             onPressed: () => Navigator.push(context,
-              //                     MaterialPageRoute(builder: (context) {
-              //                   return Bottomnavigations(
-              //                     selectedIndex: 0,
-              //                   );
-              //                 })))
-              //       ],
-              //     ).show();
-              //   }
-              // },
+                if (res.statusCode == 200) {
+                  //Map<String, dynamic> data = jsonDecode(res.body);
+                  print("yes");
+
+                  Alert(
+                    context: context,
+                    type: AlertType.success,
+                    title: "เพิ่มสินค้าสำเร็จ",
+                    desc: "",
+                    buttons: [
+                      DialogButton(
+                          child: Text(
+                            "OK",
+                            style: TextStyle(color: Colors.white, fontSize: 20),
+                          ),
+                          onPressed: () => Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return Bottomnavigations(
+                                  selectedIndex: 0,
+                                );
+                              })))
+                    ],
+                  ).show();
+                }
+              },
               color: Colors.deepOrange,
               child: Text(
                 'ยืนยัน',
