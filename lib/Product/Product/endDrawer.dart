@@ -1,6 +1,11 @@
 import 'dart:convert';
+import 'package:provider/provider.dart';
 
+import 'package:Shopper/Homepage/BottomNavigation.dart';
 import 'package:Shopper/api/product_api.dart';
+import 'package:Shopper/api/user_api.dart';
+import 'package:Shopper/model/User.dart';
+import 'package:Shopper/providers/user_provider.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:http/http.dart' as http;
 
@@ -18,6 +23,7 @@ class Drawer2 extends StatefulWidget {
 class _DrawerState extends State<Drawer2> {
   int iduser = 0;
   productApi api = productApi();
+  userApi api1 = userApi();
 
   @override
   void initState() {
@@ -39,6 +45,8 @@ class _DrawerState extends State<Drawer2> {
 
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<UserProvider>(context, listen: false);
+    User user = provider.getUser();
     return Drawer(
       child: Column(
         children: <Widget>[
@@ -194,7 +202,84 @@ class _DrawerState extends State<Drawer2> {
                                               iconSize: 30,
                                               color: Colors.yellowAccent[700],
                                               splashColor: Colors.purple,
-                                              onPressed: () {},
+                                              onPressed: () async {
+                                                var res1 = await snapshot
+                                                    .data[index]["Price"];
+                                                var price = int.parse(res1);
+
+                                                var prices = user.Coin - price;
+                                                var prices2 =
+                                                    user.Coin = prices;
+                                                if (user.Coin <= 0) {
+                                                  Alert(
+                                                    context: context,
+                                                    type: AlertType.error,
+                                                    title: "ยอดเงินของคุณไม่พอ",
+                                                    desc: "",
+                                                    buttons: [
+                                                      DialogButton(
+                                                          child: Text(
+                                                            "OK",
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .white,
+                                                                fontSize: 20),
+                                                          ),
+                                                          onPressed: () =>
+                                                              Navigator.push(
+                                                                  context,
+                                                                  MaterialPageRoute(
+                                                                      builder:
+                                                                          (context) {
+                                                                return Bottomnavigations(
+                                                                  selectedIndex:
+                                                                      0,
+                                                                );
+                                                              })))
+                                                    ],
+                                                  ).show();
+                                                } else {
+                                                  api1.coin(prices2,
+                                                      user.Id.toString());
+                                                  setState(() {});
+                                                  var res =
+                                                      await api.deleteproduct(
+                                                          snapshot.data[index]
+                                                              ["ID"]);
+                                                  print(res);
+                                                  if (snapshot.data[index]
+                                                          ["ID"] !=
+                                                      null) {}
+                                                  Alert(
+                                                    context: context,
+                                                    type: AlertType.success,
+                                                    title:
+                                                        "คุณซื้อสินค้าชิ้นนี้ไปแล้ว",
+                                                    desc: "",
+                                                    buttons: [
+                                                      DialogButton(
+                                                          child: Text(
+                                                            "OK",
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .white,
+                                                                fontSize: 20),
+                                                          ),
+                                                          onPressed: () =>
+                                                              Navigator.push(
+                                                                  context,
+                                                                  MaterialPageRoute(
+                                                                      builder:
+                                                                          (context) {
+                                                                return Bottomnavigations(
+                                                                  selectedIndex:
+                                                                      0,
+                                                                );
+                                                              })))
+                                                    ],
+                                                  ).show();
+                                                }
+                                              },
                                             ),
                                           ),
                                         ],

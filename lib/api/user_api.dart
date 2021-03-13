@@ -69,16 +69,17 @@ class userApi {
     return res;
   }
 
-  Future<dynamic> coin(String coin) async {
+  Future<dynamic> coin(int coin, String id2) async {
     // open a bytestream
 
-    var uri = Uri.parse("http://25.46.25.35:5000/CoinandAirpay");
+    var uri = Uri.parse("http://25.46.25.35:5000/Coin");
 
     // create multipart request
     var request = new http.MultipartRequest("POST", uri);
 
     // add file to multipart
-    request.fields['Coin'] = coin;
+    request.fields['ID'] = id2;
+    request.fields['Coin'] = coin.toString();
 
     // send
     var response = await request.send();

@@ -345,19 +345,16 @@ class _DetailPageState extends State<DetailPage> {
                               color: Colors.deepOrange,
                               splashColor: Colors.white,
                               onPressed: () async {
-                                
-                                var res = await api1.coin(user.Coin);
+                                var res1 = await snapshot.data["Price"];
+                                var price = int.parse(res1);
 
-                                print(res.statusCode);
-
-                                if (res.statusCode == 200) {
-                                  //Map<String, dynamic> data = jsonDecode(res.body);
-                                  print("yes");
-
+                                var prices = user.Coin - price;
+                                var prices2 = user.Coin = prices;
+                                if (user.Coin <= 0) {
                                   Alert(
                                     context: context,
-                                    type: AlertType.success,
-                                    title: "สั่งซื้อสินค้าสำเร็จ",
+                                    type: AlertType.error,
+                                    title: "ยอดเงินของคุณไม่พอ",
                                     desc: "",
                                     buttons: [
                                       DialogButton(
@@ -367,33 +364,39 @@ class _DetailPageState extends State<DetailPage> {
                                                 color: Colors.white,
                                                 fontSize: 20),
                                           ),
-                                          onPressed: () =>
-                                              Navigator.pop(context))
+                                          onPressed: () => Navigator.push(
+                                                  context, MaterialPageRoute(
+                                                      builder: (context) {
+                                                return Bottomnavigations(
+                                                  selectedIndex: 0,
+                                                );
+                                              })))
                                     ],
                                   ).show();
                                 } else {
-                                  // Alert(
-                                  //   context: context,
-                                  //   type: AlertType.error,
-                                  //   title: "คุณเพิ่มสินค้าชิ้นนี้ไปแล้ว",
-                                  //   desc: "",
-                                  //   buttons: [
-                                  //     DialogButton(
-                                  //         child: Text(
-                                  //           "OK",
-                                  //           style: TextStyle(
-                                  //               color: Colors.white,
-                                  //               fontSize: 20),
-                                  //         ),
-                                  //         onPressed: () => Navigator.push(
-                                  //                 context, MaterialPageRoute(
-                                  //                     builder: (context) {
-                                  //               return Bottomnavigations(
-                                  //                 selectedIndex: 0,
-                                  //               );
-                                  //             })))
-                                  //   ],
-                                  // ).show();
+                                  api1.coin(prices2, user.Id.toString());
+                                  Alert(
+                                    context: context,
+                                    type: AlertType.success,
+                                    title: "คุณซื้อสินค้าชิ้นนี้ไปแล้ว",
+                                    desc: "",
+                                    buttons: [
+                                      DialogButton(
+                                          child: Text(
+                                            "OK",
+                                            style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 20),
+                                          ),
+                                          onPressed: () => Navigator.push(
+                                                  context, MaterialPageRoute(
+                                                      builder: (context) {
+                                                return Bottomnavigations(
+                                                  selectedIndex: 0,
+                                                );
+                                              })))
+                                    ],
+                                  ).show();
                                 }
                               },
                               child: Row(

@@ -148,7 +148,7 @@ class _CashInfoState extends State<CashInfo> {
             verticalDivider,
             _buildInfo(
               image: "assets/logo/coin.jpg",
-              title: '${user.Coin} Coin',
+              title: '${user.Coin.toString()} Coin',
               subTitle: "นำ coin มาแลกหัวใจ ",
             ),
           ],

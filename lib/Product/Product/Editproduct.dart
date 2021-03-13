@@ -6,14 +6,14 @@ import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
-class Addproduct extends StatefulWidget {
+class Editproduct extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return _Addproduct();
+    return _Editproduct();
   }
 }
 
-class _Addproduct extends State<Addproduct> {
+class _Editproduct extends State<Editproduct> {
   String dropdownValue = 'Nike';
   final picker = ImagePicker();
   File _image;
@@ -30,7 +30,7 @@ class _Addproduct extends State<Addproduct> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Addproduct"),
+        title: Text("Editproduct"),
         backgroundColor: Colors.black,
       ),
       body: ListView(
@@ -124,42 +124,41 @@ class _Addproduct extends State<Addproduct> {
           Padding(
             padding: const EdgeInsets.all(15.0),
             child: RaisedButton(
-              onPressed: () async {
-                var res = await api.uploadproduct(
-                  _image,
-                  NameproductController.text,
-                  InformationController.text,
-                  PriceController.text,
-                  dropdownValue.toString(),
-                  
-                );
-                print(res.statusCode);
+              // onPressed: () async {
+              //   var res = await api.uploadproduct(
+              //     _image,
+              //     NameproductController.text,
+              //     InformationController.text,
+              //     PriceController.text,
+              //     dropdownValue.toString(),
+              //   );
+              //   print(res.statusCode);
 
-                if (res.statusCode == 200) {
-                  //Map<String, dynamic> data = jsonDecode(res.body);
-                  print("yes");
+              //   if (res.statusCode == 200) {
+              //     //Map<String, dynamic> data = jsonDecode(res.body);
+              //     print("yes");
 
-                  Alert(
-                    context: context,
-                    type: AlertType.success,
-                    title: "เพิ่มสินค้าสำเร็จ",
-                    desc: "",
-                    buttons: [
-                      DialogButton(
-                          child: Text(
-                            "OK",
-                            style: TextStyle(color: Colors.white, fontSize: 20),
-                          ),
-                          onPressed: () => Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) {
-                                return Bottomnavigations(
-                                  selectedIndex: 0,
-                                );
-                              })))
-                    ],
-                  ).show();
-                }
-              },
+              //     Alert(
+              //       context: context,
+              //       type: AlertType.success,
+              //       title: "เพิ่มสินค้าสำเร็จ",
+              //       desc: "",
+              //       buttons: [
+              //         DialogButton(
+              //             child: Text(
+              //               "OK",
+              //               style: TextStyle(color: Colors.white, fontSize: 20),
+              //             ),
+              //             onPressed: () => Navigator.push(context,
+              //                     MaterialPageRoute(builder: (context) {
+              //                   return Bottomnavigations(
+              //                     selectedIndex: 0,
+              //                   );
+              //                 })))
+              //       ],
+              //     ).show();
+              //   }
+              // },
               color: Colors.deepOrange,
               child: Text(
                 'ยืนยัน',

@@ -6,7 +6,7 @@ class User {
   String PhoneNumber;
   String Name;
   String Image;
-  String Coin;
+  int Coin;
   String Airpay;
   int Admin;
 

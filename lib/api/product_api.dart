@@ -4,11 +4,13 @@ import 'package:async/async.dart';
 import 'package:http/http.dart' as http;
 import 'package:path/path.dart';
 
+// ignore: camel_case_types
 class productApi {
   Future<dynamic> uploadproduct(File imageFile, String name, String information,
       String price, String brand) async {
     // open a bytestream
     var stream =
+        // ignore: deprecated_member_use
         new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
     // get file length
     var length = await imageFile.length();
@@ -42,6 +44,7 @@ class productApi {
     return res;
   }
 
+  // ignore: non_constant_identifier_names
   Future<dynamic> Userproduct(int userID, int proID) async {
     // open a bytestream
 

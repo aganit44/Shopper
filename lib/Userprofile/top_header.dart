@@ -1,4 +1,3 @@
-import 'package:Shopper/api/user_api.dart';
 import 'package:Shopper/model/User.dart';
 import 'package:Shopper/providers/user_provider.dart';
 import 'package:flutter/material.dart';
