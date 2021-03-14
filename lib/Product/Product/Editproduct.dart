@@ -48,7 +48,7 @@ class _EditproductState extends State<Editproduct> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Addproduct"),
+        title: Text("Updateproduct"),
         backgroundColor: Colors.black,
       ),
       body: ListView(
@@ -60,8 +60,8 @@ class _EditproductState extends State<Editproduct> {
                   ? Image.network(
                       'http://192.168.43.200:5000/product/image?path=' +
                           widget.data[widget.index]["Images"],
-                      width: 150,
-                      height: 100,
+                      width: 200,
+                      height: 150,
                     )
                   : Image.file(File(_image.path)),
             ),

@@ -13,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class Drawer2 extends StatefulWidget {
+  int id;
   int iduser;
   Drawer2({this.iduser});
 
@@ -21,6 +22,7 @@ class Drawer2 extends StatefulWidget {
 }
 
 class _DrawerState extends State<Drawer2> {
+  int id = 0;
   int iduser = 0;
   productApi api = productApi();
   userApi api1 = userApi();
@@ -152,7 +154,7 @@ class _DrawerState extends State<Drawer2> {
                                             padding: const EdgeInsets.symmetric(
                                                 horizontal: 1),
                                             child: Text(
-                                              "     \$${snapshot.data[index]["Price"]}",
+                                              "     \$${snapshot.data[index]["Price"].toString()}",
                                               style: TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 20,
@@ -205,12 +207,13 @@ class _DrawerState extends State<Drawer2> {
                                               onPressed: () async {
                                                 var res1 = await snapshot
                                                     .data[index]["Price"];
-                                                var price = int.parse(res1);
 
-                                                var prices = user.Coin - price;
-                                                var prices2 =
-                                                    user.Coin = prices;
-                                                if (user.Coin <= 0) {
+                                                var stork = snapshot.data[index]
+                                                    ["Stock"];
+                                                var storks = int.parse(stork);
+
+                                                print(res1);
+                                                if (user.Coin < res1) {
                                                   Alert(
                                                     context: context,
                                                     type: AlertType.error,
@@ -238,23 +241,11 @@ class _DrawerState extends State<Drawer2> {
                                                               })))
                                                     ],
                                                   ).show();
-                                                } else {
-                                                  api1.coin(prices2,
-                                                      user.Id.toString());
-
-                                                  var res =
-                                                      await api.deleteproduct(
-                                                          snapshot.data[index]
-                                                              ["ID"]);
-                                                  print(res);
-                                                  if (snapshot.data[index]
-                                                          ["ID"] !=
-                                                      null) {}
+                                                } else if (storks < 1) {
                                                   Alert(
                                                     context: context,
-                                                    type: AlertType.success,
-                                                    title:
-                                                        "คุณซื้อสินค้าชิ้นนี้ไปแล้ว",
+                                                    type: AlertType.error,
+                                                    title: "สินค้าหมด",
                                                     desc: "",
                                                     buttons: [
                                                       DialogButton(
@@ -276,6 +267,52 @@ class _DrawerState extends State<Drawer2> {
                                                                       0,
                                                                 );
                                                               })))
+                                                    ],
+                                                  ).show();
+                                                } else {
+                                                  var prices = user.Coin - res1;
+                                                  user.Coin = prices;
+                                                  var storkss = storks - 1;
+                                                  api.updatestock(
+                                                      storkss, id.toString());
+                                                  api1.coin(prices,
+                                                      user.Id.toString());
+
+                                                  var res =
+                                                      await api.deleteproduct(
+                                                          snapshot.data[index]
+                                                              ["ID"]);
+                                                  print(res);
+                                                  if (snapshot.data[index]
+                                                          ["ID"] !=
+                                                      null) {}
+                                                  Alert(
+                                                    context: context,
+                                                    type: AlertType.success,
+                                                    title: "ซื้อสินค้าสำเร็จ",
+                                                    desc: "",
+                                                    buttons: [
+                                                      DialogButton(
+                                                        child: Text(
+                                                          "OK",
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontSize: 20),
+                                                        ),
+                                                        onPressed: () =>
+                                                            Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                            builder: (context) {
+                                                              return Bottomnavigations(
+                                                                selectedIndex:
+                                                                    0,
+                                                              );
+                                                            },
+                                                          ),
+                                                        ),
+                                                      ),
                                                     ],
                                                   ).show();
                                                 }

@@ -38,11 +38,6 @@ class _ProductState extends State<Notifications> {
               press: () => {},
             ),
             ProfileMenu(
-              text: "กิจกรรม",
-              icon: "assets/icons/Gift Icon.svg",
-              press: () {},
-            ),
-            ProfileMenu(
               text: "รายการอัปเดตจากShopper",
               icon: "assets/icons/Mail.svg",
               press: () {},

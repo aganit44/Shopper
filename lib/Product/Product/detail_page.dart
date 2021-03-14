@@ -380,7 +380,7 @@ class _DetailPageState extends State<DetailPage> {
                                               })))
                                     ],
                                   ).show();
-                                } else if (storks < 0) {
+                                } else if (storks < 1) {
                                   Alert(
                                     context: context,
                                     type: AlertType.error,
@@ -479,5 +479,3 @@ class _DetailPageState extends State<DetailPage> {
     );
   }
 }
-
-// body: Container(
