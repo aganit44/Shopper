@@ -54,11 +54,6 @@ class _Page1 extends State<Page1> {
             },
           ),
           ProfileMenu(
-            text: "Settings",
-            icon: "assets/icons/Settings.svg",
-            press: () {},
-          ),
-          ProfileMenu(
             text: "Log Out",
             icon: "assets/icons/Log out.svg",
             press: () {
