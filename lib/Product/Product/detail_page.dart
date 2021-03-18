@@ -193,7 +193,7 @@ class _DetailPageState extends State<DetailPage> {
                         Container(
                           padding: EdgeInsets.symmetric(horizontal: 20),
                           child: Text(
-                            "สิ้นค้าคงเหลือ",
+                            "สินค้าคงเหลือ",
                             style: TextStyle(color: Colors.black, fontSize: 19),
                           ),
                         ),

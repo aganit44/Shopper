@@ -277,7 +277,9 @@ class _DrawerState extends State<Drawer2> {
                                                   user.Coin = prices;
                                                   var storkss = storks - 1;
                                                   api.updatestock(
-                                                      storkss, id.toString());
+                                                      storkss,
+                                                      snapshot.data[index]["ID"]
+                                                          .toString());
                                                   api1.coin(prices,
                                                       user.Id.toString());
 
