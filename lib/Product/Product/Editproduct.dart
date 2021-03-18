@@ -21,9 +21,13 @@ class _EditproductState extends State<Editproduct> {
   productApi api = productApi();
   final picker = ImagePicker();
 
+  // ignore: non_constant_identifier_names
   TextEditingController NameproductController;
+  // ignore: non_constant_identifier_names
   TextEditingController InformationController;
+  // ignore: non_constant_identifier_names
   TextEditingController PriceController;
+  // ignore: non_constant_identifier_names
   TextEditingController BrandController;
   TextEditingController stockController;
 
@@ -161,53 +165,55 @@ class _EditproductState extends State<Editproduct> {
           // ignore: deprecated_member_use
           Padding(
             padding: const EdgeInsets.all(15.0),
-            child: RaisedButton(
-              onPressed: () async {
-                var res = await api.Editproduct(
-                    _image,
-                    NameproductController.text,
-                    InformationController.text,
-                    PriceController.text,
-                    dropdownValue.toString(),
-                    stockController.text,
-                    widget.data[widget.index]['ID'].toString());
+            child: ElevatedButton(
+                child: Text(
+                  'ยืนยัน',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold),
+                ),
+                onPressed: () async {
+                  var res = await api.Editproduct(
+                      _image,
+                      NameproductController.text,
+                      InformationController.text,
+                      PriceController.text,
+                      dropdownValue.toString(),
+                      stockController.text,
+                      widget.data[widget.index]['ID'].toString());
 
-                print(res.statusCode);
+                  print(res.statusCode);
 
-                if (res.statusCode == 200) {
-                  //Map<String, dynamic> data = jsonDecode(res.body);
-                  print("yes");
+                  if (res.statusCode == 200) {
+                    //Map<String, dynamic> data = jsonDecode(res.body);
+                    print("yes");
 
-                  Alert(
-                    context: context,
-                    type: AlertType.success,
-                    title: "เพิ่มสินค้าสำเร็จ",
-                    desc: "",
-                    buttons: [
-                      DialogButton(
-                          child: Text(
-                            "OK",
-                            style: TextStyle(color: Colors.white, fontSize: 20),
-                          ),
-                          onPressed: () => Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) {
-                                return Bottomnavigations(
-                                  selectedIndex: 0,
-                                );
-                              })))
-                    ],
-                  ).show();
-                }
-              },
-              color: Colors.deepOrange,
-              child: Text(
-                'ยืนยัน',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.bold),
-              ),
-            ),
+                    Alert(
+                      context: context,
+                      type: AlertType.success,
+                      title: "เพิ่มสินค้าสำเร็จ",
+                      desc: "",
+                      buttons: [
+                        DialogButton(
+                            child: Text(
+                              "OK",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 20),
+                            ),
+                            onPressed: () => Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) {
+                                  return Bottomnavigations(
+                                    selectedIndex: 0,
+                                  );
+                                })))
+                      ],
+                    ).show();
+                  }
+                },
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all(Colors.red),
+                )),
           ),
         ],
       ),
@@ -251,14 +257,14 @@ class _EditproductState extends State<Editproduct> {
             height: 20,
           ),
           Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-            FlatButton.icon(
+            TextButton.icon(
               icon: Icon(Icons.camera),
               onPressed: () {
                 takePhoto2(ImageSource.camera);
               },
               label: Text("Camera"),
             ),
-            FlatButton.icon(
+            TextButton.icon(
               icon: Icon(Icons.image),
               onPressed: () {
                 takePhoto(ImageSource.gallery);

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class HeaderContainer extends StatelessWidget {
   var text = "Login";
 
@@ -12,7 +13,6 @@ class HeaderContainer extends StatelessWidget {
 
       child: Stack(
         children: <Widget>[
-
           Center(
             child: Image.asset('assets/images/promotion_sneaker3.png'),
           ),

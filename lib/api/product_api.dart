@@ -79,7 +79,7 @@ class productApi {
   }
 
   Future<dynamic> updatestock(int stock, String id) async {
-    var uri = Uri.parse("http://25.46.25.35:5000/product/Stock");
+    var uri = Uri.parse("http://192.168.43.200:5000/product/Stock");
 
     var request = new http.MultipartRequest("POST", uri);
 
@@ -96,8 +96,17 @@ class productApi {
     return response;
   }
 
-  Future<dynamic> Editproduct(File imageFile, String name, String information,
-      String price, String brand, String stock, String ID) async {
+  // ignore: non_constant_identifier_names
+  Future<dynamic> Editproduct(
+      File imageFile,
+      String name,
+      String information,
+      // ignore: non_constant_identifier_names
+      String price,
+      String brand,
+      String stock,
+      // ignore: non_constant_identifier_names
+      String ID) async {
     var uri = Uri.parse("http://192.168.43.200:5000/product/EditProduct");
     var request = new http.MultipartRequest("POST", uri);
     // open a bytestream

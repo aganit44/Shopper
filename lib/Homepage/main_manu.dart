@@ -30,6 +30,7 @@ class _MainMenu extends State<MainMenu> {
               Container(
                 width: 100,
                 height: 75,
+                // ignore: deprecated_member_use
                 child: FlatButton(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(14),

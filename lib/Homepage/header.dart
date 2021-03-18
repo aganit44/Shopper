@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-
 class Header extends StatefulWidget {
   final TrackingScrollController scrollController;
   const Header(this.scrollController);
@@ -10,6 +9,7 @@ class Header extends StatefulWidget {
 }
 
 class _HeaderState extends State<Header> {
+  // ignore: unused_field
   Color _backgroundColor;
   Color _backgroundColorSeach;
   Color _colorIcon;

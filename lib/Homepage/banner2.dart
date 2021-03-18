@@ -1,4 +1,3 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -18,6 +17,7 @@ class BannerWidgetArea extends StatelessWidget {
     PageController controller =
         PageController(viewportFraction: 0.8, initialPage: 1);
 
+    // ignore: deprecated_member_use
     List<Widget> banners = new List<Widget>();
 
     for (int x = 0; x < bannerItems.length; x++) {

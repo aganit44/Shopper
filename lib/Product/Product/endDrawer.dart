@@ -12,6 +12,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
+// ignore: must_be_immutable
 class Drawer2 extends StatefulWidget {
   int id;
   int iduser;
@@ -70,6 +71,7 @@ class _DrawerState extends State<Drawer2> {
                       Icon(SimpleLineIcons.basket),
                       Text(
                         '  Cart',
+                        // ignore: deprecated_member_use
                         style: Theme.of(context).textTheme.title,
                       ),
                     ],
@@ -80,6 +82,7 @@ class _DrawerState extends State<Drawer2> {
 
           Flexible(
             child: FutureBuilder(
+              future: getproduct(),
               builder: (context, snapshot) {
                 if (ConnectionState.active != null && !snapshot.hasData) {
                   return Center(child: Text("ไม่มีสินค้าในตะกร้า"));
@@ -357,7 +360,6 @@ class _DrawerState extends State<Drawer2> {
                   },
                 );
               },
-              future: getproduct(),
             ),
           ),
 

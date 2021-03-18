@@ -14,6 +14,7 @@ class _BannerSliderState extends State<BannerSlider> {
   @override
   Widget build(BuildContext context) {
     return Stack(
+      // ignore: deprecated_member_use
       overflow: Overflow.visible,
       alignment: Alignment.bottomCenter,
       children: [

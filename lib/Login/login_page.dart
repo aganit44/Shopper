@@ -9,7 +9,9 @@ import 'dart:convert';
 
 import 'package:provider/provider.dart';
 
+// ignore: non_constant_identifier_names
 TextEditingController UserController = TextEditingController();
+// ignore: non_constant_identifier_names
 TextEditingController PassController = TextEditingController();
 
 class LoginPage extends StatefulWidget {
@@ -85,7 +87,7 @@ class _LoginPageState extends State<LoginPage> {
                           height: 20.0,
                         ),
                         // ignore: deprecated_member_use
-                        RaisedButton(
+                        MaterialButton(
                           onPressed: () async {
                             if (formKey.currentState.validate()) {
                               var user = UserController.text;
@@ -166,7 +168,7 @@ class _LoginPageState extends State<LoginPage> {
                                 fontWeight: FontWeight.bold),
                           ),
                         ),
-                        RaisedButton(
+                        MaterialButton(
                           onPressed: () {
                             Navigator.push(
                               context,

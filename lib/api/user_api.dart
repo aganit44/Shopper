@@ -5,6 +5,7 @@ import 'package:async/async.dart';
 import 'package:http/http.dart' as http;
 import 'package:path/path.dart';
 
+// ignore: camel_case_types
 class userApi {
   Future<dynamic> login(String userName, String password) async {
     var url = 'http://192.168.43.200:5000/login/' + userName + '/' + password;
@@ -31,6 +32,7 @@ class userApi {
   Future<dynamic> upload(File imageFile, String uid, String name) async {
     // open a bytestream
     var stream =
+        // ignore: deprecated_member_use
         new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
     // get file length
     var length = await imageFile.length();
@@ -62,6 +64,7 @@ class userApi {
     return response;
   }
 
+  // ignore: non_constant_identifier_names
   Future<dynamic> getUser(String ID) async {
     var url = 'http://192.168.43.200:5000/getuser/' + ID;
     print(url);
@@ -72,7 +75,7 @@ class userApi {
   Future<dynamic> coin(int coin, String id2) async {
     // open a bytestream
 
-    var uri = Uri.parse("http://25.46.25.35:5000/Coin");
+    var uri = Uri.parse("http://192.168.43.200:5000/Coin");
 
     // create multipart request
     var request = new http.MultipartRequest("POST", uri);
@@ -80,7 +83,6 @@ class userApi {
     // add file to multipart
     request.fields['ID'] = id2;
     request.fields['Coin'] = coin.toString();
-    
 
     // send
     var response = await request.send();

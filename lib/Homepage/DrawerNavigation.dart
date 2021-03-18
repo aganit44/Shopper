@@ -109,13 +109,6 @@ class _DrawerNavitionState extends State<DrawerNavition> {
         child: Center(child: VideoDemo()),
       ),
     );
-
-    // child: ListView(
-    //   padding: EdgeInsets.zero,
-    //   children: <Widget>[
-
-    //   ],
-    // ),
   }
 }
 
@@ -135,7 +128,8 @@ class VideoDemoState extends State<VideoDemo> {
 
   @override
   void initState() {
-    _controller = VideoPlayerController.network("https://youtu.be/ia9E21LHfSY");
+    _controller = VideoPlayerController.network(
+        "https://static.nike.com/a/videos/q_90,vc_vp9/83549ee5-9839-4ae6-9da6-a1a1865d0393/video.webm");
     //_controller = VideoPlayerController.asset("videos/sample_video.mp4");
     _initializeVideoPlayerFuture = _controller.initialize();
     _controller.setLooping(true);

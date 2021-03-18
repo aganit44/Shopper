@@ -3,10 +3,15 @@ import 'package:Shopper/api/user_api.dart';
 import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
+// ignore: non_constant_identifier_names
 TextEditingController UserController = TextEditingController();
+// ignore: non_constant_identifier_names
 TextEditingController PassController = TextEditingController();
+// ignore: non_constant_identifier_names
 TextEditingController EmailController = TextEditingController();
+// ignore: non_constant_identifier_names
 TextEditingController PhoneNumberController = TextEditingController();
+// ignore: non_constant_identifier_names
 TextEditingController NameController = TextEditingController();
 
 class RegPage extends StatefulWidget {
@@ -85,6 +90,7 @@ class _RegPageState extends State<RegPage> {
                     SizedBox(
                       height: 50.0,
                     ),
+                    // ignore: deprecated_member_use
                     RaisedButton(
                       onPressed: () async {
                         var res = await api.register(
@@ -132,8 +138,15 @@ class _RegPageState extends State<RegPage> {
         ));
   }
 
+  // ignore: unused_element
   Widget _textInput(
-      {controller, hint, icon, bool isPassword = true, Object pass}) {
+      // ignore: unused_element
+      {controller,
+      hint,
+      icon,
+      bool isPassword = true,
+      // ignore: unused_element
+      Object pass}) {
     return Container(
       margin: EdgeInsets.only(top: 0),
       decoration: BoxDecoration(

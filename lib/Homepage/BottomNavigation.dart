@@ -5,6 +5,7 @@ import 'home_page.dart';
 import '../Notifications/Notifications.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 
+// ignore: must_be_immutable
 class Bottomnavigations extends StatefulWidget {
   int selectedIndex = 0;
   Bottomnavigations({this.selectedIndex});

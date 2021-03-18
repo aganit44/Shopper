@@ -24,6 +24,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: non_constant_identifier_names
     TextEditingController NameController = TextEditingController();
     var provider = Provider.of<UserProvider>(context, listen: false);
     User user = provider.getUser();
@@ -54,6 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   fillColor: Colors.white,
                   border: InputBorder.none),
             ),
+            // ignore: deprecated_member_use
             RaisedButton(
               onPressed: () async {
                 var res = await api.upload(
@@ -137,14 +139,14 @@ class _MyHomePageState extends State<MyHomePage> {
             height: 20,
           ),
           Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-            FlatButton.icon(
+            TextButton.icon(
               icon: Icon(Icons.camera),
               onPressed: () {
                 takePhoto2(ImageSource.camera);
               },
               label: Text("Camera"),
             ),
-            FlatButton.icon(
+            TextButton.icon(
               icon: Icon(Icons.image),
               onPressed: () {
                 takePhoto(ImageSource.gallery);

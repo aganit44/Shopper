@@ -17,16 +17,19 @@ class _Addproduct extends State<Addproduct> {
   String dropdownValue = 'Nike';
   final picker = ImagePicker();
   File _image;
+  // ignore: non_constant_identifier_names
   int PriceController;
   productApi api = productApi();
 
   @override
   Widget build(BuildContext context) {
-    // var provider = Provider.of<ProductProvider>(context, listen: false);
-    // Product product = provider.getProduct();
+    // ignore: non_constant_identifier_names
     TextEditingController NameproductController = TextEditingController();
+    // ignore: non_constant_identifier_names
     TextEditingController InformationController = TextEditingController();
+    // ignore: non_constant_identifier_names
     TextEditingController PriceController = TextEditingController();
+
     TextEditingController BrandController = TextEditingController();
     TextEditingController stockController = TextEditingController();
     return Scaffold(
@@ -139,7 +142,7 @@ class _Addproduct extends State<Addproduct> {
           // ignore: deprecated_member_use
           Padding(
             padding: const EdgeInsets.all(15.0),
-            child: RaisedButton(
+            child: MaterialButton(
               onPressed: () async {
                 var res = await api.uploadproduct(
                     _image,
@@ -228,14 +231,14 @@ class _Addproduct extends State<Addproduct> {
             height: 20,
           ),
           Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-            FlatButton.icon(
+            TextButton.icon(
               icon: Icon(Icons.camera),
               onPressed: () {
                 takePhoto2(ImageSource.camera);
               },
               label: Text("Camera"),
             ),
-            FlatButton.icon(
+            TextButton.icon(
               icon: Icon(Icons.image),
               onPressed: () {
                 takePhoto(ImageSource.gallery);

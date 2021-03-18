@@ -16,6 +16,7 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 import 'detail_page.dart';
 import 'endDrawer.dart';
 
+// ignore: must_be_immutable
 class OnitsukaTiger2 extends StatefulWidget {
   String brand;
   OnitsukaTiger2({this.brand});
@@ -108,9 +109,6 @@ class _OnitsukaTiger2State extends State<OnitsukaTiger2> {
                       );
                     },
                     child: Container(
-                        margin: EdgeInsets.only(left: 1, right: 8, bottom: 10),
-                        padding:
-                            EdgeInsets.symmetric(vertical: 1, horizontal: 5),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.all(
@@ -119,8 +117,8 @@ class _OnitsukaTiger2State extends State<OnitsukaTiger2> {
                           boxShadow: [
                             BoxShadow(
                               color: Colors.black12,
-                              spreadRadius: 10,
-                              blurRadius: 10,
+                              spreadRadius: 5,
+                              blurRadius: 15,
                             ),
                           ],
                         ),
@@ -232,6 +230,7 @@ class _OnitsukaTiger2State extends State<OnitsukaTiger2> {
   }
 }
 
+// ignore: camel_case_types
 class floatingActionButton2 extends StatelessWidget {
   const floatingActionButton2({
     Key key,
@@ -282,5 +281,3 @@ class floatingActionButton2 extends StatelessWidget {
     );
   }
 }
-
-

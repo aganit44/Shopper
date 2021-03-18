@@ -1,9 +1,9 @@
 import 'package:Shopper/model/User.dart';
 import 'package:Shopper/providers/user_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:localstorage/localstorage.dart';
 import 'package:provider/provider.dart';
 
+// ignore: camel_case_types
 class topheader extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
