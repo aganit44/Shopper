@@ -40,13 +40,20 @@ class _Addproduct extends State<Addproduct> {
       body: ListView(
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 75, vertical: 1),
-            child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 100, vertical: 1),
+            child: InkWell(
+              onTap: () {
+                showModalBottomSheet(
+                  context: context,
+                  builder: ((builder) => bottomSheet()),
+                );
+              },
               child: _image == null
                   ? Image.asset("assets/images/air-max-90.jpg")
                   : Image.file(File(_image.path)),
             ),
           ),
+
           Padding(
             padding: const EdgeInsets.all(15.0),
             child: DropdownButton<String>(
@@ -77,9 +84,14 @@ class _Addproduct extends State<Addproduct> {
             padding: EdgeInsets.all(15.0),
             child: TextFormField(
               controller: NameproductController,
-              decoration:
-                  new InputDecoration(labelText: "กรุณาป้อนชื่อProduct"),
+              decoration: new InputDecoration(
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black38),
+                  ),
+                  labelText: "กรุณาป้อนชื่อProduct",
+                  labelStyle: TextStyle(color: Colors.black38)),
               autofocus: true,
+              enabled: true,
               validator: (String str) {
                 //ชื่อรายการเป็นค่าว่าง
                 if (str.isEmpty) {
@@ -94,9 +106,14 @@ class _Addproduct extends State<Addproduct> {
             padding: const EdgeInsets.all(15.0),
             child: TextFormField(
               controller: InformationController,
-              decoration:
-                  new InputDecoration(labelText: "กรุณาป้อนข้อมูลProduct"),
+              decoration: new InputDecoration(
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black38),
+                  ),
+                  labelText: "กรุณาป้อนข้อมูลProduct",
+                  labelStyle: TextStyle(color: Colors.black38)),
               autofocus: true,
+              enabled: true,
               cursorColor: Colors.redAccent,
               validator: (String str) {
                 if (str.isEmpty) {
@@ -111,9 +128,14 @@ class _Addproduct extends State<Addproduct> {
             padding: const EdgeInsets.all(15.0),
             child: TextFormField(
               controller: PriceController,
-              decoration:
-                  new InputDecoration(labelText: "กรุณาป้อนราคาProduct"),
+              decoration: new InputDecoration(
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black38),
+                  ),
+                  labelText: "กรุณาป้อนราคาProduct",
+                  labelStyle: TextStyle(color: Colors.black38)),
               autofocus: true,
+              enabled: true,
               validator: (String str) {
                 if (str.isEmpty) {
                   return "กรุณาป้อนราคาProduct";
@@ -128,8 +150,14 @@ class _Addproduct extends State<Addproduct> {
             padding: const EdgeInsets.all(15.0),
             child: TextFormField(
               controller: stockController,
-              decoration: new InputDecoration(labelText: "กรุณาป้อนจำนวนstock"),
+              decoration: new InputDecoration(
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black38),
+                  ),
+                  labelText: "กรุณาป้อนจำนวนstock",
+                  labelStyle: TextStyle(color: Colors.black38)),
               autofocus: true,
+              enabled: true,
               validator: (String str) {
                 if (str.isEmpty) {
                   return "กรุณาป้อนจำนวนstock";
@@ -191,23 +219,6 @@ class _Addproduct extends State<Addproduct> {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        backgroundColor: Colors.black,
-        child: InkWell(
-          onTap: () {
-            showModalBottomSheet(
-              context: context,
-              builder: ((builder) => bottomSheet()),
-            );
-          },
-          child: Icon(
-            Icons.camera_alt,
-            color: Colors.white,
-            size: 25.0,
-          ),
-        ),
-      ),
     );
   }
 
@@ -232,18 +243,30 @@ class _Addproduct extends State<Addproduct> {
           ),
           Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
             TextButton.icon(
-              icon: Icon(Icons.camera),
+              icon: Icon(
+                Icons.camera,
+                color: Colors.black,
+              ),
               onPressed: () {
                 takePhoto2(ImageSource.camera);
               },
-              label: Text("Camera"),
+              label: Text(
+                "Camera",
+                style: TextStyle(color: Colors.black),
+              ),
             ),
             TextButton.icon(
-              icon: Icon(Icons.image),
+              icon: Icon(
+                Icons.image,
+                color: Colors.black,
+              ),
               onPressed: () {
                 takePhoto(ImageSource.gallery);
               },
-              label: Text("Gallery"),
+              label: Text(
+                "Gallery",
+                style: TextStyle(color: Colors.black),
+              ),
             ),
           ])
         ],

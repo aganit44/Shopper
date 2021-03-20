@@ -145,10 +145,10 @@ class _OnitsukaTiger2State extends State<OnitsukaTiger2> {
                                     visible: user.Admin < 1 ? false : true,
                                     child: IconButton(
                                         icon: Icon(
-                                          Icons.close_rounded,
+                                          Icons.delete_forever_outlined,
                                         ),
                                         iconSize: 30,
-                                        color: Colors.red,
+                                        color: Colors.red[800],
                                         onPressed: () async {
                                           Alert(
                                               context: context,
@@ -190,10 +190,10 @@ class _OnitsukaTiger2State extends State<OnitsukaTiger2> {
                                           )
                                         : IconButton(
                                             icon: Icon(
-                                              Icons.edit,
+                                              Icons.drive_file_rename_outline,
                                             ),
                                             iconSize: 30,
-                                            color: Colors.red,
+                                            color: Colors.yellow[700],
                                             splashColor: Colors.purple,
                                             onPressed: () => {
                                               Navigator.push(
@@ -255,8 +255,6 @@ class floatingActionButton2 extends StatelessWidget {
         curve: Curves.bounceIn,
         overlayColor: Colors.black,
         overlayOpacity: 0.5,
-        onOpen: () => print('OPENING DIAL'),
-        onClose: () => print('DIAL CLOSED'),
         tooltip: 'Speed Dial',
         heroTag: 'speed-dial-hero-tag',
         backgroundColor: Colors.white,

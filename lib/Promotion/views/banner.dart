@@ -9,9 +9,7 @@ class BannerSlider2 extends StatelessWidget {
       overflow: Overflow.visible,
       alignment: Alignment.bottomCenter,
       children: [
-
         BannerSection2(),
-
       ],
     );
   }
@@ -30,48 +28,36 @@ class _BannerSectionState extends State<BannerSection2> {
     'assets/imgPromotion/PromotionNew.jpg',
   ];
 
-
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         buildBanner(),
-
       ],
     );
   }
 
   Container buildBanner() {
-
     return Container(
-
       width: double.infinity,
       child: CarouselSlider(
         options: CarouselOptions(
-            aspectRatio: 1.573,
+            aspectRatio: 1.9,
             viewportFraction: 1.0,
             autoPlay: true,
             onPageChanged: (index, reason) {
-              setState(() {
-
-              });
+              setState(() {});
             }),
         items: _imgList
             .map(
               (item) => Image.asset(
-            item,
-            fit: BoxFit.cover,
-            width: double.infinity,
-          ),
-        )
+                item,
+                fit: BoxFit.cover,
+                width: double.infinity,
+              ),
+            )
             .toList(),
       ),
     );
   }
-
-
 }
-
-
-
-

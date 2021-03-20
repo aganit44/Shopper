@@ -100,9 +100,14 @@ class _EditproductState extends State<Editproduct> {
             padding: EdgeInsets.all(15.0),
             child: TextFormField(
               controller: NameproductController,
-              decoration:
-                  new InputDecoration(labelText: "กรุณาป้อนชื่อProduct"),
+              decoration: new InputDecoration(
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black38),
+                  ),
+                  labelText: "กรุณาป้อนชื่อProduct",
+                  labelStyle: TextStyle(color: Colors.black38)),
               autofocus: true,
+              enabled: true,
               validator: (String str) {
                 //ชื่อรายการเป็นค่าว่าง
                 if (str.isEmpty) {
@@ -117,9 +122,13 @@ class _EditproductState extends State<Editproduct> {
             padding: const EdgeInsets.all(15.0),
             child: TextFormField(
               controller: InformationController,
-              decoration:
-                  new InputDecoration(labelText: "กรุณาป้อนข้อมูลProduct"),
-              autofocus: true,
+              decoration: new InputDecoration(
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black38),
+                  ),
+                  labelText: "กรุณาป้อนข้อมูลProduct",
+                  labelStyle: TextStyle(color: Colors.black38)),
+              enabled: true,
               cursorColor: Colors.redAccent,
               validator: (String str) {
                 if (str.isEmpty) {
@@ -134,9 +143,13 @@ class _EditproductState extends State<Editproduct> {
             padding: const EdgeInsets.all(15.0),
             child: TextFormField(
               controller: PriceController,
-              decoration:
-                  new InputDecoration(labelText: "กรุณาป้อนราคาProduct"),
-              autofocus: true,
+              decoration: new InputDecoration(
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black38),
+                  ),
+                  labelText: "กรุณาป้อนราคาProduct",
+                  labelStyle: TextStyle(color: Colors.black38)),
+              enabled: true,
               validator: (String str) {
                 if (str.isEmpty) {
                   return "กรุณาป้อนราคาProduct";
@@ -151,8 +164,13 @@ class _EditproductState extends State<Editproduct> {
             padding: const EdgeInsets.all(15.0),
             child: TextFormField(
               controller: stockController,
-              decoration: new InputDecoration(labelText: "กรุณาป้อนจำนวนstock"),
-              autofocus: true,
+              decoration: new InputDecoration(
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(color: Colors.black38),
+                  ),
+                  labelText: "กรุณาป้อนจำนวนstock",
+                  labelStyle: TextStyle(color: Colors.black38)),
+              enabled: true,
               validator: (String str) {
                 if (str.isEmpty) {
                   return "กรุณาป้อนจำนวนstock";
@@ -258,18 +276,30 @@ class _EditproductState extends State<Editproduct> {
           ),
           Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
             TextButton.icon(
-              icon: Icon(Icons.camera),
+              icon: Icon(
+                Icons.camera,
+                color: Colors.black,
+              ),
               onPressed: () {
                 takePhoto2(ImageSource.camera);
               },
-              label: Text("Camera"),
+              label: Text(
+                "Camera",
+                style: TextStyle(color: Colors.black),
+              ),
             ),
             TextButton.icon(
-              icon: Icon(Icons.image),
+              icon: Icon(
+                Icons.image,
+                color: Colors.black,
+              ),
               onPressed: () {
                 takePhoto(ImageSource.gallery);
               },
-              label: Text("Gallery"),
+              label: Text(
+                "Gallery",
+                style: TextStyle(color: Colors.black),
+              ),
             ),
           ])
         ],
