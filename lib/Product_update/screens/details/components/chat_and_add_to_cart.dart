@@ -1,7 +1,5 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-
 
 import '../../../constants.dart';
 
@@ -24,8 +22,8 @@ class ChatAndAddToCart extends StatelessWidget {
       ),
       child: Row(
         children: <Widget>[
+          // ignore: deprecated_member_use
           FlatButton.icon(
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             onPressed: () {
               Navigator.of(context).pop();
@@ -41,6 +39,7 @@ class ChatAndAddToCart extends StatelessWidget {
           ),
           // it will cover all available spaces
           Spacer(),
+          // ignore: deprecated_member_use
           FlatButton.icon(
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /*onPressed: () {

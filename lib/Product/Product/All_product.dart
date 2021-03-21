@@ -51,6 +51,7 @@ class _OnitsukaTiger2State extends State<OnitsukaTiger2> {
     return Scaffold(
         endDrawer: Drawer2(iduser: user.Id),
         appBar: AppBar(
+          centerTitle: true,
           title: Text(brand),
           backgroundColor: Colors.black,
           leading: Builder(

@@ -1,10 +1,8 @@
-import 'package:Shopper/Product_update/components/search_box.dart';
 import 'package:Shopper/Product_update/constants.dart';
 import 'package:Shopper/Product_update/models/product.dart';
 import 'package:Shopper/Product_update/screens/details/details_screen.dart';
 import 'package:flutter/material.dart';
 
-import 'category_list.dart';
 import 'product_card.dart';
 
 class Body extends StatelessWidget {

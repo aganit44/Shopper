@@ -22,23 +22,23 @@ class MainMenuViewModel {
           image: "assets/logo/nike.jpg",
           title: "Nike",
           function: OnitsukaTiger2(
-            brand: "nike",
+            brand: "Nike",
           ) //color: Colors.red,://encrypt
           ),
       MainMenuModel(
           image: "assets/logo/converse.jpg",
           title: "converse",
-          function: OnitsukaTiger2(brand: "converse") //color: Colors.red,
+          function: OnitsukaTiger2(brand: "Converse") //color: Colors.red,
           ),
       MainMenuModel(
           image: "assets/logo/Puma.png",
           title: "PUMA",
-          function: OnitsukaTiger2(brand: "PUMA") //color: Colors.red,
+          function: OnitsukaTiger2(brand: "Puma") //color: Colors.red,
           ),
       MainMenuModel(
           image: "assets/logo/adidas.png",
           title: "adidas",
-          function: OnitsukaTiger2(brand: "adidas") //color: Colors.red,
+          function: OnitsukaTiger2(brand: "Adidas") //color: Colors.red,
           ),
       MainMenuModel(
           image: "assets/logo/Vans.png",

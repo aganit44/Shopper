@@ -119,11 +119,46 @@ class _RegPageState extends State<RegPage> {
                                       })))
                             ],
                           ).show();
+                        } else {
+                          Alert(
+                            context: context,
+                            type: AlertType.error,
+                            title: "กรุณากรอกข้อมูลให้ครบ",
+                            desc: "",
+                            buttons: [
+                              DialogButton(
+                                  child: Text(
+                                    "OK",
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 20),
+                                  ),
+                                  onPressed: () => Navigator.push(context,
+                                          MaterialPageRoute(builder: (context) {
+                                        return LoginPage();
+                                      })))
+                            ],
+                          ).show();
                         }
                       },
                       color: Colors.black,
                       child: Text(
                         '                 REGISTER                  ',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    RaisedButton(
+                      onPressed: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return LoginPage();
+                        }));
+                      },
+                      color: Colors.deepOrange,
+                      child: Text(
+                        '              Go To Login                ',
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 20.0,

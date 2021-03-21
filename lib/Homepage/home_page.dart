@@ -39,7 +39,6 @@ class _HomePageState extends State<HomePage> {
         BannerSlider(),
         MainMenu(),
         BannerWidgetArea(),
-        Container(height: 0),
         //2 - NavigationBarWidget
       ]),
     );

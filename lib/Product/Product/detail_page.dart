@@ -52,6 +52,7 @@ class _DetailPageState extends State<DetailPage> {
     return Scaffold(
       endDrawer: Drawer2(iduser: user.Id),
       appBar: AppBar(
+        centerTitle: true,
         title: Text("ลายละเอียดสินค้า"),
         backgroundColor: Colors.black,
         leading: Builder(

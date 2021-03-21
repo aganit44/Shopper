@@ -6,7 +6,6 @@ import 'package:Shopper/Promotion/data/data.dart';
 import 'package:Shopper/Promotion/models/categorie_model.dart';
 import 'package:Shopper/Promotion/models/product_model.dart';
 import 'package:Shopper/Promotion/models/trending_productmodel.dart';
-import 'package:Shopper/Promotion/resources/colors.dart';
 import 'package:Shopper/Promotion/views/banner.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -33,9 +32,9 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-  List<TrendingProductModel> trendingProducts = new List();
-  List<ProductModel> products = new List();
-  List<CategorieModel> categories = new List();
+  List<TrendingProductModel> trendingProducts = [];
+  List<ProductModel> products = [];
+  List<CategorieModel> categories = [];
 
   @override
   void initState() {
