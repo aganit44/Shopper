@@ -64,9 +64,48 @@ class productApi {
     return response;
   }
 
+  Future<dynamic> addaddress(
+    int usersID,
+    int prosID,
+    String address,
+    String district,
+    String province,
+    String pinCode,
+    String images,
+  ) async {
+    print(address);
+    // open a bytestream
+
+    // string to uri
+    var uri = Uri.parse('http://192.168.43.200:5000/product/Addaddress');
+
+    // create multipart request
+    var request = new http.MultipartRequest("POST", uri);
+
+    request.fields['UsersID'] = usersID.toString();
+    request.fields['ProsID'] = prosID.toString();
+    request.fields['Address'] = address.toString();
+    request.fields['District'] = district.toString();
+    request.fields['Province'] = province.toString();
+    request.fields['PinCode'] = pinCode.toString();
+    request.fields['Images'] = images.toString();
+
+    print(prosID);
+    var response = await request.send();
+
+    return response;
+  }
+
   Future<dynamic> deleteproduct(int proID) async {
     var url = 'http://192.168.43.200:5000/basket/deletebasket?ProID=' +
         proID.toString();
+    var res = await http.get(url);
+    return res;
+  }
+
+  Future<dynamic> deleteAddress(int id) async {
+    var url =
+        'http://192.168.43.200:5000/basket/deleteAddress?ID=' + id.toString();
     var res = await http.get(url);
     return res;
   }
@@ -86,6 +125,23 @@ class productApi {
     request.fields['ID'] = id;
     request.fields['Stock'] = stock.toString();
 
+    var response = await request.send();
+    print(response.statusCode);
+
+    response.stream.transform(utf8.decoder).listen((value) {
+      print(value);
+    });
+
+    return response;
+  }
+
+  Future<dynamic> updateconfirm(String staTus, String id) async {
+    var uri = Uri.parse("http://192.168.43.200:5000/basket/Updatconfirm");
+
+    var request = new http.MultipartRequest("POST", uri);
+
+    request.fields['StaTus'] = staTus;
+    request.fields['ID'] = id;
     var response = await request.send();
     print(response.statusCode);
 

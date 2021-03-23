@@ -100,17 +100,20 @@ class _LoginPageState extends State<LoginPage> {
                                 print(data);
 
                                 User statement = User(
-                                  Id: data['ID'],
-                                  Username: data['Username'],
-                                  Password: data['Password'],
-                                  Email: data['Email'],
-                                  PhoneNumber: data['PhoneNumber'],
-                                  Name: data['Name'],
-                                  Image: data['Image'],
-                                  Coin: data['Coin'],
-                                  Airpay: data['Airpay'],
-                                  Admin: data['Admin'],
-                                );
+                                    Id: data['ID'],
+                                    Username: data['Username'],
+                                    Password: data['Password'],
+                                    Email: data['Email'],
+                                    PhoneNumber: data['PhoneNumber'],
+                                    Name: data['Name'],
+                                    Image: data['Image'],
+                                    Coin: data['Coin'],
+                                    Airpay: data['Airpay'],
+                                    Admin: data['Admin'],
+                                    Address: data['Address'],
+                                    District: data['District'],
+                                    Province: data['Province'],
+                                    PinCode: data['PinCode']);
 
                                 var provider = Provider.of<UserProvider>(
                                     context,

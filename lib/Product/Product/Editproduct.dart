@@ -210,7 +210,7 @@ class _EditproductState extends State<Editproduct> {
                     Alert(
                       context: context,
                       type: AlertType.success,
-                      title: "เพิ่มสินค้าสำเร็จ",
+                      title: "แก้ไขสินค้าสำเร็จ",
                       desc: "",
                       buttons: [
                         DialogButton(

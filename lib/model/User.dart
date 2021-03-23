@@ -9,7 +9,10 @@ class User {
   int Coin;
   String Airpay;
   int Admin;
-
+  String Address;
+  String District;
+  String Province;
+  String PinCode;
   User(
       {this.Id,
       this.Username,
@@ -20,5 +23,9 @@ class User {
       this.Image,
       this.Coin,
       this.Airpay,
-      this.Admin});
+      this.Admin,
+      this.Address,
+      this.District,
+      this.PinCode,
+      this.Province});
 }

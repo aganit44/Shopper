@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:Shopper/Product/Product/address.dart';
 import 'package:provider/provider.dart';
 
 import 'package:Shopper/Homepage/BottomNavigation.dart';
@@ -30,7 +31,9 @@ class _DrawerState extends State<Drawer2> {
 
   @override
   void initState() {
+    id = widget.id;
     iduser = widget.iduser;
+
     super.initState();
   }
 
@@ -98,6 +101,7 @@ class _DrawerState extends State<Drawer2> {
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () {
+                        print(snapshot.data[index]);
                         // Navigator.of(context).push(
                         //   MaterialPageRoute(
                         //     builder: (_) =>
@@ -293,8 +297,9 @@ class _DrawerState extends State<Drawer2> {
                                                       null) {}
                                                   Alert(
                                                     context: context,
-                                                    type: AlertType.success,
-                                                    title: "ซื้อสินค้าสำเร็จ",
+                                                    type: AlertType.warning,
+                                                    title:
+                                                        "กรอกข้อมูลที่อยู่เพื่อซื้อสินค้า",
                                                     desc: "",
                                                     buttons: [
                                                       DialogButton(
@@ -310,9 +315,10 @@ class _DrawerState extends State<Drawer2> {
                                                           context,
                                                           MaterialPageRoute(
                                                             builder: (context) {
-                                                              return Bottomnavigations(
-                                                                selectedIndex:
-                                                                    0,
+                                                              return AddData(
+                                                                id: snapshot
+                                                                        .data[
+                                                                    index],
                                                               );
                                                             },
                                                           ),

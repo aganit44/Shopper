@@ -9,6 +9,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import 'address.dart';
 import 'endDrawer.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
@@ -42,6 +43,7 @@ class _DetailPageState extends State<DetailPage> {
   @override
   void initState() {
     id = widget.id;
+    print(widget.id);
     super.initState();
   }
 
@@ -414,8 +416,8 @@ class _DetailPageState extends State<DetailPage> {
 
                                   Alert(
                                     context: context,
-                                    type: AlertType.success,
-                                    title: "ซื้อสินค้าสำเร็จ",
+                                    type: AlertType.info,
+                                    title: "กรอกข้อมูลที่อยู่เพื่อซื้อสินค้า",
                                     desc: "",
                                     buttons: [
                                       DialogButton(
@@ -429,8 +431,8 @@ class _DetailPageState extends State<DetailPage> {
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) {
-                                              return Bottomnavigations(
-                                                selectedIndex: 0,
+                                              return AddData(
+                                                id: snapshot.data,
                                               );
                                             },
                                           ),
