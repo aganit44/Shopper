@@ -94,8 +94,7 @@ class _detaillState extends State<detaill> {
                     // );
                   },
                   child: Container(
-                    margin: EdgeInsets.only(left: 1, right: 1, bottom: 10),
-                    padding: EdgeInsets.symmetric(vertical: 1, horizontal: 25),
+                    padding: EdgeInsets.symmetric(vertical: 1, horizontal: 1),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.all(
@@ -242,13 +241,12 @@ class _detaillState extends State<detaill> {
                                   color: Colors.green[700],
                                   splashColor: Colors.purple,
                                   onPressed: () => {
-                                    api.updateconfirm(
-                                        "อนุมัติคำสั่งซื้อลอการจัดส่ง",
+                                    api.updateconfirm("อนุมัติลอการจัดส่ง",
                                         snapshot.data[index]["ID"].toString()),
                                     setState(() {}),
                                   },
                                 ),
-                                Text("อนุมัติคำสั่งซื้อ",
+                                Text("อนุมัติ",
                                     maxLines: 2,
                                     overflow: TextOverflow.fade,
                                     style: TextStyle(
@@ -257,14 +255,14 @@ class _detaillState extends State<detaill> {
                                 Center(
                                   child: IconButton(
                                     icon: Icon(
-                                      Icons.cancel,
+                                      Icons.campaign,
                                     ),
                                     iconSize: 30,
-                                    color: Colors.red[700],
+                                    color: Colors.amber[700],
                                     splashColor: Colors.purple,
                                     onPressed: () async {
                                       api.updateconfirm(
-                                          "ไม่อนุมัติ",
+                                          "จัดส่งสำเร็จ",
                                           snapshot.data[index]["ID"]
                                               .toString());
 
@@ -273,7 +271,28 @@ class _detaillState extends State<detaill> {
                                     },
                                   ),
                                 ),
-                                Text("ไม่อนุมัติคำสั่งซื้อ",
+                                Text("จัดส่งสำเร็จ",
+                                    maxLines: 2,
+                                    overflow: TextOverflow.fade,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    )),
+                                IconButton(
+                                  icon: Icon(
+                                    Icons.cancel,
+                                  ),
+                                  iconSize: 30,
+                                  color: Colors.red[700],
+                                  splashColor: Colors.purple,
+                                  onPressed: () async {
+                                    api.updateconfirm("ไม่อนุมัติ",
+                                        snapshot.data[index]["ID"].toString());
+
+                                    //Map<String, dynamic> data = jsonDecode(res.body);
+                                    setState(() {});
+                                  },
+                                ),
+                                Text("ไม่อนุมัติ",
                                     maxLines: 2,
                                     overflow: TextOverflow.fade,
                                     style: TextStyle(

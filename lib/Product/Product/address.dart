@@ -110,11 +110,11 @@ class _AddDataState extends State<AddData> {
                         return null;
                       },
                     ),
-                    new Padding(
+                    Padding(
                       padding: const EdgeInsets.all(10.0),
                     ),
-                    new RaisedButton(
-                      child: new Text("สั่งซื้อ"),
+                    RaisedButton(
+                      child: Text("สั่งซื้อ"),
                       color: Colors.orange,
                       onPressed: () async {
                         if (formKey.currentState.validate()) {

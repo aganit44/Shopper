@@ -77,7 +77,8 @@ dev_dependencies:
   badges: ^1.1.6
   fancy_bottom_navigation: ^0.3.2
   bottom_bar_with_sheet: ^0.5.5+2
-  
+  condition: ^0.0.8
+
 # The following section is specific to Flutter.
 flutter:
   # The following line ensures that the Material Icons font is

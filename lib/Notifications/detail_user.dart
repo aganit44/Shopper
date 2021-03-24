@@ -1,16 +1,14 @@
 import 'dart:convert';
 import 'package:Shopper/Homepage/BottomNavigation.dart';
-import 'package:Shopper/Product/Product/Editproduct.dart';
-import 'package:Shopper/Product/Product/endDrawer.dart';
+
 import 'package:Shopper/api/product_api.dart';
 import 'package:Shopper/api/user_api.dart';
 import 'package:Shopper/model/User.dart';
 import 'package:Shopper/providers/user_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
-import 'package:rflutter_alert/rflutter_alert.dart';
+import 'package:condition/condition.dart';
 
 class detailluser extends StatefulWidget {
   String address;
@@ -151,20 +149,79 @@ class _detaillState extends State<detailluser> {
                                           Text(
                                             'สถานะ : ',
                                             style: TextStyle(
-                                              color: Colors.blue[900],
+                                              color: Colors.amber[600],
                                               fontWeight: FontWeight.bold,
                                               fontSize: 14,
                                             ),
                                           ),
-                                          Text(
-                                            '${snapshot.data[index]["StaTus"]}',
-                                            style: TextStyle(
-                                              color: Colors.red,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 13,
-                                            ),
-                                          ),
-                                        ]),
+                                          Container(
+                                              child: Conditioned(
+                                                  cases: [
+                                                Case(
+                                                    snapshot.data[index]
+                                                            ["StaTus"] ==
+                                                        'รออนุมัติ',
+                                                    builder: () => Text(
+                                                          '${snapshot.data[index]["StaTus"]}',
+                                                          style: TextStyle(
+                                                            color: Colors
+                                                                .blue[900],
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontSize: 13,
+                                                          ),
+                                                        )),
+                                                Case(
+                                                    snapshot.data[index]
+                                                            ["StaTus"] ==
+                                                        'ไม่อนุมัติ',
+                                                    builder: () => Text(
+                                                          '${snapshot.data[index]["StaTus"]}',
+                                                          style: TextStyle(
+                                                            color:
+                                                                Colors.red[900],
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontSize: 13,
+                                                          ),
+                                                        )),
+                                                Case(
+                                                    snapshot.data[index]
+                                                            ["StaTus"] ==
+                                                        'อนุมัติลอการจัดส่ง',
+                                                    builder: () => Text(
+                                                          '${snapshot.data[index]["StaTus"]}',
+                                                          style: TextStyle(
+                                                            color: Colors.green,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontSize: 13,
+                                                          ),
+                                                        )),
+                                              ],
+                                                  defaultBuilder: () => Text(
+                                                        '${snapshot.data[index]["StaTus"]}',
+                                                        style: TextStyle(
+                                                          color:
+                                                              Colors.blue[900],
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 13,
+                                                        ),
+                                                      )))
+                                        ]
+
+                                            //     : Text(
+                                            //         '${snapshot.data[index]["StaTus"]}',
+                                            //         style: TextStyle(
+                                            //           color:
+                                            //               Colors.green[900],
+                                            //           fontWeight:
+                                            //               FontWeight.bold,
+                                            //           fontSize: 13,
+                                            //         ),
+                                            //       )),
+                                            )
                                       ],
                                     ),
                                     SizedBox(
@@ -181,6 +238,7 @@ class _detaillState extends State<detailluser> {
                                           splashColor: Colors.purple,
                                           onPressed: () async {
                                             setState(() {});
+
                                             var res = await api.deleteAddress(
                                                 snapshot.data[index]["ID"]);
                                             print(res);
